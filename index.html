@@ -6,6 +6,7 @@
 <title>蟬吃茶 ZenEaTea</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/site-nav.css">
+<link rel="stylesheet" href="css/tea-quiz.css">
 </head>
 
 <body class="home-page">
@@ -79,6 +80,7 @@
     <p class="eyebrow">CHAN CHA TEA</p>
     <h1>一口茶湯，<br>是與自己的對話。</h1>
     <p class="lede">靜靜喝一口茶，讓時間慢下來，<br>聽見內心最真實的聲音。</p>
+    <a href="#find-tea" class="session-link">找到自己的茶 <span aria-hidden="true">→</span></a>
   </div>
   <img class="session-asset session-asset--left" src="assets/img/tea-figure-1.png" alt="蟬吃茶 品茶意象" data-drift="right" data-base-transform="translateY(-50%)">
 </section>
@@ -129,6 +131,118 @@
         <p>好喝、自然健康、心靈寧靜<br>進一步有能量，善予他人<br>成為轉動世界正向能量的因子<br>如潺潺流水般，涓涓不息！</p>
       </figcaption>
     </figure>
+  </div>
+</section>
+
+
+<!-- ==================================== -->
+<!-- 找到適合自己的茶：互動測驗（js/tea-quiz.js） -->
+<!-- ==================================== -->
+<section class="tq" id="find-tea" data-quiz>
+  <div class="tq-intro" data-reveal>
+    <p class="tq-eyebrow">小蟬陪你選茶 ・ 從喜歡的味道開始</p>
+    <h2 class="tq-title">不知道選哪一杯<br>也沒關係</h2>
+    <p class="tq-lede">從喜歡的味道、現在的心情，到喝茶的片刻，<br>小蟬陪你找到適合的那一杯。</p>
+    <button type="button" class="tq-start" data-quiz-path="first">一起找找看 <span aria-hidden="true">↓</span></button>
+    <p class="tq-or">或者，你想要…</p>
+    <div class="tq-paths">
+      <button type="button" class="tq-path" data-quiz-path="explore">
+        <strong>深入探索台灣茶</strong><span>從茶色、焙火選口味</span>
+      </button>
+      <button type="button" class="tq-path" data-quiz-path="gift">
+        <strong>為重要的人挑份茶禮</strong><span>依對象、場合挑選</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="tq-steps" data-quiz-steps></div>
+
+  <section class="tq-result" data-quiz-result hidden>
+    <figure class="tq-result__art">
+      <p class="tq-result__mood" data-r-mood></p>
+      <div class="tq-result__arch">
+        <img src="" alt="" data-r-img>
+        <p class="tq-result__caption" data-r-caption></p>
+      </div>
+      <figcaption>茶品示意</figcaption>
+    </figure>
+    <div class="tq-result__text">
+      <p class="tq-eyebrow">YOUR TEA ・ 從你的喜歡出發</p>
+      <p class="tq-result__sub">小蟬想推薦你這一杯</p>
+      <h3 class="tq-result__name" data-r-name></h3>
+      <p class="tq-result__tags" data-r-tags></p>
+      <p class="tq-result__desc" data-r-desc></p>
+      <p class="tq-result__picked" data-r-picked></p>
+      <button type="button" class="tq-open" data-quiz-open>認識這杯茶 <span aria-hidden="true">↗</span></button>
+      <button type="button" class="tq-link" data-quiz-again>換個心情，再選一次 ↑</button>
+    </div>
+    <dialog class="tq-dialog" data-quiz-dialog aria-labelledby="tq-dialog-name">
+      <p class="tq-eyebrow">你的日常茶時光</p>
+      <h3 id="tq-dialog-name" data-d-name></h3>
+      <p data-d-desc></p>
+      <p class="tq-dialog__note">這是依香氣偏好提供的推薦，實際風味會隨茶葉與沖泡方式而變化。</p>
+      <div class="tq-dialog__actions">
+        <button type="button" class="tq-next" data-quiz-close>繼續品味</button>
+        <a class="tq-open" href="#" data-d-link>到茶本舖看看 <span aria-hidden="true">→</span></a>
+      </div>
+    </dialog>
+  </section>
+</section>
+
+<!-- ==================================== -->
+<!-- 認識茶（理解茶）：四款茶介紹 → 茶本舖 -->
+<!-- ==================================== -->
+<section class="kt" id="know-tea">
+  <div class="kt-head" data-reveal>
+    <p class="tq-eyebrow">KNOW YOUR TEA ・ 認識茶</p>
+    <h2 class="kt-title">好茶的背後，<br>是每一個用心的選擇。</h2>
+    <p class="kt-lede">從小綠葉蟬咬過的嫩芽、高山的雲霧，到每一次萎凋與焙火，<br>認識每一款茶的個性，找到屬於你的那一杯。</p>
+  </div>
+  <div class="kt-grid">
+      <a class="kt-card" href="product.html?slug=honey-black" data-reveal>
+        <div class="kt-card__media"><img src="assets/img/product-honey-black.png" alt="蟬吃蜜香紅茶" loading="lazy"></div>
+        <p class="kt-card__eyebrow">小綠葉蟬的天然蜜果香</p>
+        <h3 class="kt-card__name">蟬吃蜜香紅茶</h3>
+        <dl class="kt-card__notes">
+          <div><dt>香氣</dt><dd>蜜香・熟果・溫潤</dd></div>
+          <div><dt>口感</dt><dd>溫柔、清甜、有茶感、不厚重</dd></div>
+        </dl>
+        <span class="kt-card__more">認識這款茶 →</span>
+      </a>
+      <a class="kt-card" href="product.html?slug=gaba" data-reveal>
+        <div class="kt-card__media"><img src="assets/img/product-gaba.png" alt="蟬吃佳葉龍茶" loading="lazy"></div>
+        <p class="kt-card__eyebrow">厭氧發酵・沉穩安定</p>
+        <h3 class="kt-card__name">蟬吃佳葉龍茶</h3>
+        <dl class="kt-card__notes">
+          <div><dt>香氣</dt><dd>熟香・溫潤・沉穩</dd></div>
+          <div><dt>口感</dt><dd>柔和、厚實、安定感</dd></div>
+        </dl>
+        <span class="kt-card__more">認識這款茶 →</span>
+      </a>
+      <a class="kt-card" href="product.html?slug=fresh-oolong" data-reveal>
+        <div class="kt-card__media"><img src="assets/img/product-fresh-oolong.png" alt="蟬吃鮮翠烏龍茶" loading="lazy"></div>
+        <p class="kt-card__eyebrow">輕發酵中烘焙・清香甘潤</p>
+        <h3 class="kt-card__name">蟬吃鮮翠烏龍茶</h3>
+        <dl class="kt-card__notes">
+          <div><dt>香氣</dt><dd>清香・烏龍香・山林感</dd></div>
+          <div><dt>口感</dt><dd>清甜、甘醇、乾淨、回甘</dd></div>
+        </dl>
+        <span class="kt-card__more">認識這款茶 →</span>
+      </a>
+      <a class="kt-card" href="product.html?slug=yushan-oolong" data-reveal>
+        <div class="kt-card__media"><img src="assets/img/product-yushan-oolong.png" alt="蟬吃玉山烏龍茶" loading="lazy"></div>
+        <p class="kt-card__eyebrow">高山雲霧・葉厚耐泡</p>
+        <h3 class="kt-card__name">蟬吃玉山烏龍茶</h3>
+        <dl class="kt-card__notes">
+          <div><dt>香氣</dt><dd>高山香・清雅・山林感</dd></div>
+          <div><dt>口感</dt><dd>清透、甘醇、細緻</dd></div>
+        </dl>
+        <span class="kt-card__more">認識這款茶 →</span>
+      </a>
+  </div>
+  <div class="kt-foot" data-reveal>
+    <a class="tq-next kt-shop" href="products.html">走進茶本舖 <span aria-hidden="true">→</span></a>
+    <a class="tq-link" href="#find-tea">還不確定？先做個小測驗 ↑</a>
   </div>
 </section>
 
@@ -271,16 +385,27 @@
 <script src="js/main.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/site-nav.js"></script>
+<script src="js/tea-quiz.js"></script>
 <script>
   // 「走進蟬吃茶」與「關於蟬吃茶」：平滑捲到品牌理念，讓四個理念置中出現
-  document.querySelectorAll('a[href="#session-4"]').forEach((a) => {
+  document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach((a) => {
     a.addEventListener("click", (e) => {
-      const target = document.querySelector("#session-4");
+      const target = document.querySelector(a.getAttribute("href"));
       if (!target) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      target.scrollIntoView({ behavior: "smooth", block: a.hash === "#session-4" ? "center" : "start" });
     });
   });
+  // 測驗與認識茶區塊：捲到時淡入
+  const revealer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-in");
+        revealer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll("[data-reveal]").forEach((el) => revealer.observe(el));
 </script>
 
 </body>
