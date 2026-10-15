@@ -6,40 +6,8 @@
  * 純前端，不需要後端；茶的連結指到商品頁 product.html?slug=…
  */
 (function () {
-  const TEAS = {
-    "honey-black": {
-      name: "蟬吃蜜香紅茶",
-      tags: ["蜜香", "熟果", "溫潤"],
-      mood: "溫潤・蜜甜",
-      img: "assets/img/product-honey-black.png",
-      caption: "小綠葉蟬咬過的嫩芽，\n轉出天然的蜜果香。",
-      desc: "小綠葉蟬叮咬過的嫩芽，在發酵中轉出天然蜜香與熟果感。入口溫柔清甜、有茶感卻不厚重，配點心剛好，也很適合想換個心情的時候。",
-    },
-    gaba: {
-      name: "蟬吃佳葉龍茶",
-      tags: ["熟香", "溫潤", "沉穩"],
-      mood: "沉穩・安定",
-      img: "assets/img/product-gaba.png",
-      caption: "厭氧發酵的熟香，\n喝起來有一種安定感。",
-      desc: "以厭氧發酵製成的佳葉龍（GABA）茶，熟香溫潤、口感柔和厚實。不急不躁的味道，適合放鬆下來、飯後，或一天結束時慢慢喝。",
-    },
-    "fresh-oolong": {
-      name: "蟬吃鮮翠烏龍茶",
-      tags: ["清香", "甘潤", "回甘"],
-      mood: "清爽・甘潤",
-      img: "assets/img/product-fresh-oolong.png",
-      caption: "輕發酵、中烘焙，\n清甜乾淨的一杯。",
-      desc: "輕發酵、中烘焙，保留烏龍的清香與山林感。清甜甘醇、乾淨回甘，早晨清飲剛剛好，也是每天喝都不膩的一杯。",
-    },
-    "yushan-oolong": {
-      name: "蟬吃玉山烏龍茶",
-      tags: ["高山香", "清雅", "細緻"],
-      mood: "清雅・高山",
-      img: "assets/img/product-yushan-oolong.png",
-      caption: "高山雲霧與日夜溫差，\n養出葉厚耐泡的茶。",
-      desc: "玉山高海拔的雲霧與日夜溫差，養出葉厚耐泡的茶。高山香清雅，茶湯清透甘醇、口感細緻，適合靜下來細細品，也是有份量的茶禮。",
-    },
-  };
+  const TEAS = window.ZENTEA_TEAS; // js/teas.js
+
 
   // 每個選項：[文字, 圖示, {茶: 分數}]
   const PATHS = {
@@ -54,8 +22,8 @@
           options: [
             ["清爽淡雅", "leaf", { "fresh-oolong": 3, "yushan-oolong": 1 }],
             ["花香清亮", "flower", { "yushan-oolong": 3, "fresh-oolong": 1 }],
-            ["溫厚醇甜", "cup", { "honey-black": 3, gaba: 1 }],
-            ["焙火沉穩", "mountain", { gaba: 3, "honey-black": 1 }],
+            ["溫厚醇甜", "cup", { "honey-black": 3, "ruby-black": 2, gaba: 1 }],
+            ["焙火沉穩", "mountain", { "charcoal-oolong": 3, gaba: 2 }],
           ],
         },
         {
@@ -64,10 +32,10 @@
           hint: "照著此刻的感覺選就好。",
           next: "最後，留一點時間給茶",
           options: [
-            ["放鬆一下", "wave", { gaba: 2, "honey-black": 1 }],
-            ["提振精神", "sun", { "fresh-oolong": 2, "yushan-oolong": 1 }],
-            ["靜靜獨處", "moon", { "yushan-oolong": 2, gaba: 1 }],
-            ["換個心情", "heart", { "honey-black": 2, "fresh-oolong": 1 }],
+            ["放鬆一下", "wave", { gaba: 3, "charcoal-oolong": 1 }],
+            ["提振精神", "sun", { "ruby-black": 2, "fresh-oolong": 2 }],
+            ["靜靜獨處", "moon", { "yushan-oolong": 2, "charcoal-oolong": 2 }],
+            ["換個心情", "heart", { "honey-black": 2, "ruby-black": 2 }],
           ],
         },
         {
@@ -76,8 +44,8 @@
           hint: "一杯茶，可以有不同的日常模樣。",
           options: [
             ["早晨清飲，慢慢開始", "wave", { "fresh-oolong": 2, "yushan-oolong": 1 }],
-            ["午後配點心，歇一會兒", "sun", { "honey-black": 2, "fresh-oolong": 1 }],
-            ["飯後喝一杯，收個尾", "moon", { gaba: 2, "yushan-oolong": 1 }],
+            ["午後配點心，歇一會兒", "sun", { "honey-black": 2, "ruby-black": 2 }],
+            ["飯後喝一杯，收個尾", "moon", { "charcoal-oolong": 2, gaba: 2 }],
             ["和人一起喝，聊聊天", "heart", { "yushan-oolong": 2, "honey-black": 1 }],
           ],
         },
@@ -93,21 +61,21 @@
           next: "接著，聊聊焙火",
           options: [
             ["清綠透亮", "leaf", { "fresh-oolong": 3, "yushan-oolong": 2 }],
-            ["金黃蜜色", "flower", { "yushan-oolong": 2, gaba: 2 }],
-            ["琥珀紅潤", "cup", { "honey-black": 3 }],
-            ["都想試試", "star", { "honey-black": 1, gaba: 1, "fresh-oolong": 1, "yushan-oolong": 1 }],
+            ["金黃蜜色", "flower", { "yushan-oolong": 2, gaba: 2, "charcoal-oolong": 1 }],
+            ["琥珀紅潤", "cup", { "honey-black": 3, "ruby-black": 3 }],
+            ["都想試試", "star", { "fresh-oolong": 1, "charcoal-oolong": 1, "honey-black": 1, gaba: 1, "ruby-black": 1, "yushan-oolong": 1 }],
           ],
         },
         {
           step: "焙火程度",
           title: "焙火的香氣，你偏好…",
-          hint: "焙火越深，香氣越熟、越沉穩。",
+          hint: "焙火越深，香氣越熟、越溫潤。",
           next: "最後，選一個你在意的",
           options: [
-            ["不焙，保留清香", "wave", { "yushan-oolong": 2, "fresh-oolong": 1 }],
-            ["輕焙，香氣圓潤", "sun", { "fresh-oolong": 2 }],
-            ["中焙，熟香沉穩", "mountain", { gaba: 2, "honey-black": 1 }],
-            ["沒有特別偏好", "star", { "honey-black": 1 }],
+            ["輕焙，留住清香", "wave", { "yushan-oolong": 3, "fresh-oolong": 1 }],
+            ["中焙，香氣圓潤", "sun", { "fresh-oolong": 3 }],
+            ["炭焙，溫潤炭香", "mountain", { "charcoal-oolong": 3, gaba: 1 }],
+            ["沒有特別偏好", "star", { "honey-black": 1, "ruby-black": 1, gaba: 1 }],
           ],
         },
         {
@@ -116,9 +84,9 @@
           hint: "選一個最吸引你的就好。",
           options: [
             ["高山雲霧的清冽", "mountain", { "yushan-oolong": 3 }],
-            ["小綠葉蟬的蜜香", "flower", { "honey-black": 3 }],
-            ["沉穩安定的感覺", "moon", { gaba: 3 }],
-            ["每天喝也不膩", "leaf", { "fresh-oolong": 3 }],
+            ["小綠葉蟬的蜜香", "flower", { "honey-black": 3, gaba: 1 }],
+            ["肉桂薄荷的台灣香", "moon", { "ruby-black": 3 }],
+            ["厭氧發酵的沉穩", "leaf", { gaba: 3, "charcoal-oolong": 1 }],
           ],
         },
       ],
@@ -132,10 +100,10 @@
           hint: "想著對方的樣子選就好。",
           next: "接著，說說場合",
           options: [
-            ["長輩家人", "home", { gaba: 2, "yushan-oolong": 1 }],
+            ["長輩家人", "home", { gaba: 2, "charcoal-oolong": 2 }],
             ["同事客戶", "people", { "yushan-oolong": 2, "fresh-oolong": 1 }],
-            ["好朋友", "heart", { "honey-black": 2, "fresh-oolong": 1 }],
-            ["懂茶的人", "leaf", { "yushan-oolong": 2, "honey-black": 1 }],
+            ["好朋友", "heart", { "honey-black": 2, "ruby-black": 1 }],
+            ["懂茶的人", "leaf", { "ruby-black": 2, "yushan-oolong": 1, "charcoal-oolong": 1 }],
           ],
         },
         {
@@ -144,10 +112,10 @@
           hint: "場合不同，適合的茶也不太一樣。",
           next: "最後，想留下的感覺",
           options: [
-            ["年節送禮", "gift", { "yushan-oolong": 2, "honey-black": 1 }],
-            ["生日、道謝", "star", { "honey-black": 2 }],
+            ["年節送禮", "gift", { "yushan-oolong": 2, "charcoal-oolong": 1 }],
+            ["生日、道謝", "star", { "honey-black": 2, "ruby-black": 1 }],
             ["拜訪、初次見面", "people", { "fresh-oolong": 2, "yushan-oolong": 1 }],
-            ["想到就送", "sun", { "fresh-oolong": 2, "honey-black": 1 }],
+            ["想到就送", "sun", { "ruby-black": 2, "fresh-oolong": 1 }],
           ],
         },
         {
@@ -156,8 +124,8 @@
           hint: "茶會替你把心意說出來。",
           options: [
             ["安心、自在", "moon", { gaba: 3 }],
-            ["溫暖、貼心", "heart", { "honey-black": 3 }],
-            ["有質感、有份量", "mountain", { "yushan-oolong": 3 }],
+            ["溫暖、貼心", "heart", { "honey-black": 2, "charcoal-oolong": 2 }],
+            ["有質感、有份量", "mountain", { "yushan-oolong": 2, "ruby-black": 2 }],
             ["輕鬆、好入口", "wave", { "fresh-oolong": 3 }],
           ],
         },
@@ -299,18 +267,28 @@
         explore: `你想喝「${picked[0]}」的茶色，焙火偏好「${picked[1]}」，最想喝到「${picked[2]}」。小蟬想推薦你試試${tea.name}。`,
         gift: `想送給「${picked[0]}」，在「${picked[1]}」的時候，希望對方感覺${picked[2]}。小蟬想推薦你這份${tea.name}。`,
       }[pathKey()];
-      const text = `${intro}${tea.desc}`;
+      const text = `${intro}${tea.summary}`;
       $("[data-r-mood]").textContent = tea.mood;
-      $("[data-r-img]").src = tea.img;
-      $("[data-r-img]").alt = tea.name;
+      const img = $("[data-r-img]");
+      img.hidden = !tea.img;
+      if (tea.img) {
+        img.src = tea.img;
+        img.alt = tea.name;
+      }
+      $("[data-r-glyph]").hidden = !!tea.img;
+      $("[data-r-glyph]").textContent = tea.glyph;
       $("[data-r-caption]").textContent = tea.caption;
       $("[data-r-name]").textContent = tea.name;
       $("[data-r-tags]").textContent = tea.tags.join(" ・ ");
       $("[data-r-desc]").textContent = text;
       $("[data-r-picked]").textContent = picked.join(" ・ ");
       $("[data-d-name]").textContent = tea.name;
-      $("[data-d-desc]").textContent = text;
-      $("[data-d-link]").href = `product.html?slug=${encodeURIComponent(slug)}`;
+      $("[data-d-meta]").textContent = `${tea.origin}　${tea.process}`;
+      $("[data-d-desc]").replaceChildren(...tea.story.map((t) => Object.assign(document.createElement("p"), { textContent: t })));
+      const link = $("[data-d-link]");
+      link.hidden = !tea.shop;
+      if (tea.shop) link.href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
+      $("[data-d-soon]").hidden = !!tea.shop;
       resultBox.hidden = false;
       resultBox.classList.remove("is-in");
       requestAnimationFrame(() => resultBox.classList.add("is-in"));

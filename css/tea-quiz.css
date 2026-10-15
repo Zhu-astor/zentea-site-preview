@@ -307,6 +307,20 @@
 .tq-dialog .tq-next, .tq-dialog .tq-open { font-size: 14px; padding: 10px 24px; }
 
 /* ---------- 認識茶 ---------- */
+/* 從「認識茶」開始，背景慢慢轉成白色，上面的山水底圖不再透出來（後面的詩句區塊也是白底） */
+.kt::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.85) 200px, #fff 340px);
+}
+body.home-page #session-5.poem-session { background-color: #fff !important; }
+
 .kt {
   max-width: 1240px;
   margin: 0 auto;
@@ -327,7 +341,7 @@
 
 .kt-lede { font-size: 14.5px; line-height: 2.1; letter-spacing: 0.08em; color: var(--muted); margin: 0; }
 
-.kt-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.kt-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 26px; max-width: 1080px; margin: 0 auto; }
 
 .kt-card {
   display: flex;
@@ -342,9 +356,6 @@
   padding: 0 22px 26px;
   transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 }
-.kt-card:nth-child(2) { transition-delay: 0.05s; }
-.kt-card:nth-child(3) { transition-delay: 0.1s; }
-.kt-card:nth-child(4) { transition-delay: 0.15s; }
 .kt-card:hover { transform: translateY(-6px); border-color: #DCD2C2; box-shadow: 0 22px 44px rgba(42, 38, 32, 0.1); }
 
 .kt-card__media {
@@ -368,6 +379,31 @@
 .kt-card__notes dt { flex: 0 0 auto; color: var(--muted); letter-spacing: 0.1em; }
 .kt-card__notes dd { margin: 0; color: #4A4036; }
 
+/* 卡片是按鈕（點了打開深入介紹），拿掉按鈕預設樣式 */
+button.kt-card { font: inherit; cursor: pointer; width: 100%; }
+.kt-card__media { position: relative; }
+.kt-card__summary {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+  text-align: left;
+  margin: 0 0 14px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.kt-card__badge {
+  position: absolute;
+  top: 18%;
+  right: 8px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #fff;
+  background: var(--tq-green);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
 .kt-card__more { margin-top: auto; font-size: 13px; letter-spacing: 0.14em; color: var(--tq-green-ink); transition: letter-spacing 0.3s; }
 .kt-card:hover .kt-card__more { letter-spacing: 0.22em; color: var(--seal); }
 
@@ -391,4 +427,104 @@
   .kt-card__media { width: calc(100% + 28px); margin: 0 -14px 14px; }
   .kt-card__name { font-size: 16px; }
   .kt-card__notes div { flex-direction: column; gap: 0; }
+}
+
+/* ---------- 還沒有商品照的茶：用茶名字樣代替 ---------- */
+.tq-glyph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58%;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  font-family: "Noto Serif TC", serif;
+  font-weight: 500;
+  font-size: clamp(48px, 6vw, 84px);
+  color: var(--tq-green-ink);
+  background: radial-gradient(circle, #FFFFFF 0%, #F1EEE6 70%);
+  border: 1px solid #E2DCCF;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.6);
+}
+.tq-glyph[hidden] { display: none; }
+.tq-result__arch .tq-glyph { position: absolute; left: 50%; top: 20%; transform: translateX(-50%); width: 52%; background: rgba(255, 255, 255, 0.82); }
+.tq-result__arch img[hidden] { display: none; }
+
+.tq-soon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  border: 1px dashed #C9C2B5;
+  border-radius: 999px;
+  padding: 9px 20px;
+}
+.tq-soon[hidden], .tq-dialog [hidden] { display: none; }
+.tq-dialog__meta { font-size: 12.5px !important; letter-spacing: 0.1em; color: var(--seal) !important; margin-top: -6px !important; }
+
+/* ---------- 認識茶：深入介紹 ---------- */
+.kt-dialog {
+  max-width: 860px;
+  width: calc(100vw - 32px);
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  padding: 0;
+  display: none;
+}
+.kt-dialog[open] { display: grid; grid-template-columns: 300px minmax(0, 1fr); }
+
+.kt-dialog__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.8);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.kt-dialog__close:hover { color: var(--ink); }
+
+.kt-dialog__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 28px;
+  background:
+    linear-gradient(180deg, rgba(243, 239, 230, 0.2), rgba(243, 239, 230, 0.95)),
+    url("../assets/img/landscape-1.png") center / cover;
+}
+.kt-dialog__media img { width: 88%; filter: drop-shadow(0 16px 20px rgba(42, 38, 32, 0.2)); }
+.kt-dialog__media .tq-glyph { width: 70%; }
+
+.kt-dialog__body { padding: 36px 36px 30px; }
+.kt-dialog .kt-dialog__body h3 { font-size: 26px; margin-bottom: 18px; }
+
+.kt-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; margin: 0 0 20px; padding: 14px 0; border-top: 1px solid #E6DFD2; border-bottom: 1px solid #E6DFD2; }
+.kt-facts div { display: flex; flex-direction: column; gap: 2px; }
+.kt-facts dt { font-size: 11.5px; letter-spacing: 0.16em; color: var(--muted); }
+.kt-facts dd { margin: 0; font-size: 14px; color: var(--ink); }
+
+.kt-dialog__story p { font-size: 15px !important; line-height: 2 !important; }
+
+.kt-more { margin: 6px 0 16px; padding: 14px 16px; background: #F1F4EE; border-left: 3px solid var(--tq-sage-line); border-radius: 4px; }
+.kt-more__title { font-size: 12px !important; letter-spacing: 0.2em; color: var(--tq-green-ink) !important; margin: 0 0 6px !important; }
+.kt-more p:last-child { font-size: 13.5px !important; line-height: 1.95 !important; margin: 0 !important; }
+
+.kt-leaf { font-size: 13px !important; letter-spacing: 0.1em; color: var(--tq-green-ink) !important; }
+
+@media (max-width: 760px) {
+  .kt-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .kt-dialog[open] { grid-template-columns: 1fr; }
+  .kt-dialog__media { padding: 26px 20px; }
+  .kt-dialog__media img { width: 46%; }
+  .kt-dialog__media .tq-glyph { width: 40%; }
+  .kt-dialog__body { padding: 22px 20px 24px; }
+  .kt-facts { grid-template-columns: 1fr; }
 }

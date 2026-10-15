@@ -162,6 +162,7 @@
       <p class="tq-result__mood" data-r-mood></p>
       <div class="tq-result__arch">
         <img src="" alt="" data-r-img>
+        <span class="tq-glyph" data-r-glyph hidden></span>
         <p class="tq-result__caption" data-r-caption></p>
       </div>
       <figcaption>茶品示意</figcaption>
@@ -179,11 +180,13 @@
     <dialog class="tq-dialog" data-quiz-dialog aria-labelledby="tq-dialog-name">
       <p class="tq-eyebrow">你的日常茶時光</p>
       <h3 id="tq-dialog-name" data-d-name></h3>
-      <p data-d-desc></p>
+      <p class="tq-dialog__meta" data-d-meta></p>
+      <div data-d-desc></div>
       <p class="tq-dialog__note">這是依香氣偏好提供的推薦，實際風味會隨茶葉與沖泡方式而變化。</p>
       <div class="tq-dialog__actions">
         <button type="button" class="tq-next" data-quiz-close>繼續品味</button>
         <a class="tq-open" href="#" data-d-link>到茶本舖看看 <span aria-hidden="true">→</span></a>
+        <span class="tq-soon" data-d-soon hidden>即將上架</span>
       </div>
     </dialog>
   </section>
@@ -198,48 +201,27 @@
     <h2 class="kt-title">好茶的背後，<br>是每一個用心的選擇。</h2>
     <p class="kt-lede">從小綠葉蟬咬過的嫩芽、高山的雲霧，到每一次萎凋與焙火，<br>認識每一款茶的個性，找到屬於你的那一杯。</p>
   </div>
-  <div class="kt-grid">
-      <a class="kt-card" href="product.html?slug=honey-black" data-reveal>
-        <div class="kt-card__media"><img src="assets/img/product-honey-black.png" alt="蟬吃蜜香紅茶" loading="lazy"></div>
-        <p class="kt-card__eyebrow">小綠葉蟬的天然蜜果香</p>
-        <h3 class="kt-card__name">蟬吃蜜香紅茶</h3>
-        <dl class="kt-card__notes">
-          <div><dt>香氣</dt><dd>蜜香・熟果・溫潤</dd></div>
-          <div><dt>口感</dt><dd>溫柔、清甜、有茶感、不厚重</dd></div>
-        </dl>
-        <span class="kt-card__more">認識這款茶 →</span>
-      </a>
-      <a class="kt-card" href="product.html?slug=gaba" data-reveal>
-        <div class="kt-card__media"><img src="assets/img/product-gaba.png" alt="蟬吃佳葉龍茶" loading="lazy"></div>
-        <p class="kt-card__eyebrow">厭氧發酵・沉穩安定</p>
-        <h3 class="kt-card__name">蟬吃佳葉龍茶</h3>
-        <dl class="kt-card__notes">
-          <div><dt>香氣</dt><dd>熟香・溫潤・沉穩</dd></div>
-          <div><dt>口感</dt><dd>柔和、厚實、安定感</dd></div>
-        </dl>
-        <span class="kt-card__more">認識這款茶 →</span>
-      </a>
-      <a class="kt-card" href="product.html?slug=fresh-oolong" data-reveal>
-        <div class="kt-card__media"><img src="assets/img/product-fresh-oolong.png" alt="蟬吃鮮翠烏龍茶" loading="lazy"></div>
-        <p class="kt-card__eyebrow">輕發酵中烘焙・清香甘潤</p>
-        <h3 class="kt-card__name">蟬吃鮮翠烏龍茶</h3>
-        <dl class="kt-card__notes">
-          <div><dt>香氣</dt><dd>清香・烏龍香・山林感</dd></div>
-          <div><dt>口感</dt><dd>清甜、甘醇、乾淨、回甘</dd></div>
-        </dl>
-        <span class="kt-card__more">認識這款茶 →</span>
-      </a>
-      <a class="kt-card" href="product.html?slug=yushan-oolong" data-reveal>
-        <div class="kt-card__media"><img src="assets/img/product-yushan-oolong.png" alt="蟬吃玉山烏龍茶" loading="lazy"></div>
-        <p class="kt-card__eyebrow">高山雲霧・葉厚耐泡</p>
-        <h3 class="kt-card__name">蟬吃玉山烏龍茶</h3>
-        <dl class="kt-card__notes">
-          <div><dt>香氣</dt><dd>高山香・清雅・山林感</dd></div>
-          <div><dt>口感</dt><dd>清透、甘醇、細緻</dd></div>
-        </dl>
-        <span class="kt-card__more">認識這款茶 →</span>
-      </a>
-  </div>
+  <div class="kt-grid" data-kt-grid></div>
+
+  <dialog class="tq-dialog kt-dialog" data-kt-dialog aria-labelledby="kt-dialog-name">
+    <button type="button" class="kt-dialog__close" data-kt-close aria-label="關閉">×</button>
+    <div class="kt-dialog__media" data-kt-media></div>
+    <div class="kt-dialog__body">
+      <p class="tq-eyebrow" data-kt-mood></p>
+      <h3 id="kt-dialog-name" data-kt-name></h3>
+      <dl class="kt-facts" data-kt-facts></dl>
+      <div class="kt-dialog__story" data-kt-story></div>
+      <div class="kt-more">
+        <p class="kt-more__title">多知道一點</p>
+        <p data-kt-more></p>
+      </div>
+      <p class="kt-leaf">＋ 裡面是原葉的茶葉</p>
+      <div class="tq-dialog__actions">
+        <a class="tq-next" href="#" data-kt-link>到茶本舖看看 <span aria-hidden="true">→</span></a>
+        <span class="tq-soon" data-kt-soon hidden>即將上架</span>
+      </div>
+    </div>
+  </dialog>
   <div class="kt-foot" data-reveal>
     <a class="tq-next kt-shop" href="products.html">走進茶本舖 <span aria-hidden="true">→</span></a>
     <a class="tq-link" href="#find-tea">還不確定？先做個小測驗 ↑</a>
@@ -385,7 +367,9 @@
 <script src="js/main.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/site-nav.js"></script>
+<script src="js/teas.js"></script>
 <script src="js/tea-quiz.js"></script>
+<script src="js/know-tea.js"></script>
 <script>
   // 「走進蟬吃茶」與「關於蟬吃茶」：平滑捲到品牌理念，讓四個理念置中出現
   document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach((a) => {
