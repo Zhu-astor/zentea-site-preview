@@ -1,0 +1,318 @@
+/*
+ * 購物車與結帳頁的新版樣式（依設計稿：淺綠橫幅、框線表單卡、米色訂單摘要、鼠尾草綠按鈕）。
+ * 只套用在 body.shop-ui，訂單完成與訂單查詢頁仍用 cart.css／checkout.css 原本的樣式。
+ */
+.shop-ui {
+  --sh-ink: #2F3A33;
+  --sh-text: #4A524C;
+  --sh-muted: #7A817B;
+  --sh-sage: #6D8A73;
+  --sh-sage-deep: #56715C;
+  --sh-mint: #E9F1EB;
+  --sh-beige: #F7F3EA;
+  --sh-line: #DCDDD7;
+  --sh-field: #C3C9C3;
+  background: #fff !important;
+  color: var(--sh-ink);
+  font-family: "Noto Serif TC", "Songti TC", serif;
+}
+
+/* ---------- 橫幅 ---------- */
+.shop-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 240px;
+  overflow: hidden;
+  background: var(--sh-mint);
+}
+
+.shop-hero__text { position: relative; z-index: 1; padding: 0 5vw; }
+
+.shop-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: #5E6B61;
+  margin: 0 0 14px;
+}
+.shop-hero__eyebrow::after { content: ""; width: 56px; height: 1px; background: #8C978E; }
+
+.shop-hero__title {
+  font-weight: 600;
+  font-size: clamp(46px, 6vw, 74px);
+  letter-spacing: 0.14em;
+  line-height: 1.1;
+  color: #5A7360;
+  margin: 0;
+}
+
+/* 茶杯圖貼右邊，左緣淡進底色 */
+.shop-hero__img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: auto;
+  max-width: 70%;
+  object-fit: cover;
+  object-position: right center;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%);
+  mask-image: linear-gradient(to right, transparent 0, #000 22%);
+}
+
+/* ---------- 版面 ---------- */
+.shop-ui .c-wrap { max-width: 1240px; padding: 36px 36px 80px; }
+.shop-ui .c-layout { grid-template-columns: minmax(0, 1fr) 412px; gap: 20px; }
+.shop-ui .c-status { font-size: 15px; color: var(--sh-muted); }
+
+.shop-card {
+  background: #fff;
+  border: 1px solid var(--sh-field);
+  border-radius: 6px;
+  padding: 30px 28px 34px;
+}
+
+.shop-back {
+  display: inline-block;
+  font-size: 16px;
+  color: var(--sh-sage-deep);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin-bottom: 10px;
+}
+.shop-back:hover { color: var(--seal); }
+
+/* ---------- 購物車清單 ---------- */
+.c-panel { padding: 24px 24px 40px; }
+.c-panel .shop-back { margin: 30px 0 0 12px; }
+
+.c-list-head,
+.shop-ui .c-line {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr) 120px 96px 56px;
+  align-items: center;
+  gap: 16px;
+}
+
+.c-list-head {
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: var(--sh-text);
+  padding: 14px 16px 18px;
+  border-bottom: 1px solid var(--sh-line);
+}
+.c-list-head span:first-child { grid-column: 1 / 3; }
+.c-list-head span:nth-child(2) { grid-column: 3; text-align: center; }
+.c-list-head span:nth-child(3) { grid-column: 4 / 6; padding-left: 18px; }
+
+.shop-ui .c-line { padding: 26px 16px; border-bottom: 1px solid var(--sh-line); }
+.shop-ui .c-line__img { width: 140px; height: 180px; object-fit: contain; border: 0; border-radius: 4px; background: #F6F5F0; }
+.shop-ui .c-line__name { font-size: 26px; font-weight: 500; letter-spacing: 0.04em; color: var(--sh-text); }
+.shop-ui .c-line__variant { font-size: 13px; color: var(--sh-muted); margin-top: 6px; }
+.shop-ui .c-line__price { font-size: 18px; color: var(--sh-text); margin-top: 8px; }
+.shop-ui .c-line__total { min-width: 0; font-size: 18px; color: var(--sh-text); text-align: left; }
+.shop-ui .c-line__remove { font-size: 18px; color: var(--sh-sage-deep); text-align: left; }
+
+.shop-ui .c-qty { justify-self: center; border: 1px solid var(--sh-field); border-radius: 4px; background: #fff; }
+.shop-ui .c-qty__btn { width: 38px; height: 46px; font-size: 20px; color: var(--sh-text); }
+.shop-ui .c-qty__input { width: 40px; height: 46px; font-size: 18px; border: 0; color: var(--sh-text); }
+
+/* ---------- 訂單摘要（米色卡） ---------- */
+.shop-ui .c-summary {
+  top: 96px;
+  padding: 36px 38px 34px;
+  background: var(--sh-beige);
+  border: 0;
+  border-radius: 10px;
+}
+
+.shop-summary__title {
+  font-weight: 500;
+  font-size: 34px;
+  letter-spacing: 0.16em;
+  color: var(--sh-ink);
+  margin: 0 0 26px;
+}
+
+.shop-ui .c-summary__row { font-size: 20px; color: var(--sh-text); padding: 8px 0; }
+.shop-ui .c-summary__row--muted { font-size: 20px; color: var(--sh-text); }
+
+.shop-ui .shop-summary__total {
+  align-items: baseline;
+  margin-top: 18px;
+  padding-top: 26px;
+  border-top: 1px solid #DDD6C8;
+}
+.shop-ui .shop-summary__total span:last-child { font-size: 28px; }
+
+.shop-ui .c-summary__note { font-size: 15px; color: var(--sh-text); text-align: left; margin-top: 18px; }
+.shop-ui .c-summary__warn { font-size: 15px; }
+
+.shop-ui .c-checkout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 22px;
+  padding: 18px;
+  font-size: 24px;
+  letter-spacing: 0.18em;
+  color: #fff;
+  background: var(--sh-sage);
+  border-radius: 4px;
+  transition: background-color 0.25s;
+}
+.shop-ui .c-checkout:hover:not(:disabled):not(.is-disabled) { background: var(--sh-sage-deep); }
+.shop-ui .c-checkout:disabled, .shop-ui .c-checkout.is-disabled { background: #B5BDB6; }
+
+/* ---------- 結帳表單 ---------- */
+.shop-ui .co__main { padding: 26px 28px 36px; }
+.shop-ui .co__section { margin: 0; padding: 22px 0 8px; border: 0; }
+
+/* 區塊標題右邊拉一條細線 */
+.shop-ui .co__legend {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  float: left;
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: 0.12em;
+  color: var(--sh-text);
+  margin-bottom: 26px;
+  padding: 0;
+}
+.shop-ui .co__legend::after { content: ""; flex: 1; height: 1px; background: var(--sh-line); }
+.shop-ui .co__legend + * { clear: both; }
+.shop-ui .co__optional { font-size: 15px; letter-spacing: 0.04em; color: var(--sh-muted); }
+
+.shop-ui .co__field label { display: block; font-size: 18px; color: var(--sh-text); margin-bottom: 10px; }
+.shop-ui .co__field { margin-bottom: 18px; }
+.shop-ui .co__row { gap: 20px; }
+
+.shop-ui .co__field input,
+.shop-ui .co__field textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 18px;
+  color: var(--sh-ink);
+  background: #fff;
+  border: 1px solid var(--sh-field);
+  border-radius: 3px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.shop-ui .co__field input { height: 50px; }
+.shop-ui .co__field input::placeholder, .shop-ui .co__field textarea::placeholder { color: #9AA09B; }
+.shop-ui .co__field input:focus,
+.shop-ui .co__field textarea:focus { border-color: var(--sh-sage); box-shadow: 0 0 0 3px rgba(109, 138, 115, 0.15); }
+
+.shop-ui .co__hint { font-size: 15px; color: var(--sh-text); margin-top: 10px; }
+.shop-ui .co__error { font-size: 15px; }
+
+.shop-ui .co__same { display: flex; align-items: center; gap: 10px; font-size: 18px; color: var(--sh-text); margin-bottom: 14px; }
+.shop-ui .co__same input { width: 20px; height: 20px; accent-color: var(--sh-sage); }
+
+/* 配送／付款選項：一列一個框 */
+.shop-ui .co__options { display: flex; flex-direction: column; gap: 10px; }
+
+.shop-ui .co__option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 52px;
+  font-size: 18px;
+  color: var(--sh-text);
+  background: #fff;
+  border: 1px solid var(--sh-field);
+  border-radius: 3px;
+  padding: 10px 14px 10px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.shop-ui .co__option:hover { border-color: var(--sh-sage); }
+.shop-ui .co__option:has(input:checked) { border-color: var(--sh-sage); background: #F3F7F3; }
+.shop-ui .co__option input { width: 20px; height: 20px; margin: 0; accent-color: var(--sh-sage); }
+.shop-ui .co__option-fee { margin-left: auto; font-size: 18px; }
+.shop-ui .co__option--pay small { margin-left: 12px; font-size: 14px; color: var(--sh-muted); }
+.shop-ui .co__option--pay .co__option-fee { font-size: 15px; color: var(--sh-muted); }
+.shop-ui .co__option--pay + .co__hint { margin-top: 14px; }
+
+.shop-ui .co__store { border: 1px solid var(--sh-field); border-radius: 3px; background: #FAFBF9; }
+.shop-ui .co__store-btn { background: var(--sh-sage); border-radius: 3px; }
+
+/* 結帳摘要的商品列 */
+.shop-ui .co__items { list-style: none; margin: 0 0 6px; padding: 0 0 18px; border-bottom: 1px solid #DDD6C8; }
+.shop-ui .co__item { display: flex; align-items: center; gap: 16px; padding: 8px 0; font-size: 17px; }
+.shop-ui .co__item-img { width: 74px; height: 96px; flex: 0 0 auto; object-fit: contain; background: #fff; border-radius: 4px; }
+.shop-ui .co__item-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.shop-ui .co__item-name { color: var(--sh-ink); }
+.shop-ui .co__item-unit { font-size: 14px; color: var(--sh-muted); }
+.shop-ui .co__item-price { font-size: 18px; color: var(--sh-text); }
+.shop-ui .co__items + .c-summary__row { margin-top: 14px; }
+.shop-ui .co__total { margin-top: 14px; padding-top: 22px; border-top: 1px solid #DDD6C8; font-size: 20px; }
+.shop-ui .co__total span:last-child { font-size: 28px; }
+
+/* ---------- 空購物車 ---------- */
+.shop-ui .c-empty { font-size: 18px; color: var(--sh-text); }
+
+/* ---------- 頁尾 ---------- */
+.shop-foot {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 26px 5vw;
+  border-top: 1px solid var(--sh-line);
+}
+.shop-foot__leaf { width: 150px; height: auto; opacity: 0.85; }
+.shop-foot__logo img { height: 56px; display: block; }
+.shop-foot__motto { justify-self: end; font-size: 18px; letter-spacing: 0.26em; color: var(--sh-text); margin: 0; }
+
+/* ---------- 手機 ---------- */
+@media (max-width: 960px) {
+  .shop-ui .c-layout { grid-template-columns: 1fr; }
+  .shop-ui .c-summary { position: static; }
+}
+
+@media (max-width: 680px) {
+  .shop-hero { min-height: 150px; }
+  /* 手機：茶杯縮小貼右下，不壓到標題 */
+  .shop-hero__img { top: auto; bottom: 0; height: 78%; max-width: 62%; }
+  .shop-hero__title { font-size: 40px; }
+  .shop-hero__eyebrow { font-size: 11px; gap: 10px; }
+  .shop-hero__eyebrow::after { width: 28px; }
+  .shop-ui .co__option--pay { flex-wrap: wrap; }
+  .shop-ui .co__option--pay small { display: block; margin: 2px 0 0; }
+  .shop-ui .co__option--pay .co__option-fee { font-size: 13px; }
+  .shop-foot__logo img { height: 44px; }
+  .shop-ui .c-wrap { padding: 20px 16px 56px; }
+  .shop-card, .shop-ui .co__main { padding: 20px 16px 26px; }
+  .c-list-head { display: none; }
+  .shop-ui .c-line {
+    grid-template-columns: 92px minmax(0, 1fr) auto;
+    grid-template-areas: "img info info" "img qty total" "img qty remove";
+    gap: 8px 14px;
+    padding: 18px 4px;
+  }
+  .shop-ui .c-line__img { grid-area: img; width: 92px; height: 120px; }
+  .shop-ui .c-line__info { grid-area: info; }
+  .shop-ui .c-qty { grid-area: qty; justify-self: start; }
+  .shop-ui .c-line__total { grid-area: total; text-align: right; }
+  .shop-ui .c-line__remove { grid-area: remove; text-align: right; font-size: 15px; }
+  .shop-ui .c-line__name { font-size: 20px; }
+  .shop-ui .c-summary { padding: 26px 22px; }
+  .shop-summary__title { font-size: 26px; }
+  .shop-ui .c-summary__row, .shop-ui .c-summary__row--muted { font-size: 17px; }
+  .shop-ui .c-checkout { font-size: 20px; padding: 15px; }
+  .shop-ui .co__legend { font-size: 22px; }
+  .shop-ui .co__row { grid-template-columns: 1fr; }
+  .shop-foot { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .shop-foot__leaf { width: 100px; }
+  .shop-foot__motto { justify-self: center; font-size: 15px; }
+}

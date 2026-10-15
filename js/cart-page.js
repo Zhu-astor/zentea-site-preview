@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (id !== requestId) return; // 使用者連續點擊時只採用最後一次的結果
 
       list.replaceChildren(...data.items.map(renderLine));
-      $("[data-cart-subtotal]").textContent = cart.formatPrice(data.subtotal);
+      document.querySelectorAll("[data-cart-subtotal]").forEach((el) => (el.textContent = cart.formatPrice(data.subtotal)));
       $("[data-cart-warn]").hidden = !data.has_problems;
       // 有商品無法購買時不能前往結帳
       $("[data-cart-checkout]").classList.toggle("is-disabled", data.has_problems);

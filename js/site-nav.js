@@ -1,12 +1,14 @@
 /*
- * 固定功能列：切換樣式（?nav=clear 全透明／?nav=frost 80% 白底）、捲動後加陰影、手機版選單開關。
+ * 固定功能列：切換樣式（?nav=clear 全透明／?nav=frost 20% 白底／購物頁 solid 實心白底）、捲動後加陰影、手機版選單開關。
  */
 document.addEventListener("DOMContentLoaded", () => {
   const nav = document.querySelector("[data-site-nav]");
   if (!nav) return;
 
-  const variant = new URLSearchParams(location.search).get("nav") || nav.dataset.variant || "clear";
-  nav.classList.add(variant === "frost" ? "site-nav--frost" : "site-nav--clear");
+  // 購物車、結帳等頁面用實心白底（data-variant="solid"），不受 ?nav= 影響
+  const variant =
+    nav.dataset.variant === "solid" ? "solid" : new URLSearchParams(location.search).get("nav") || nav.dataset.variant || "clear";
+  nav.classList.add({ frost: "site-nav--frost", solid: "site-nav--solid" }[variant] || "site-nav--clear");
 
   const onScroll = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
   window.addEventListener("scroll", onScroll, { passive: true });

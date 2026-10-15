@@ -7,23 +7,56 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/products.css">
 <link rel="stylesheet" href="css/cart.css">
+<link rel="stylesheet" href="css/site-nav.css">
+<link rel="stylesheet" href="css/shop.css">
 </head>
-<body class="products-page cart-page">
+<body class="products-page cart-page shop-ui">
+
+<header class="site-nav" data-site-nav data-variant="solid">
+  <a href="index.html" class="site-nav__logo"><img src="assets/img/logo.png" alt="蟬吃茶"></a>
+  <nav class="site-nav__links" id="site-nav-links" aria-label="主要選單">
+    <a href="index.html">首頁</a>
+    <a href="index.html#session-4">關於蟬吃茶</a>
+    <a href="products.html" class="is-active">產品介紹</a>
+    <a href="articles.html?category=%E8%8C%B6%E7%9A%84%E6%97%A5%E5%B8%B8">茶的日常</a>
+    <a href="journal.html">蟬吃誌</a>
+    <a href="#">門市據點</a>
+  </nav>
+  <div class="site-nav__icons">
+    <a href="order-lookup.html" class="site-nav__icon" aria-label="訂單查詢" title="訂單查詢">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+    </a>
+    <a href="cart.html" class="site-nav__icon" aria-label="購物車" title="購物車">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>
+      <span class="site-nav__count" data-cart-count hidden>0</span>
+    </a>
+    <button type="button" class="site-nav__icon site-nav__menu-btn" data-nav-toggle aria-label="選單" aria-controls="site-nav-links" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="shop-hero">
+  <div class="shop-hero__text">
+    <p class="shop-hero__eyebrow">YOUR TEA BAG</p>
+    <h1 class="shop-hero__title">購物車</h1>
+  </div>
+  <img class="shop-hero__img" src="assets/img/checkout-hero.jpg" alt="">
+</section>
 
 <div class="c-wrap">
-  <header class="c-head">
-    <a href="index.html" class="c-head__logo"><img src="assets/img/logo.png" alt="蟬吃茶"></a>
-    <a href="products.html" class="c-head__back">← 繼續選購</a>
-  </header>
-
-  <h1 class="c-title">購物車</h1>
 
   <p class="c-status" data-cart-status>正在確認最新價格與庫存…</p>
 
   <div class="c-layout" data-cart-layout hidden>
-    <ul class="c-list" data-cart-list></ul>
+    <section class="shop-card c-panel">
+      <div class="c-list-head" aria-hidden="true"><span>商品</span><span>數量</span><span>小計</span></div>
+      <ul class="c-list" data-cart-list></ul>
+      <a href="products.html" class="shop-back">← 繼續選購</a>
+    </section>
 
     <aside class="c-summary">
+      <h2 class="shop-summary__title">訂單摘要</h2>
       <div class="c-summary__row">
         <span>商品小計</span>
         <span data-cart-subtotal>NT$0</span>
@@ -32,8 +65,13 @@
         <span>運費</span>
         <span>結帳時計算</span>
       </div>
+      <div class="c-summary__row shop-summary__total">
+        <span>商品總額</span>
+        <span data-cart-subtotal>NT$0</span>
+      </div>
+      <p class="c-summary__note">運費於結帳時確認。</p>
       <p class="c-summary__warn" data-cart-warn hidden>部分商品目前無法購買，請先調整數量或移除</p>
-      <a href="checkout.html" class="c-checkout" data-cart-checkout>前往結帳</a>
+      <a href="checkout.html" class="c-checkout" data-cart-checkout>前往結帳 <span aria-hidden="true">→</span></a>
     </aside>
   </div>
 
@@ -43,6 +81,12 @@
     <a href="products.html" class="p-card__cta c-empty__cta">去逛逛茶品</a>
   </div>
 </div>
+
+<footer class="shop-foot">
+  <img src="assets/img/leaf-1.png" alt="" class="shop-foot__leaf">
+  <a href="index.html" class="shop-foot__logo"><img src="assets/img/logo.png" alt="蟬吃茶"></a>
+  <p class="shop-foot__motto">一葉一日・與茶相伴</p>
+</footer>
 
 <template id="cart-line">
   <li class="c-line">
@@ -65,5 +109,6 @@
 
 <script src="js/cart.js"></script>
 <script src="js/cart-page.js"></script>
+<script src="js/site-nav.js"></script>
 </body>
 </html>

@@ -137,3 +137,11 @@
   /* 透明版打開選單時，功能列本身也要有底色，不然 logo 會壓在內容上 */
   .site-nav.is-open { background: #FAF8F4; }
 }
+
+/* 購物車、結帳等頁面：實心白底，跟著捲動但不蓋住內容 */
+.site-nav--solid {
+  position: sticky;
+  background: #fff;
+  border-bottom-color: rgba(74, 64, 54, 0.1);
+}
+.site-nav--solid.is-scrolled { box-shadow: 0 6px 20px rgba(42, 38, 32, 0.06); }

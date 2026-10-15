@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const FIELDS = ["customer_name", "customer_phone", "customer_email", "receiver_name", "receiver_phone",
     "receiver_zipcode", "address", "note"];
   const CVS_METHODS = ["cvs_fami", "cvs_unimart"];
-  const SUBMIT_LABEL = "前往付款";
+  const SUBMIT_LABEL = "前往付款 →";
 
   let subtotal = 0;
   let shipping = { free_shipping_threshold: Infinity, methods: [] };
@@ -109,6 +109,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   form.addEventListener("input", saveDraft);
   form.addEventListener("change", saveDraft);
+  // 改了欄位就把那一欄的錯誤訊息收起來（選了配送方式也一樣）
+  const clearError = (e) => {
+    const name = e.target.name;
+    const err = name && document.querySelector(`[data-error="${name}"]`);
+    if (err) err.hidden = true;
+  };
+  form.addEventListener("input", clearError);
+  form.addEventListener("change", clearError);
 
   // ---------- 配送方式與金額 ----------
   function feeFor(method) {
@@ -213,12 +221,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       ...quote.items.map((item) => {
         const li = document.createElement("li");
         li.className = "co__item";
+        const img = document.createElement(item.image ? "img" : "span");
+        img.className = "co__item-img";
+        if (item.image) {
+          img.src = item.image;
+          img.alt = "";
+        }
+        const info = document.createElement("span");
+        info.className = "co__item-info";
         const name = document.createElement("span");
+        name.className = "co__item-name";
         name.textContent = `${item.product_name || item.sku} × ${item.quantity}`;
+        const unit = document.createElement("span");
+        unit.className = "co__item-unit";
+        unit.textContent = item.unit_price ? `單價 ${cart.formatPrice(item.unit_price)}` : "";
+        info.append(name, unit);
         const price = document.createElement("span");
+        price.className = "co__item-price";
         price.textContent = item.problems.length ? item.problems.join("、") : cart.formatPrice(item.line_total);
         if (item.problems.length) li.classList.add("has-problem");
-        li.append(name, price);
+        li.append(img, info, price);
         return li;
       })
     );
