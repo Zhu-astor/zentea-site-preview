@@ -1,0 +1,81 @@
+/* 蟬茶誌：大卡＋右側兩張分割卡（左圖右文），米白底、細明體大標、底線連結 */
+body.diary-page { background: #fff; }
+
+.jd { width: min(1330px, 92vw); margin: 0 auto; padding: 64px 0 96px; }
+.jd-rows { display: flex; flex-direction: column; gap: 28px; }
+
+.jd-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.67fr) minmax(0, 1fr);
+  gap: 27px;
+}
+.jd-row.is-flipped { grid-template-columns: minmax(0, 1fr) minmax(0, 1.67fr); }
+.jd-row.is-flipped .jd-card--big { order: 2; }
+
+.jd-side { display: flex; flex-direction: column; gap: 27px; }
+
+.jd-card { color: var(--ink); text-decoration: none; background: #F5F4EF; }
+.jd-card--big { display: flex; flex-direction: column; }
+.jd-card--split { display: grid; grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr); flex: 1; min-height: 360px; }
+
+/* 圖片區：照片鋪滿；插畫（is-illustration）縮在中間，留白 */
+.jd-card__media { position: relative; overflow: hidden; background: #F1F0EA; }
+.jd-card--big .jd-card__media { aspect-ratio: 813 / 484; }
+.jd-card--split .jd-card__media { background: #fff; }
+.jd-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; }
+.jd-card__media.is-illustration img { object-fit: contain; padding: 12% 4%; }
+.jd-card--split .jd-card__media.is-illustration img { padding: 26% 12%; }
+a.jd-card:hover .jd-card__media img { transform: scale(1.03); }
+
+.jd-card__label {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  color: #6B6B63;
+}
+
+.jd-card__body { display: flex; flex-direction: column; align-items: flex-start; padding: 46px 38px 34px; }
+.jd-card--big .jd-card__body { padding: 44px 38px 36px; }
+
+.jd-card__eyebrow { font-size: 10.5px; letter-spacing: 0.16em; color: #6B6B63; margin: 0 0 26px; text-transform: uppercase; }
+
+.jd-card__title {
+  font-family: "Noto Serif TC", serif;
+  font-weight: 400;
+  font-size: clamp(22px, 1.8vw, 28px);
+  line-height: 1.6;
+  letter-spacing: 0.06em;
+  color: #2A2A26;
+  margin: 0 0 30px;
+  white-space: pre-line;
+}
+.jd-card--big .jd-card__title { font-size: clamp(26px, 2.2vw, 34px); margin-bottom: 26px; }
+
+.jd-card__summary { font-size: 14px; line-height: 1.9; color: #55554E; margin: 0 0 16px; }
+
+.jd-card__link {
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  color: #2A2A26;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #2A2A26;
+  transition: letter-spacing 0.3s, color 0.3s, border-color 0.3s;
+}
+.jd-card--split .jd-card__link { margin-top: auto; }
+a.jd-card:hover .jd-card__link { letter-spacing: 0.16em; color: #9B3D38; border-color: #9B3D38; }
+div.jd-card .jd-card__link { color: #8A887F; border-bottom-style: dashed; border-color: #B9B6AC; }
+
+@media (max-width: 960px) {
+  .jd-row, .jd-row.is-flipped { grid-template-columns: 1fr; }
+  .jd-row.is-flipped .jd-card--big { order: 0; }
+}
+
+@media (max-width: 600px) {
+  .jd { width: auto; padding: 32px 16px 64px; }
+  .jd-card--split { grid-template-columns: 1fr; min-height: 0; }
+  .jd-card--split .jd-card__media { aspect-ratio: 16 / 9; }
+  .jd-card--split .jd-card__media.is-illustration img { padding: 6% 20%; }
+  .jd-card__body, .jd-card--big .jd-card__body { padding: 28px 22px 26px; }
+}

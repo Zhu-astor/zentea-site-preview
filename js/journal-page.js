@@ -1,5 +1,5 @@
 /*
- * 蟬吃誌輪播：第一組是 HTML 裡原本手工排版的六張卡片（精選文章），
+ * 茶知識輪播（knowledge.html）：第一組是 HTML 裡原本手工排版的六張卡片（精選文章），
  * 按箭頭依序換成最新文章／人氣文章／最多點閱，每組六張，版型跟第一組完全相同。
  * 用左右箭頭、上方分頁、鍵盤左右鍵或手機左右滑切換。
  * 文章來自後端 /api/articles/?sort=…&page_size=6（只有已發布的文章）；後端連不上時只顯示第一組。
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const link = el("a", `j-card ${variant}`.trim());
     link.href = `article.html?slug=${encodeURIComponent(a.slug)}`;
     const body = el("div", "j-card__body");
-    const eyebrow = el("p", "j-card__eyebrow", a.category || "蟬吃誌");
+    const eyebrow = el("p", "j-card__eyebrow", a.category || "茶知識");
     if (ranked) eyebrow.prepend(el("span", "j-card__rank", `No.${rank}`));
     body.append(eyebrow, el("h2", "j-card__title", a.title));
     if (variant === "j-card--hero" && a.summary) body.append(el("p", "j-card__desc", a.summary));
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function fetchSlide(s) {
-    const res = await fetch(`${api}/api/articles/?sort=${s.sort}&page_size=${PER_SLIDE}`);
+    const res = await fetch(`${api}/api/articles/?section=knowledge&sort=${s.sort}&page_size=${PER_SLIDE}`);
     if (!res.ok) throw new Error(res.status);
     return res.json();
   }

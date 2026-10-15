@@ -11,7 +11,8 @@
   const byDate = (a, b) => (b.published_at || "").localeCompare(a.published_at || "");
 
   async function articleList(params) {
-    const all = await list();
+    const section = params.get("section");
+    const all = (await list()).filter((a) => !section || (a.section || "knowledge") === section);
     let items = all.slice();
     const category = params.get("category");
     const month = params.get("month");

@@ -3,12 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>蟬茶日誌 | 蟬吃茶 ZenEaTea</title>
-<link rel="stylesheet" href="css/style.css?v=b0df1bf9">
+<title>蟬茶誌 | 蟬吃茶 ZenEaTea</title>
+<meta name="description" content="蟬茶誌：關於蟬吃茶的人、茶園與日常。">
+<link rel="stylesheet" href="css/style.css?v=46f22e29">
 <link rel="stylesheet" href="css/site-nav.css?v=c312661f">
-<link rel="stylesheet" href="css/journal.css?v=3fbd7dc8">
+<link rel="stylesheet" href="css/journal.css?v=89d7214c">
+<link rel="stylesheet" href="css/journal-diary.css?v=69dc96a5">
 </head>
-<body class="journal-page">
+<body class="journal-page diary-page">
 
 <header class="journal-hero-bg">
   <!-- 頂部導覽列 -->
@@ -19,12 +21,11 @@
     </a>
     
     <nav class="nav-links">
-      <a href="index.html">首頁</a>
-      <a href="index.html#session-4">關於蟬吃茶</a>
-      <a href="products.html">產品介紹</a>
-      <a href="articles.html?category=%E8%8C%B6%E7%9A%84%E6%97%A5%E5%B8%B8">茶的日常</a>
-      <a href="journal.html" class="active">蟬吃誌</a>
-      <a href="#">門市據點</a>
+      <a href="index.html#session-4">關於我們</a>
+      <a href="products.html">蟬茶鋪</a>
+      <a href="journal.html" class="active">蟬茶誌</a>
+      <a href="knowledge.html">茶知識</a>
+      <a href="experience.html">蟬茗齋</a>
     </nav>
     
     <!-- 右側功能圖示 (會員、購物車、漢堡選單) 可先留空或放入你的圖示 -->
@@ -44,109 +45,19 @@
     
     <!-- 幫文字與印章建立一個橫排的群組 -->
     <div class="title-with-seal">
-      <h1>蟬茶日誌</h1>
+      <h1>蟬茶誌</h1>
       <img src="assets/img/seal.png" alt="蟬吃茶印章" class="hero-seal">
     </div>
     
-    <p>把山林、茶香與生活裡的留白，慢慢寫下來。</p>
+    <p>關於蟬吃茶的人、茶園與日常，一篇一篇慢慢寫下來。</p>
   </div>
 </header>
 
-<!-- 精選輪播：最新文章 → 人氣文章 → 最多點閱，每組六張卡片，左右箭頭切換。
-     卡片從後端讀取；後端連不上時維持下面手工排版的卡片。 -->
-<section class="j-feature" data-feature aria-roledescription="輪播" aria-label="蟬吃誌精選文章">
-  <header class="j-feature__head">
-    <p class="j-feature__eyebrow">CHAN CHA JOURNAL</p>
-    <h2 class="j-feature__title" data-feature-title>精選文章</h2>
-    <p class="j-feature__sub" data-feature-sub>把山林、茶香與生活裡的留白，慢慢寫下來。</p>
-    <div class="j-feature__tabs" data-feature-tabs role="tablist" hidden></div>
-  </header>
-
-  <div class="j-feature__stage">
-    <button type="button" class="j-feature__arrow j-feature__arrow--prev" data-feature-prev aria-label="上一組文章" hidden>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
-    </button>
-<main class="journal-columns" data-feature-columns aria-live="polite">
-
-  <div class="j-col">
-    <a class="j-card" href="article-1.html">
-      <div class="j-card__body">
-        <p class="j-card__eyebrow">產地故事</p>
-        <h2 class="j-card__title">玉山自然茶園</h2>
-        <span class="j-card__arrow">閱讀全文 →</span>
-      </div>
-      <div class="j-card__media"><img src="assets/img/landscape-1.png" alt="玉山自然茶園"></div>
-    </a>
-    <!-- <div class="j-card j-card--quote">
-      <p class="j-card__quote-text">順應天地的節律耕作，<br>與自然共生，<br>才有好茶。</p>
-    </div> -->
-    <a class="j-card" href="article-3.html">
-      <div class="j-card__body">
-        <p class="j-card__eyebrow">沖泡指南</p>
-        <h2 class="j-card__title">冷泡茶泡茶方法</h2>
-        <span class="j-card__arrow">閱讀全文 →</span>
-      </div>
-      <div class="j-card__media"><img src="assets/img/tea-figure-1.png" alt="冷泡茶泡茶方法"></div>
-    </a>
-    
-  </div>
-
-  <div class="j-col j-col--hero">
-    <a class="j-card j-card--hero" href="article-2.html">
-      <div class="j-card__body">
-        <p class="j-card__eyebrow">品牌理念</p>
-        <h2 class="j-card__title">自然農法</h2>
-        <p class="j-card__desc">不使用農藥、不施化肥，讓茶樹與小綠葉蟬共生，產出天然的蜜果香氣。</p>
-        <span class="j-card__arrow">閱讀全文 →</span>
-      </div>
-      <div class="j-card__media"><img src="assets/img/landscape-1.png" alt="自然農法"></div>
-    </a>
-  </div>
-
-  <div class="j-col">
-    <a class="j-card j-card--fade-a" href="article-4.html">
-      <div class="j-card__body">
-        <p class="j-card__eyebrow">知識型</p>
-        <h2 class="j-card__title">GABA茶、佳葉龍茶介紹</h2>
-        <span class="j-card__arrow">閱讀全文 →</span>
-      </div>
-      <div class="j-card__media"><img src="assets/img/journal-thumb-4.jpg" alt="GABA茶介紹"></div>
-    </a>
-    <a class="j-card j-card--fade-b" href="article-6.html">
-      <div class="j-card__body">
-        <p class="j-card__eyebrow">知識型</p>
-        <h2 class="j-card__title">各種茶的英文怎麼說？</h2>
-        <span class="j-card__arrow">閱讀全文 →</span>
-      </div>
-      <div class="j-card__media"><img src="assets/img/journal-thumb-3.jpg" alt="各種茶的英文怎麼說"></div>
-    </a>
-    <a class="j-card" href="article-5.html">
-      <div class="j-card__body">
-        <p class="j-card__eyebrow">榮譽・信任資產</p>
-        <h2 class="j-card__title">全國製茶武林大賽・榮獲茶王</h2>
-        <span class="j-card__arrow">閱讀全文 →</span>
-      </div>
-      <div class="j-card__media"><img src="assets/img/leaf-1.png" alt="全國製茶武林大賽"></div>
-    </a>
-  </div>
-
+<!-- 蟬茶誌：大卡＋右側兩張分割卡，一列三篇，下一列左右對調。文章來自後台「欄目：蟬茶誌」 -->
+<main class="jd">
+  <div class="jd-rows" data-diary></div>
+  <p class="jd-status" data-diary-status hidden></p>
 </main>
-    <button type="button" class="j-feature__arrow j-feature__arrow--next" data-feature-next aria-label="下一組文章" hidden>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
-    </button>
-  </div>
-</section>
-
-<!-- 其他文章（非最新、點閱較少）都在「全部文章」頁 -->
-<section class="j-more">
-  <img src="assets/img/leaf-1.png" alt="" class="j-more__leaf">
-  <div class="j-more__text">
-    <p class="j-more__eyebrow">MORE STORIES</p>
-    <h2 class="j-more__title">更多文章，慢慢翻</h2>
-    <p class="j-more__desc" data-more-desc>依分類、日期找到想讀的那一篇，還能看到大家最常讀哪些。</p>
-  </div>
-  <a href="articles.html" class="j-more__btn">看全部文章 <span aria-hidden="true">→</span></a>
-</section>
 
 <footer class="site-footer-bg">
   <div class="footer-container">
@@ -171,10 +82,10 @@
         <a href="#">沖泡指南</a>
       </div>
       <div class="footer-col">
-        <h4>蟬吃誌</h4>
-        <a href="#">茶的日常</a>
-        <a href="#">產地故事</a>
-        <a href="#">茶知識</a>
+        <h4>蟬茶誌・茶知識</h4>
+        <a href="journal.html">蟬茶誌</a>
+        <a href="knowledge.html">茶知識</a>
+        <a href="articles.html">全部文章</a>
       </div>
       <div class="footer-col">
         <h4>購物</h4>
@@ -207,8 +118,8 @@
   </div>
 </footer>
 
-<script src="js/demo-api.js?v=e908b8c5"></script><!-- 預覽站：文章讀 demo/ 快照 -->
+<script src="js/demo-api.js?v=ee72c7f3"></script><!-- 預覽站：文章、商品讀 demo/ 快照 -->
 <script src="js/cart.js?v=63202081"></script>
-<script src="js/journal-page.js?v=8a538154"></script>
+<script src="js/journal-diary.js?v=577aa85f"></script>
 </body>
 </html>

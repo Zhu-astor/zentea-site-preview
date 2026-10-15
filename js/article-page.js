@@ -26,7 +26,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!res.ok) throw new Error(res.status);
     const a = await res.json();
 
-    document.title = `${a.title} | 蟬吃誌 | 蟬吃茶`;
+    // 依文章欄目決定「回到哪裡」：蟬茶誌（品牌文章）或茶知識
+    const section = a.section === "journal" ? { name: "蟬茶誌", href: "journal.html" } : { name: "茶知識", href: "knowledge.html" };
+    document.title = `${a.title} | ${section.name} | 蟬吃茶`;
+    const back = document.querySelector('.ar-head__back[href="knowledge.html"]');
+    if (back) {
+      back.href = section.href;
+      back.textContent = `← 回${section.name}`;
+    }
     document.querySelector('meta[name="description"]').content = a.summary || "";
     $("[data-preview]").hidden = a.status !== "draft";
     $("[data-category]").textContent = a.category || "";
@@ -88,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-// 記一次點閱（給蟬吃誌的「人氣文章」「最多點閱」）。同一個分頁重新整理不重複算；後端另外依 IP 去重。
+// 記一次點閱（給茶知識的「人氣文章」「最多點閱」）。同一個分頁重新整理不重複算；後端另外依 IP 去重。
 function countView(slug) {
   const key = `zentea_viewed_${slug}`;
   try {

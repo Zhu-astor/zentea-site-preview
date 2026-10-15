@@ -1,5 +1,5 @@
 /*
- * 蟬吃誌「全部文章」：分類、月份、關鍵字篩選，最新／人氣／最多點閱排序，分頁。
+ * 茶知識「全部文章」：分類、月份、關鍵字篩選，最新／人氣／最多點閱排序，分頁。
  * 篩選條件同步到網址（?category=&month=&q=&sort=&page=），可以直接分享或從選單連過來。
  * 資料來自後端 /api/articles/（只有已發布的文章）。
  */
@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.scrollY > top) window.scrollTo({ top, behavior: "smooth" });
     }
 
-    const qs = new URLSearchParams({ sort: state.sort, page: state.page, page_size: PAGE_SIZE });
+    const qs = new URLSearchParams({ section: "knowledge", sort: state.sort, page: state.page, page_size: PAGE_SIZE });
     ["category", "month", "q"].forEach((k) => state[k] && qs.set(k, state[k]));
     try {
       const res = await fetch(`${api}/api/articles/?${qs}`);

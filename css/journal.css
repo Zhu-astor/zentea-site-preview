@@ -434,3 +434,27 @@ html, body.journal-page {
   .j-more { flex-direction: column; text-align: center; margin: 8px 6vw 56px; padding: 28px 24px; gap: 16px; }
   .j-more__leaf { width: 64px; }
 }
+
+/* ---------- 蟬茗齋（即將開放） ---------- */
+.soon { max-width: 720px; margin: 0 auto; padding: 56px 6vw 96px; text-align: center; }
+.soon__img { width: 220px; margin-bottom: 18px; }
+.soon__eyebrow { font-size: 11px; letter-spacing: 0.3em; color: var(--seal); margin: 0 0 12px; }
+.soon__title { font-family: "Noto Serif TC", serif; font-weight: 500; font-size: 26px; letter-spacing: 0.12em; margin: 0 0 16px; }
+.soon__text { font-size: 15px; line-height: 2; color: var(--muted); margin: 0; }
+.soon__links { justify-content: center; }
+
+/* 手機：橫幅裡的選單改成 logo 下方一列，可以左右滑，不要直排撐破畫面 */
+@media (max-width: 760px) {
+  .top-nav { flex-wrap: wrap; row-gap: 10px; }
+  .top-nav .nav-links {
+    order: 3;
+    width: 100%;
+    gap: 22px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .top-nav .nav-links::-webkit-scrollbar { display: none; }
+  .top-nav .nav-links a { font-size: 14px; }
+}
