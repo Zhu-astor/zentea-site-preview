@@ -679,16 +679,21 @@ body.home-page {
 .text-link:focus-visible .text-link__label { text-decoration-color: currentColor; }
 .text-link:hover .text-link__mark { transform: translateX(3px); }
 
-/* 船旁邊的「走進蟬吃茶」：船（.boat-wrapper）寬 22vw、貼底 5%，連結放在船的右上方 */
+/* 船旁邊的「走進蟬吃茶」：放在船的右下方（船身中心在畫面 38%，見下面 .boat-wrapper） */
 .hero-enter {
     position: absolute;
     z-index: 5;
-    left: calc(50% + 12vw);
-    bottom: calc(5% + 5.5vw);
+    left: 49%;
+    bottom: 7%;
 }
 
-/* 小船換成兩人對坐喝茶的圖，人物比較細，放大一點 */
-.boat-wrapper { width: 22vw; }
+/* 小船換成兩人對坐喝茶的圖，人物比較細，放大一點；整艘船往左、稍微往下 */
+.boat-wrapper { width: 22vw; left: 38%; bottom: 3%; }
+
+/* 第二段文字（標題、內文、連結）整體往左靠，不要貼在最右邊 */
+@media (min-width: 861px) {
+    #session-2 .session-text.session-text--right { right: 14vw; }
+}
 
 /* 第二段：直式的竹林品茶人物 */
 .session-asset.session-asset--portrait {
@@ -699,8 +704,8 @@ body.home-page {
 }
 
 @media (max-width: 860px) {
-    .hero-enter { left: 50%; bottom: calc(5% + 30vw); transform: translateX(-50%); white-space: nowrap; }
-    .boat-wrapper { width: 46vw; }
+    .hero-enter { left: 50%; bottom: calc(3% + 26vw); transform: translateX(-50%); white-space: nowrap; }
+    .boat-wrapper { width: 46vw; left: 50%; }
     .session-asset.session-asset--portrait { width: 56vw; min-width: 0; left: auto; right: 6vw; }
     .session-text--right .text-links { justify-content: flex-start; }
 }
