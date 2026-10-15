@@ -543,12 +543,22 @@ body.home-page {
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 100%; 
+    display: flex;
+    flex-direction: column;
     background-image: url('../assets/img/bg-main.png');
     background-size: 100% auto;
     background-position: top center;
     background-repeat: no-repeat;
     transform-origin: top center;
     will-change: transform; 
+}
+/* 底圖下面延伸：::before 佔住 bg-main.png 的高度（941×1672），::after 從底圖結尾接上紙紋往下重複。
+   紙紋 bg-paper.jpg 是底圖下半段＋上下翻轉拼成的，頂端跟底圖最下緣同一條，接起來看不到接縫 */
+.home-bg-layer::before { content: ""; flex: none; aspect-ratio: 941 / 1672; }
+.home-bg-layer::after {
+    content: "";
+    flex: 1;
+    background: url('../assets/img/bg-paper.jpg') top center / 100% auto repeat-y;
 }
 
 /* 🌟 修正：把所有內容區塊的層級拉高到 10，穩穩壓在底圖之上 */
@@ -639,60 +649,58 @@ body.home-page {
     transform: translateY(0); 
 }
 /* =========================================
-   首頁：船旁邊的「走進蟬吃茶」按鈕（捲到品牌理念）
-   位置跟著 .boat-wrapper（left 50%、寬 15vw、bottom 5%），放在船的右側
+   首頁文字連結：「> 走進蟬吃茶」「> 找到自己的茶」「> 茶品介紹」
+   平常只有 > 加文字，沒有底色和外框；滑鼠移上去文字才出現底線
    ========================================= */
+.text-links { display: flex; flex-wrap: wrap; gap: 14px 34px; margin-top: 26px; }
+.session-text--right .text-links { justify-content: flex-end; }
+
+.text-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: "Noto Serif TC", serif;
+    font-size: 16px;
+    letter-spacing: 0.16em;
+    color: #4A4036;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.text-link__mark { font-size: 15px; color: #8A7B68; transition: transform 0.3s; }
+.text-link__label {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 7px;
+    transition: text-decoration-color 0.3s;
+}
+.text-link:hover, .text-link:focus-visible { color: #2F2A24; }
+.text-link:hover .text-link__label,
+.text-link:focus-visible .text-link__label { text-decoration-color: currentColor; }
+.text-link:hover .text-link__mark { transform: translateX(3px); }
+
+/* 船旁邊的「走進蟬吃茶」：船（.boat-wrapper）寬 22vw、貼底 5%，連結放在船的右上方 */
 .hero-enter {
     position: absolute;
     z-index: 5;
-    left: calc(50% + 9vw);
-    bottom: calc(5% + 4vw);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px 10px 22px;
-    font-family: "Noto Serif TC", serif;
-    font-size: 14px;
-    letter-spacing: 0.22em;
-    color: #4A4036;
-    text-decoration: none;
-    background: rgba(250, 248, 244, 0.72);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(155, 61, 56, 0.35);
-    border-radius: 999px;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+    left: calc(50% + 12vw);
+    bottom: calc(5% + 5.5vw);
 }
 
-.hero-enter svg {
-    width: 15px;
-    height: 15px;
-    animation: hero-enter-bob 2.2s ease-in-out infinite;
-}
+/* 小船換成兩人對坐喝茶的圖，人物比較細，放大一點 */
+.boat-wrapper { width: 22vw; }
 
-.hero-enter:hover {
-    color: #fff;
-    background: #9B3D38;
-    border-color: #9B3D38;
-    transform: translateY(-2px);
-}
-
-@keyframes hero-enter-bob {
-    0%, 100% { transform: translateY(-1px); }
-    50% { transform: translateY(3px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .hero-enter svg { animation: none; }
+/* 第二段：直式的竹林品茶人物 */
+.session-asset.session-asset--portrait {
+    width: 30vw;
+    min-width: 280px;
+    max-width: 470px;
+    left: 8vw;
 }
 
 @media (max-width: 860px) {
-    .hero-enter {
-        left: 50%;
-        bottom: calc(5% + 34vw);
-        transform: translateX(-50%);
-        font-size: 13px;
-        padding: 9px 14px 9px 18px;
-    }
-    .hero-enter:hover { transform: translateX(-50%) translateY(-2px); }
+    .hero-enter { left: 50%; bottom: calc(5% + 30vw); transform: translateX(-50%); white-space: nowrap; }
+    .boat-wrapper { width: 46vw; }
+    .session-asset.session-asset--portrait { width: 56vw; min-width: 0; left: auto; right: 6vw; }
+    .session-text--right .text-links { justify-content: flex-start; }
 }

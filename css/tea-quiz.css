@@ -79,23 +79,6 @@
 }
 .tq-link:hover { color: var(--seal); }
 
-/* 第二段「找到自己的茶」小連結 */
-.session-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 22px;
-  font-family: "Noto Serif TC", serif;
-  font-size: 14px;
-  letter-spacing: 0.2em;
-  color: #4A4036;
-  text-decoration: none;
-  padding-bottom: 4px;
-  border-bottom: 1px solid rgba(155, 61, 56, 0.4);
-  transition: color 0.3s, gap 0.3s;
-}
-.session-link:hover { color: #9B3D38; gap: 14px; }
-
 /* ---------- 測驗開頭 ---------- */
 .tq {
   max-width: 1200px;
@@ -307,20 +290,6 @@
 .tq-dialog .tq-next, .tq-dialog .tq-open { font-size: 14px; padding: 10px 24px; }
 
 /* ---------- 認識茶 ---------- */
-/* 從「認識茶」開始，背景慢慢轉成白色，上面的山水底圖不再透出來（後面的詩句區塊也是白底） */
-.kt::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 100vw;
-  transform: translateX(-50%);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.85) 200px, #fff 340px);
-}
-body.home-page #session-5.poem-session { background-color: #fff !important; }
-
 .kt {
   max-width: 1240px;
   margin: 0 auto;
