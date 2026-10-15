@@ -17,14 +17,16 @@ body.diary-page { background: #fff; }
 
 .jd-side { display: flex; flex-direction: column; gap: 27px; }
 
-.jd-card { color: var(--ink); text-decoration: none; background: #F5F4EF; }
+.jd-card { color: var(--ink); text-decoration: none; background: #F8F8F5; }
 .jd-card--big { display: flex; flex-direction: column; }
 .jd-card--split { display: grid; grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr); flex: 1; min-height: 360px; }
 
 /* 圖片區：照片鋪滿；插畫（is-illustration）縮在中間，留白 */
-.jd-card__media { position: relative; overflow: hidden; background: #F1F0EA; }
+.jd-card__media { position: relative; overflow: hidden; background: #F4F6EF; }
 .jd-card--big .jd-card__media { aspect-ratio: 813 / 484; }
 .jd-card--split .jd-card__media { background: #fff; }
+/* 圓形圖示的卡片，圖區是淡米色（設計稿 #F7F7F3），橫幅人物的卡片才是白底 */
+.jd-card--split .jd-card__media.is-icon { background: #F7F7F3; }
 .jd-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; }
 /* 插畫：置中、留白，大小跟設計稿一樣（大卡約九成寬，小卡約一半寬） */
 .jd-card__media.is-illustration { display: flex; align-items: center; justify-content: center; }
