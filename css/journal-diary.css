@@ -1,3 +1,6 @@
+/* 標題用較細的明體（style.css 只載入 500／700） */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400&display=swap');
+
 /* 蟬茶誌：大卡＋右側兩張分割卡（左圖右文），米白底、細明體大標、底線連結 */
 body.diary-page { background: #fff; }
 
@@ -23,8 +26,11 @@ body.diary-page { background: #fff; }
 .jd-card--big .jd-card__media { aspect-ratio: 813 / 484; }
 .jd-card--split .jd-card__media { background: #fff; }
 .jd-card__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; }
-.jd-card__media.is-illustration img { object-fit: contain; padding: 12% 4%; }
-.jd-card--split .jd-card__media.is-illustration img { padding: 26% 12%; }
+/* 插畫：置中、留白，大小跟設計稿一樣（大卡約九成寬，小卡約一半寬） */
+.jd-card__media.is-illustration { display: flex; align-items: center; justify-content: center; }
+.jd-card__media.is-illustration img { width: 94%; height: auto; max-height: 86%; object-fit: contain; }
+.jd-card--split .jd-card__media.is-wide img { width: 96%; max-height: 60%; }
+.jd-card--split .jd-card__media.is-icon img { width: 56%; max-height: 32%; }
 a.jd-card:hover .jd-card__media img { transform: scale(1.03); }
 
 .jd-card__label {
@@ -36,7 +42,7 @@ a.jd-card:hover .jd-card__media img { transform: scale(1.03); }
   color: #6B6B63;
 }
 
-.jd-card__body { display: flex; flex-direction: column; align-items: flex-start; padding: 46px 38px 34px; }
+.jd-card__body { display: flex; flex-direction: column; align-items: flex-start; padding: 50px 40px 40px; }
 .jd-card--big .jd-card__body { padding: 44px 38px 36px; }
 
 .jd-card__eyebrow { font-size: 10.5px; letter-spacing: 0.16em; color: #6B6B63; margin: 0 0 26px; text-transform: uppercase; }
@@ -48,7 +54,7 @@ a.jd-card:hover .jd-card__media img { transform: scale(1.03); }
   line-height: 1.6;
   letter-spacing: 0.06em;
   color: #2A2A26;
-  margin: 0 0 30px;
+  margin: 0 0 40px;
   white-space: pre-line;
 }
 .jd-card--big .jd-card__title { font-size: clamp(26px, 2.2vw, 34px); margin-bottom: 26px; }
@@ -63,9 +69,8 @@ a.jd-card:hover .jd-card__media img { transform: scale(1.03); }
   border-bottom: 1px solid #2A2A26;
   transition: letter-spacing 0.3s, color 0.3s, border-color 0.3s;
 }
-.jd-card--split .jd-card__link { margin-top: auto; }
 a.jd-card:hover .jd-card__link { letter-spacing: 0.16em; color: #9B3D38; border-color: #9B3D38; }
-div.jd-card .jd-card__link { color: #8A887F; border-bottom-style: dashed; border-color: #B9B6AC; }
+div.jd-card .jd-card__link { color: #55554E; border-color: #55554E; }
 
 @media (max-width: 960px) {
   .jd-row, .jd-row.is-flipped { grid-template-columns: 1fr; }
@@ -76,6 +81,7 @@ div.jd-card .jd-card__link { color: #8A887F; border-bottom-style: dashed; border
   .jd { width: auto; padding: 32px 16px 64px; }
   .jd-card--split { grid-template-columns: 1fr; min-height: 0; }
   .jd-card--split .jd-card__media { aspect-ratio: 16 / 9; }
-  .jd-card--split .jd-card__media.is-illustration img { padding: 6% 20%; }
+  .jd-card--split .jd-card__media.is-wide img { width: 70%; max-height: 80%; }
+  .jd-card--split .jd-card__media.is-icon img { width: 30%; max-height: 70%; }
   .jd-card__body, .jd-card--big .jd-card__body { padding: 28px 22px 26px; }
 }

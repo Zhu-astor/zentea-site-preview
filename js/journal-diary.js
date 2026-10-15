@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       img: "assets/img/landscape-2.png",
       illustration: true,
     },
-    { title: "玉山自然茶園", eyebrow: "產地故事", label: "茶園走訪", img: "assets/img/tea-figure-bamboo.webp", illustration: true },
-    { title: "全國製茶武林大賽・榮獲茶王", eyebrow: "榮譽紀事", label: "職人", img: "assets/img/idea-chan-crave.png", illustration: true },
+    { title: "玉山自然茶園", eyebrow: "產地故事", label: "茶園走訪", img: "assets/img/tea-figure-1.png", illustration: "wide" },
+    { title: "全國製茶武林大賽・榮獲茶王", eyebrow: "榮譽紀事", label: "職人", img: "assets/img/idea-chan-crave.png", illustration: "icon" },
   ];
 
   function el(tag, className, text) {
@@ -30,7 +30,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   function card(item, big, index) {
     const node = el(item.href ? "a" : "div", `jd-card ${big ? "jd-card--big" : "jd-card--split"}`);
     if (item.href) node.href = item.href;
-    const media = el("div", "jd-card__media" + (item.illustration ? " is-illustration" : ""));
+    // 插畫：wide＝橫幅人物（鋪滿寬度）、icon＝圓形圖示（約一半寬）
+    const kind = item.illustration ? ` is-illustration is-${item.illustration === true ? "wide" : item.illustration}` : "";
+    const media = el("div", "jd-card__media" + kind);
     if (item.img) {
       const img = el("img");
       img.src = item.img;
