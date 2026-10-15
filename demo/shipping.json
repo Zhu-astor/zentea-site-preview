@@ -1,0 +1,1 @@
+{"free_shipping_threshold": 1000, "methods": [{"code": "cvs_fami", "label": "\u5168\u5bb6\u5e97\u5230\u5e97", "fee": 60, "enabled": true}, {"code": "cvs_unimart", "label": "7-11 \u5e97\u5230\u5e97", "fee": 60, "enabled": true}, {"code": "home", "label": "\u5b85\u914d", "fee": 100, "enabled": true}]}
