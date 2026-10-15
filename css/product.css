@@ -157,3 +157,6 @@
   .pd__name { font-size: 23px; }
   .pd__actions .pd__add { max-width: none; }
 }
+
+/* 功能列下方的「← 全部茶品」 */
+.product-back { display: inline-block; margin: 4px 0 18px; }

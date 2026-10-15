@@ -2,7 +2,8 @@
  * 購物車與結帳頁的新版樣式（依設計稿：淺綠橫幅、框線表單卡、米色訂單摘要、鼠尾草綠按鈕）。
  * 只套用在 body.shop-ui，訂單完成與訂單查詢頁仍用 cart.css／checkout.css 原本的樣式。
  */
-.shop-ui {
+/* 顏色變數：購物車／結帳整頁，以及其他頁面（蟬茶鋪）單獨使用的功能列也要用得到 */
+.shop-ui, .shop-head, .shop-foot {
   --sh-ink: #2F3A33;
   --sh-text: #4A524C;
   --sh-muted: #7A817B;
@@ -12,6 +13,9 @@
   --sh-beige: #F7F3EA;
   --sh-line: #DCDDD7;
   --sh-field: #C3C9C3;
+}
+
+.shop-ui {
   background: #fff !important;
   color: var(--sh-ink);
   font-family: "Noto Serif TC", "Songti TC", serif;
