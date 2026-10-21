@@ -1,121 +1,156 @@
 /*
  * 首頁「找到適合自己的茶」互動測驗。
- * 三種開始方式（第一次認識／深入探索台灣茶／挑份茶禮），各三題，每題四個選項；
- * 每個選項替四款茶加分，最高分的就是推薦（同分時看第一題的選擇）。
- * 題目一題一題往下出現，選完按下一步才出現下一題；最後顯示推薦的茶。
+ * 三種開始方式（第一次認識／深入探索台灣茶／挑份茶禮），每個選項替幾款茶加分，
+ * 結果給主推一款＋備選一款，各附推薦理由，另有沖泡建議與配茶文章。
+ * 題目與加分的依據見 /srv/storage/projects/reports/蟬吃茶選茶測驗依據.md：
+ *   - 香氣題對應茶改場風味輪的五大香調（青香、花香、果香、甜香、焙香），用食物來比喻
+ *   - 苦澀接受度是台灣消費者偏好最好的預測因子（取代原本沒有依據的「心情」題）
+ *   - 點心題只當輔助題，依蟬茶誌〈點心配哪杯茶？先比重量，再找香氣〉的對照表
+ *   - 茶色用茶改場的水色用語；每題都有不計分的「還不確定」
+ *   - 「什麼時候喝」不計分，只決定結果頁先給熱泡還是冷泡建議
+ * 同分時先看 tie 指定的那一題（證據最強的題），再依新手友善順序 NOVICE_ORDER。
  * 純前端，不需要後端；茶的連結指到商品頁 product.html?slug=…
  */
 (function () {
   const TEAS = window.ZENTEA_TEAS; // js/teas.js
+  const NOVICE_ORDER = ["yushan-oolong", "fresh-oolong", "gaba", "honey-black", "charcoal-oolong", "ruby-black"];
+  const UNSURE = ["還不確定", "star", {}];
+  const PAIRING_ARTICLES = [
+    ["點心配哪杯茶？先比重量，再找香氣", "茶與點心搭配_先比重量再找香氣"],
+    ["今天吃什麼？配一杯對的茶", "茶與餐食搭配_三餐配茶地圖"],
+  ];
 
-
-  // 每個選項：[文字, 圖示, {茶: 分數}]
+  // 每個選項：[文字, 圖示, {茶: 分數}, 沖泡方式]；題目 scored: false 的不計分（只影響沖泡建議）
   const PATHS = {
     first: {
       label: "第一次認識蟬吃茶",
+      tie: 0,
       questions: [
         {
-          step: "喜歡的味道",
-          title: "你平常比較喜歡…",
-          hint: "不用懂茶，選一個讓你心動的味道就好。",
-          next: "接著，聊聊現在的你",
+          step: "喜歡的香氣",
+          title: "這幾種香氣，你最喜歡哪一種？",
+          hint: "想想平常吃的東西就好，不用懂茶。",
+          next: "接著，聊聊苦跟澀",
           options: [
-            ["清爽淡雅", "leaf", { "fresh-oolong": 3, "yushan-oolong": 1 }],
-            ["花香清亮", "flower", { "yushan-oolong": 3, "fresh-oolong": 1 }],
-            ["溫厚醇甜", "cup", { "honey-black": 3, "ruby-black": 2, gaba: 1 }],
-            ["焙火沉穩", "mountain", { "charcoal-oolong": 3, gaba: 2 }],
+            ["青草、黃瓜般的清爽", "leaf", { "fresh-oolong": 3, "yushan-oolong": 1 }],
+            ["梔子花、桂花般的花香", "flower", { "yushan-oolong": 3, "fresh-oolong": 1 }],
+            ["蜂蜜、熟芒果般的甜香", "cup", { "honey-black": 3, gaba: 2 }],
+            ["烤地瓜、焦糖般的焙香", "mountain", { "charcoal-oolong": 3, gaba: 1 }],
+            ["肉桂、薄荷般的特別香", "sun", { "ruby-black": 3, "honey-black": 1 }],
           ],
         },
         {
-          step: "此刻的心情",
-          title: "現在的你，想讓這杯茶陪你…",
-          hint: "照著此刻的感覺選就好。",
-          next: "最後，留一點時間給茶",
+          step: "苦與澀",
+          title: "黑咖啡、黑巧克力這類帶苦的味道，你覺得…",
+          hint: "能接受多少苦澀，最能看出你適合哪一類茶。",
+          next: "接著，聊聊配什麼吃",
           options: [
-            ["放鬆一下", "wave", { gaba: 3, "charcoal-oolong": 1 }],
-            ["提振精神", "sun", { "ruby-black": 2, "fresh-oolong": 2 }],
-            ["靜靜獨處", "moon", { "yushan-oolong": 2, "charcoal-oolong": 2 }],
-            ["換個心情", "heart", { "honey-black": 2, "ruby-black": 2 }],
+            ["不太喜歡，順口最好", "wave", { gaba: 3, "honey-black": 1, "yushan-oolong": 1 }],
+            ["偶爾可以，不要太重", "leaf", { "fresh-oolong": 2, "yushan-oolong": 2, "honey-black": 1 }],
+            ["很喜歡那種濃厚感", "mountain", { "charcoal-oolong": 3, "ruby-black": 3 }],
+            UNSURE,
           ],
         },
         {
-          step: "喝茶的片刻",
-          title: "今天，你想怎麼享受這杯茶？",
-          hint: "一杯茶，可以有不同的日常模樣。",
+          step: "配什麼吃",
+          title: "喝茶的時候，你常配…",
+          hint: "點心有多厚，茶就要有多厚。",
+          next: "最後，什麼時候喝",
           options: [
-            ["早晨清飲，慢慢開始", "wave", { "fresh-oolong": 2, "yushan-oolong": 1 }],
-            ["午後配點心，歇一會兒", "sun", { "honey-black": 2, "ruby-black": 2 }],
-            ["飯後喝一杯，收個尾", "moon", { "charcoal-oolong": 2, gaba: 2 }],
-            ["和人一起喝，聊聊天", "heart", { "yushan-oolong": 2, "honey-black": 1 }],
+            ["鳳梨酥、蛋糕、餅乾", "cup", { "honey-black": 2, "ruby-black": 2 }],
+            ["綠豆椪、太陽餅、蛋黃酥", "mountain", { "charcoal-oolong": 3, gaba: 1 }],
+            ["豆花、麻糬、水果", "flower", { "fresh-oolong": 2, "yushan-oolong": 2 }],
+            ["瓜子、花生、鹹酥雞", "sun", { "fresh-oolong": 2, "charcoal-oolong": 1 }],
+            ["什麼都不配，單喝", "leaf", { "yushan-oolong": 2, "fresh-oolong": 1 }],
+          ],
+        },
+        {
+          step: "什麼時候喝",
+          title: "你最常在什麼時候喝茶？",
+          hint: "這題不影響推薦，只用來決定怎麼泡比較適合。",
+          scored: false,
+          options: [
+            ["早上，慢慢開始", "sun", {}, "hot"],
+            ["午後，歇一會兒", "cup", {}, "hot"],
+            ["晚上，想放鬆", "moon", {}, "cold"],
+            ["天熱時，想喝冰的", "wave", {}, "cold"],
           ],
         },
       ],
     },
     explore: {
       label: "深入探索台灣茶",
+      tie: 2,
       questions: [
         {
           step: "茶湯的顏色",
           title: "你想喝哪一種茶色？",
-          hint: "茶色跟發酵程度有關，越紅潤發酵越深。",
-          next: "接著，聊聊焙火",
+          hint: "用的是評茶時描述水色的說法：發酵越深，顏色越紅。",
+          next: "接著，聊聊製程",
           options: [
-            ["清綠透亮", "leaf", { "fresh-oolong": 3, "yushan-oolong": 2 }],
-            ["金黃蜜色", "flower", { "yushan-oolong": 2, gaba: 2, "charcoal-oolong": 1 }],
-            ["琥珀紅潤", "cup", { "honey-black": 3, "ruby-black": 3 }],
-            ["都想試試", "star", { "fresh-oolong": 1, "charcoal-oolong": 1, "honey-black": 1, gaba: 1, "ruby-black": 1, "yushan-oolong": 1 }],
+            ["蜜綠，清透帶黃綠", "leaf", { "fresh-oolong": 3, "yushan-oolong": 2 }],
+            ["金黃，明亮如蜜", "flower", { "yushan-oolong": 2, gaba: 2, "fresh-oolong": 1 }],
+            ["琥珀，焙過的深金", "mountain", { "charcoal-oolong": 3, gaba: 1 }],
+            ["橙紅、紅亮", "cup", { "honey-black": 3, "ruby-black": 3 }],
+            UNSURE,
           ],
         },
         {
-          step: "焙火程度",
-          title: "焙火的香氣，你偏好…",
-          hint: "焙火越深，香氣越熟、越溫潤。",
-          next: "最後，選一個你在意的",
+          step: "製程與焙火",
+          title: "製茶的方式，你偏好…",
+          hint: "烏龍茶看焙火深淺；紅茶是全發酵，香氣來自發酵本身。",
+          next: "最後，選一個你最想喝到的",
           options: [
             ["輕焙，留住清香", "wave", { "yushan-oolong": 3, "fresh-oolong": 1 }],
-            ["中焙，香氣圓潤", "sun", { "fresh-oolong": 3 }],
-            ["炭焙，溫潤炭香", "mountain", { "charcoal-oolong": 3, gaba: 1 }],
-            ["沒有特別偏好", "star", { "honey-black": 1, "ruby-black": 1, gaba: 1 }],
+            ["中焙，香氣圓潤", "sun", { "fresh-oolong": 3, gaba: 1 }],
+            ["炭焙，溫潤炭香", "mountain", { "charcoal-oolong": 3 }],
+            ["全發酵的紅茶", "cup", { "honey-black": 2, "ruby-black": 2 }],
+            UNSURE,
           ],
         },
         {
-          step: "你在意的",
+          step: "最想喝到",
           title: "一杯台灣茶，你最想喝到…",
           hint: "選一個最吸引你的就好。",
           options: [
-            ["高山雲霧的清冽", "mountain", { "yushan-oolong": 3 }],
+            ["高山茶的清幽花香", "mountain", { "yushan-oolong": 3 }],
+            ["清甜甘醇的日常烏龍", "leaf", { "fresh-oolong": 3 }],
+            ["龍眼木炭焙的炭香", "sun", { "charcoal-oolong": 3 }],
             ["小綠葉蟬的蜜香", "flower", { "honey-black": 3, gaba: 1 }],
-            ["肉桂薄荷的台灣香", "moon", { "ruby-black": 3 }],
-            ["厭氧發酵的沉穩", "leaf", { gaba: 3, "charcoal-oolong": 1 }],
+            ["厭氧發酵的熟果香", "moon", { gaba: 3 }],
+            ["肉桂薄荷的台灣香", "heart", { "ruby-black": 3 }],
+            UNSURE,
           ],
         },
       ],
     },
     gift: {
       label: "為重要的人挑份茶禮",
+      tie: 1,
       questions: [
         {
           step: "送給誰",
           title: "這份茶禮，想送給…",
           hint: "想著對方的樣子選就好。",
-          next: "接著，說說場合",
+          next: "接著，對方平常怎麼喝",
           options: [
-            ["長輩家人", "home", { gaba: 2, "charcoal-oolong": 2 }],
-            ["同事客戶", "people", { "yushan-oolong": 2, "fresh-oolong": 1 }],
-            ["好朋友", "heart", { "honey-black": 2, "ruby-black": 1 }],
-            ["懂茶的人", "leaf", { "ruby-black": 2, "yushan-oolong": 1, "charcoal-oolong": 1 }],
+            ["長輩家人", "home", { "charcoal-oolong": 1, gaba: 1 }],
+            ["同事客戶", "people", { "yushan-oolong": 1, "fresh-oolong": 1 }],
+            ["好朋友", "heart", { "honey-black": 1, "ruby-black": 1 }],
+            ["懂茶的人", "leaf", { "ruby-black": 1, "yushan-oolong": 1, "charcoal-oolong": 1 }],
           ],
         },
         {
-          step: "什麼場合",
-          title: "是什麼樣的時候？",
-          hint: "場合不同，適合的茶也不太一樣。",
+          step: "對方的口味",
+          title: "對方平常喝茶，比較喜歡…",
+          hint: "送茶最重要的是對方愛喝；不清楚也沒關係。",
           next: "最後，想留下的感覺",
           options: [
-            ["年節送禮", "gift", { "yushan-oolong": 2, "charcoal-oolong": 1 }],
-            ["生日、道謝", "star", { "honey-black": 2, "ruby-black": 1 }],
-            ["拜訪、初次見面", "people", { "fresh-oolong": 2, "yushan-oolong": 1 }],
-            ["想到就送", "sun", { "ruby-black": 2, "fresh-oolong": 1 }],
+            ["清香、不要太重", "flower", { "fresh-oolong": 3, "yushan-oolong": 2 }],
+            ["老派的焙火茶", "mountain", { "charcoal-oolong": 3, gaba: 1 }],
+            ["紅茶、奶茶", "cup", { "honey-black": 3, "ruby-black": 2 }],
+            ["新奇、特別的味道", "star", { "ruby-black": 3, gaba: 3 }],
+            ["不太清楚", "people", { "yushan-oolong": 2, "fresh-oolong": 1 }],
           ],
         },
         {
@@ -123,10 +158,10 @@
           title: "希望對方喝到時，感覺…",
           hint: "茶會替你把心意說出來。",
           options: [
-            ["安心、自在", "moon", { gaba: 3 }],
-            ["溫暖、貼心", "heart", { "honey-black": 2, "charcoal-oolong": 2 }],
-            ["有質感、有份量", "mountain", { "yushan-oolong": 2, "ruby-black": 2 }],
-            ["輕鬆、好入口", "wave", { "fresh-oolong": 3 }],
+            ["安心、自在", "moon", { gaba: 1, "charcoal-oolong": 1 }],
+            ["溫暖、貼心", "heart", { "honey-black": 1, "charcoal-oolong": 1 }],
+            ["有質感、有份量", "mountain", { "yushan-oolong": 1, "ruby-black": 1 }],
+            ["輕鬆、好入口", "wave", { "fresh-oolong": 1, "honey-black": 1 }],
           ],
         },
       ],
@@ -248,26 +283,46 @@
 
     const pathKey = () => Object.keys(PATHS).find((k) => PATHS[k] === path);
 
-    function pickTea() {
+    // 依分數排好的茶；同分先看 path.tie 那一題，再看新手友善順序
+    function rankTeas() {
       const score = {};
       Object.keys(TEAS).forEach((k) => (score[k] = 0));
       answers.forEach((opt, q) => {
+        if (path.questions[q].scored === false) return;
         Object.entries(path.questions[q].options[opt][2]).forEach(([tea, n]) => (score[tea] += n));
       });
-      const firstChoice = path.questions[0].options[answers[0]][2];
-      return Object.keys(score).sort((a, b) => score[b] - score[a] || (firstChoice[b] || 0) - (firstChoice[a] || 0))[0];
+      const tieChoice = path.questions[path.tie].options[answers[path.tie]][2];
+      return Object.keys(score).sort(
+        (a, b) =>
+          score[b] - score[a] ||
+          (tieChoice[b] || 0) - (tieChoice[a] || 0) ||
+          NOVICE_ORDER.indexOf(a) - NOVICE_ORDER.indexOf(b)
+      );
+    }
+
+    // 推薦理由：引用替這款茶加最多分的兩個答案
+    function reasonFor(slug) {
+      const hits = answers
+        .map((opt, q) => [path.questions[q], path.questions[q].options[opt]])
+        .filter(([q, o]) => q.scored !== false && (o[2][slug] || 0) > 0)
+        .sort((a, b) => b[1][2][slug] - a[1][2][slug])
+        .slice(0, 2)
+        .map(([, o]) => `「${o[0]}」`);
+      return hits.length ? `你選了${hits.join("、")}，` : "";
+    }
+
+    // 「什麼時候喝」選晚上或天熱 → 先給冷泡建議
+    function brewTips(tea) {
+      const cold = answers.some((opt, q) => path.questions[q].options[opt][3] === "cold");
+      return cold ? [tea.brew.cold, tea.brew.hot] : [tea.brew.hot, tea.brew.cold];
     }
 
     function showResult() {
-      const slug = pickTea();
+      const [slug, altSlug] = rankTeas();
       const tea = TEAS[slug];
+      const alt = TEAS[altSlug];
       const picked = answers.map((opt, q) => path.questions[q].options[opt][0]);
-      const intro = {
-        first: `你喜歡「${picked[0]}」的味道，也想讓這杯茶陪你「${picked[1]}」。小蟬想推薦你試試${tea.name}。`,
-        explore: `你想喝「${picked[0]}」的茶色，焙火偏好「${picked[1]}」，最想喝到「${picked[2]}」。小蟬想推薦你試試${tea.name}。`,
-        gift: `想送給「${picked[0]}」，在「${picked[1]}」的時候，希望對方感覺${picked[2]}。小蟬想推薦你這份${tea.name}。`,
-      }[pathKey()];
-      const text = `${intro}${tea.summary}`;
+      const lead = pathKey() === "gift" ? "小蟬想推薦你這份" : "小蟬想推薦你試試";
       $("[data-r-mood]").textContent = tea.mood;
       const img = $("[data-r-img]");
       img.hidden = !tea.img;
@@ -280,8 +335,31 @@
       $("[data-r-caption]").textContent = tea.caption;
       $("[data-r-name]").textContent = tea.name;
       $("[data-r-tags]").textContent = tea.tags.join(" ・ ");
-      $("[data-r-desc]").textContent = text;
+      $("[data-r-desc]").textContent = `${reasonFor(slug)}${lead}${tea.name}。${tea.summary}`;
       $("[data-r-picked]").textContent = picked.join(" ・ ");
+
+      $("[data-r-brew]").replaceChildren(...brewTips(tea).map((t) => el("li", "", t)));
+
+      $("[data-alt-name]").textContent = alt.name;
+      $("[data-alt-why]").textContent = `${reasonFor(altSlug) || "換個方向的話，"}也可以試試這款：${alt.tags.join("、")}。`;
+      const altLink = $("[data-alt-link]");
+      altLink.href = alt.shop ? `product.html?slug=${encodeURIComponent(alt.shop)}` : "#know-tea";
+      altLink.textContent = alt.shop ? "到蟬茶鋪看看 →" : "認識這款茶 →";
+
+      $("[data-r-reads]").replaceChildren(
+        ...PAIRING_ARTICLES.map(([title, s]) => {
+          const li = el("li");
+          const a = el("a", "", title);
+          a.href = `article.html?slug=${encodeURIComponent(s)}`;
+          li.append(a);
+          return li;
+        })
+      );
+
+      const fb = $("[data-r-feedback]");
+      fb.querySelectorAll("button").forEach((b) => (b.disabled = false));
+      fb.querySelector("[data-fb-thanks]").hidden = true;
+
       $("[data-d-name]").textContent = tea.name;
       $("[data-d-meta]").textContent = `${tea.origin}　${tea.process}`;
       $("[data-d-desc]").replaceChildren(...tea.story.map((t) => Object.assign(document.createElement("p"), { textContent: t })));
@@ -289,11 +367,28 @@
       link.hidden = !tea.shop;
       if (tea.shop) link.href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
       $("[data-d-soon]").hidden = !!tea.shop;
+      resultBox.dataset.tea = slug;
       resultBox.hidden = false;
       resultBox.classList.remove("is-in");
       requestAnimationFrame(() => resultBox.classList.add("is-in"));
       scrollToEl(resultBox);
     }
+
+    // 👍／👎：目前先記在這台瀏覽器，之後接後台統計推薦準不準
+    $("[data-r-feedback]").querySelectorAll("[data-fb]").forEach((b) =>
+      b.addEventListener("click", () => {
+        const fb = $("[data-r-feedback]");
+        fb.querySelectorAll("button").forEach((x) => (x.disabled = true));
+        fb.querySelector("[data-fb-thanks]").hidden = false;
+        try {
+          const log = JSON.parse(localStorage.getItem("zentea-quiz-feedback") || "[]");
+          log.push({ path: pathKey(), answers: [...answers], tea: resultBox.dataset.tea, vote: b.dataset.fb, at: Date.now() });
+          localStorage.setItem("zentea-quiz-feedback", JSON.stringify(log.slice(-50)));
+        } catch (e) {
+          /* 無痕模式等存不了就算了 */
+        }
+      })
+    );
 
     root.querySelectorAll("[data-quiz-path]").forEach((b) => b.addEventListener("click", () => start(b.dataset.quizPath)));
     $("[data-quiz-again]").addEventListener("click", () => {

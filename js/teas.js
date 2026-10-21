@@ -2,6 +2,7 @@
  * 蟬吃茶六款茶的介紹資料，首頁「找到適合自己的茶」測驗與「認識茶」共用。
  * 內容依品牌提供的茶品說明整理，「多知道一點」是補充的製茶背景知識。
  * shop：商品頁的 slug（product.html?slug=…）；還沒上架的茶填 null，按鈕會改成「即將上架」。
+ * brew：熱泡／冷泡建議，測驗結果頁用。
  * img：商品圖；還沒有照片的茶填 null，畫面上改用茶名的字樣代替。
  *
  * 注意：食品不能宣稱醫療或保健功效（食安法第 28 條），佳葉龍的文字只描述成分與品牌暱稱，修改時請留意。
@@ -14,6 +15,7 @@ window.ZENTEA_TEAS = {
     shop: "fresh-oolong",
     img: "assets/img/product-fresh-oolong.png",
     tags: ["清香", "清甜", "甘醇"],
+    brew: { hot: "熱泡：95°C 熱水，3 克配 150 毫升，第一泡約 50 秒。", cold: "冷泡：10 克配 1 公升冷水，冷藏 6–8 小時。" },
     mood: "清爽・甘醇",
     origin: "南投山上・契作自然生態茶園",
     process: "輕發酵・中烘焙",
@@ -36,6 +38,7 @@ window.ZENTEA_TEAS = {
     shop: null,
     img: null,
     tags: ["炭香", "溫潤", "沉穩"],
+    brew: { hot: "熱泡：100°C 滾水，3 克配 150 毫升，第一泡約 45 秒，炭香才出得來。", cold: "冷泡：10 克配 1 公升冷水，冷藏 8 小時，炭香會變得柔和。" },
     mood: "溫潤・炭香",
     origin: "南投・自然生態茶園",
     process: "傳統龍眼木炭焙",
@@ -57,6 +60,7 @@ window.ZENTEA_TEAS = {
     shop: "honey-black",
     img: "assets/img/product-honey-black.png",
     tags: ["蜜果香", "溫潤", "清甜"],
+    brew: { hot: "熱泡：90–95°C 熱水，3 克配 150 毫升，泡 1 分鐘左右。", cold: "冷泡：8 克配 1 公升冷水，冷藏 6–8 小時，蜜香更清甜。" },
     mood: "溫潤・蜜甜",
     origin: "南投・自然生態茶園・手採",
     process: "小綠葉蟬叮咬・全發酵",
@@ -77,7 +81,8 @@ window.ZENTEA_TEAS = {
     glyph: "安",
     shop: "gaba",
     img: "assets/img/product-gaba.png",
-    tags: ["蜜果香", "沉穩", "好睡茶"],
+    tags: ["蜜果香", "沉穩", "晚安茶"],
+    brew: { hot: "熱泡：95°C 熱水，3 克配 150 毫升，第一泡約 50 秒。", cold: "冷泡：10 克配 1 公升冷水，冷藏 8 小時。" },
     mood: "沉穩・安定",
     origin: "南投・自然生態茶園・手採",
     process: "特殊厭氧發酵",
@@ -99,6 +104,7 @@ window.ZENTEA_TEAS = {
     shop: null,
     img: null,
     tags: ["肉桂香", "薄荷香", "台灣香"],
+    brew: { hot: "熱泡：90°C 熱水，3 克配 150 毫升，泡 50 秒到 1 分鐘，太久容易澀。", cold: "冷泡：8 克配 1 公升冷水，冷藏 6 小時，薄荷般的清涼感更明顯。" },
     mood: "獨特・台灣香",
     origin: "南投山上・契作自然生態茶園・手採",
     process: "台茶 18 號・全發酵",
@@ -120,6 +126,7 @@ window.ZENTEA_TEAS = {
     shop: "yushan-oolong",
     img: "assets/img/product-yushan-oolong.png",
     tags: ["山頭氣", "高雅", "清香"],
+    brew: { hot: "熱泡：95°C 熱水，3 克配 150 毫升，第一泡約 50 秒。", cold: "冷泡：10 克配 1 公升冷水，冷藏 6–8 小時，花香很清楚。" },
     mood: "清雅・高山",
     origin: "玉山茶區・自然生態・手採",
     process: "中發酵・輕烘焙",

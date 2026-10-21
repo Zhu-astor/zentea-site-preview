@@ -709,3 +709,7 @@ body.home-page {
     .session-asset.session-asset--portrait { width: 56vw; min-width: 0; left: auto; right: 6vw; }
     .session-text--right .text-links { justify-content: flex-start; }
 }
+
+/* 第一段與第二段之間多留一點白 */
+#session-2 { margin-top: 16vh; }
+@media (max-width: 860px) { #session-2 { margin-top: 10vh; } }

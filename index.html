@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>蟬吃茶 ZenEaTea</title>
-<link rel="stylesheet" href="css/style.css?v=46f22e29">
+<link rel="stylesheet" href="css/style.css?v=59778b44">
 <link rel="stylesheet" href="css/site-nav.css?v=c312661f">
-<link rel="stylesheet" href="css/tea-quiz.css?v=3c5baf40">
+<link rel="stylesheet" href="css/tea-quiz.css?v=379f593d">
 </head>
 
 <body class="home-page">
@@ -141,7 +141,7 @@
   <div class="tq-intro" data-reveal>
     <p class="tq-eyebrow">小蟬陪你選茶 ・ 從喜歡的味道開始</p>
     <h2 class="tq-title">不知道選哪一杯<br>也沒關係</h2>
-    <p class="tq-lede">從喜歡的味道、現在的心情，到喝茶的片刻，<br>小蟬陪你找到適合的那一杯。</p>
+    <p class="tq-lede">從喜歡的香氣、能接受的苦澀，到常配的點心，<br>小蟬陪你找到適合的那一杯。</p>
     <button type="button" class="tq-start" data-quiz-path="first">一起找找看 <span aria-hidden="true">↓</span></button>
     <p class="tq-or">或者，你想要…</p>
     <div class="tq-paths">
@@ -149,7 +149,7 @@
         <strong>深入探索台灣茶</strong><span>從茶色、焙火選口味</span>
       </button>
       <button type="button" class="tq-path" data-quiz-path="gift">
-        <strong>為重要的人挑份茶禮</strong><span>依對象、場合挑選</span>
+        <strong>為重要的人挑份茶禮</strong><span>依對象、對方口味挑選</span>
       </button>
     </div>
   </div>
@@ -174,14 +174,38 @@
       <p class="tq-result__desc" data-r-desc></p>
       <p class="tq-result__picked" data-r-picked></p>
       <button type="button" class="tq-open" data-quiz-open>認識這杯茶 <span aria-hidden="true">↗</span></button>
-      <button type="button" class="tq-link" data-quiz-again>換個心情，再選一次 ↑</button>
+
+      <div class="tq-extra">
+        <div class="tq-extra__block">
+          <p class="tq-extra__label">怎麼泡</p>
+          <ul class="tq-brew" data-r-brew></ul>
+        </div>
+        <div class="tq-extra__block tq-alt" data-r-alt>
+          <p class="tq-extra__label">也可以試試</p>
+          <p class="tq-alt__name" data-alt-name></p>
+          <p class="tq-alt__why" data-alt-why></p>
+          <a class="tq-alt__link" href="#" data-alt-link>到蟬茶鋪看看 →</a>
+        </div>
+        <div class="tq-extra__block">
+          <p class="tq-extra__label">配茶小讀物</p>
+          <ul class="tq-reads" data-r-reads></ul>
+        </div>
+      </div>
+
+      <div class="tq-feedback" data-r-feedback>
+        <span>這個推薦適合你嗎？</span>
+        <button type="button" data-fb="up" aria-label="適合"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10v10H4V10z"/><path d="M7 10l4-7c1.5 0 2.5 1.2 2.2 2.7L12.6 9H19a2 2 0 0 1 2 2.3l-1.2 7A2 2 0 0 1 17.8 20H7"/></svg></button>
+        <button type="button" data-fb="down" aria-label="不太適合"><svg style="transform:rotate(180deg)" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10v10H4V10z"/><path d="M7 10l4-7c1.5 0 2.5 1.2 2.2 2.7L12.6 9H19a2 2 0 0 1 2 2.3l-1.2 7A2 2 0 0 1 17.8 20H7"/></svg></button>
+        <span class="tq-feedback__thanks" data-fb-thanks hidden>謝謝你，小蟬記下來了。</span>
+      </div>
+      <button type="button" class="tq-link" data-quiz-again>換個方向，再選一次 ↑</button>
     </div>
     <dialog class="tq-dialog" data-quiz-dialog aria-labelledby="tq-dialog-name">
       <p class="tq-eyebrow">你的日常茶時光</p>
       <h3 id="tq-dialog-name" data-d-name></h3>
       <p class="tq-dialog__meta" data-d-meta></p>
       <div data-d-desc></div>
-      <p class="tq-dialog__note">這是依香氣偏好提供的推薦，實際風味會隨茶葉與沖泡方式而變化。</p>
+      <p class="tq-dialog__note">這是依你的口味偏好提供的推薦，實際風味會隨茶葉與沖泡方式而變化。</p>
       <div class="tq-dialog__actions">
         <button type="button" class="tq-next" data-quiz-close>繼續品味</button>
         <a class="tq-open" href="#" data-d-link>到蟬茶鋪看看 <span aria-hidden="true">→</span></a>
@@ -366,8 +390,8 @@
 <script src="js/main.js?v=f7983aa5"></script>
 <script src="js/cart.js?v=63202081"></script>
 <script src="js/site-nav.js?v=fbe69245"></script>
-<script src="js/teas.js?v=a5f7f588"></script>
-<script src="js/tea-quiz.js?v=775a1a4e"></script>
+<script src="js/teas.js?v=5ccfd166"></script>
+<script src="js/tea-quiz.js?v=8305d2ad"></script>
 <script src="js/know-tea.js?v=832ac5cc"></script>
 <script>
   // 「走進蟬吃茶」與「關於蟬吃茶」：平滑捲到品牌理念，讓四個理念置中出現

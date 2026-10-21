@@ -497,3 +497,44 @@ button.kt-card { font: inherit; cursor: pointer; width: 100%; }
   .kt-dialog__body { padding: 22px 20px 24px; }
   .kt-facts { grid-template-columns: 1fr; }
 }
+
+/* 選項改成置中換行：每題選項數不同（4～7 個），不再固定四欄 */
+.tq-options { display: flex; flex-wrap: wrap; justify-content: center; }
+.tq-options .tq-option { flex: 0 1 236px; }
+
+/* ---------- 結果：沖泡建議、備選、配茶文章、回饋 ---------- */
+.tq-extra {
+  display: grid;
+  gap: 18px;
+  margin: 30px 0 22px;
+  padding-top: 24px;
+  border-top: 1px solid #E7E2D8;
+}
+.tq-extra__label { font-size: 12px; letter-spacing: 0.24em; color: var(--seal); margin: 0 0 8px; }
+.tq-brew, .tq-reads { list-style: none; margin: 0; padding: 0; }
+.tq-brew li { font-size: 14px; line-height: 1.9; color: #4A4036; }
+.tq-brew li + li { color: var(--muted); font-size: 13px; }
+.tq-alt__name { font-family: "Noto Serif TC", serif; font-size: 18px; letter-spacing: 0.08em; color: var(--tq-green-ink); margin: 0 0 4px; }
+.tq-alt__why { font-size: 13.5px; line-height: 1.9; color: #4A4036; margin: 0 0 4px; }
+.tq-alt__link, .tq-reads a { font-size: 13.5px; letter-spacing: 0.06em; color: var(--tq-green-ink); text-decoration: none; border-bottom: 1px solid #C9D3C4; }
+.tq-alt__link:hover, .tq-reads a:hover { border-color: currentColor; }
+.tq-reads li + li { margin-top: 6px; }
+
+.tq-feedback { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 13px; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 6px; }
+.tq-feedback button {
+  font-size: 17px; line-height: 1; padding: 7px 10px; border-radius: 999px; cursor: pointer;
+  background: var(--tq-chip); border: 1px solid transparent; transition: background-color 0.3s;
+}
+.tq-feedback button:hover:not(:disabled) { background: var(--tq-sage); }
+.tq-feedback button:disabled { opacity: 0.45; cursor: default; }
+.tq-feedback__thanks { color: var(--tq-green-ink); }
+@media (max-width: 760px) {
+  .tq-options .tq-option { flex: 1 1 calc(50% - 10px); font-size: 13.5px; letter-spacing: 0.02em; }
+}
+.tq-feedback button { color: var(--tq-green-ink); display: inline-flex; }
+@media (max-width: 760px) {
+  .tq-feedback { justify-content: center; }
+}
+@media (max-width: 760px) {
+  .tq-result__text .tq-link { margin-left: auto; margin-right: auto; }
+}
