@@ -731,3 +731,12 @@ body.home-page {
 @media (max-width: 860px) {
     .session-asset.session-asset--portrait { width: 76vw; right: 4vw; }
 }
+
+/* 新的小船（一人喝茶）：縮成原本的 70%（22vw → 15.4vw），放在畫面正中間的水面上；
+   「走進蟬吃茶」移到船的正下方 */
+.boat-wrapper { width: 15.4vw; left: 50%; bottom: 13%; }
+.hero-enter { left: 50%; bottom: 8%; transform: translateX(-50%); white-space: nowrap; }
+@media (max-width: 860px) {
+    .boat-wrapper { width: 32vw; left: 50%; bottom: 13%; }
+    .hero-enter { left: 50%; bottom: 7%; transform: translateX(-50%); }
+}
