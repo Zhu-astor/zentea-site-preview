@@ -725,3 +725,9 @@ body.home-page {
 
 /* 第三段「一片葉子」文字整段稍微往右 */
 #session-3 .session-text { left: 11vw; }
+
+/* 第二段人物換成橫式的女生品茶圖：比直式竹林人物寬一些 */
+.session-asset.session-asset--portrait { width: 40vw; max-width: 640px; left: 5vw; }
+@media (max-width: 860px) {
+    .session-asset.session-asset--portrait { width: 76vw; right: 4vw; }
+}
