@@ -713,3 +713,15 @@ body.home-page {
 /* 第一段與第二段之間多留一點白 */
 #session-2 { margin-top: 16vh; }
 @media (max-width: 860px) { #session-2 { margin-top: 10vh; } }
+
+/* 第一段：山水底圖整體往下移，不要跟大標、副標疊到；
+   空出來的上緣用同色紙紋補上，底圖上緣再淡入，看不出接縫 */
+.bg-scroll-guard { background: url('../assets/img/bg-paper.jpg') top center / 100% auto repeat-y; }
+.home-bg-layer {
+    top: 8vw;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 4vw);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 4vw);
+}
+
+/* 第三段「一片葉子」文字整段稍微往右 */
+#session-3 .session-text { left: 11vw; }

@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>蟬吃茶 ZenEaTea</title>
-<link rel="stylesheet" href="css/style.css?v=59778b44">
+<link rel="stylesheet" href="css/style.css?v=69625518">
 <link rel="stylesheet" href="css/site-nav.css?v=c312661f">
+<link rel="stylesheet" href="css/philosophy.css?v=587704fc">
 <link rel="stylesheet" href="css/tea-quiz.css?v=379f593d">
 </head>
 
@@ -99,37 +100,73 @@
 <!-- ==================================== -->
 <!-- 第四段：品牌理念 -->
 <!-- ==================================== -->
-<section class="scroll-session" id="session-4" data-enter-at="0.6" data-stagger-count="4">
-  <h2 class="ideas-title" data-drift="none" data-stagger="0">品牌理念</h2>
-  <div class="ideas">
-    <figure class="idea" data-drift="none" data-stagger="0">
-      <img class="idea__icon" src="assets/img/idea-chan-crave.png" alt="饞吃茶">
-      <figcaption class="idea__text">
-        <h3 class="idea__name">饞吃茶</h3>
-        <p>好茶！<br>喝一口就令人愛上了</p>
-      </figcaption>
-    </figure>
-    <figure class="idea" data-drift="none" data-stagger="1">
-      <img class="idea__icon" src="assets/img/idea-chan-cicada.png" alt="蟬吃茶">
-      <figcaption class="idea__text">
-        <h3 class="idea__name">蟬吃茶</h3>
-        <p>蟬吃系列<br>友善生物、大地及自己<br>一杯蟬吃過的好茶<br>純樸、自然、健康</p>
-      </figcaption>
-    </figure>
-    <figure class="idea" data-drift="none" data-stagger="2">
-      <img class="idea__icon" src="assets/img/idea-chan-zen.png" alt="禪吃茶">
-      <figcaption class="idea__text">
-        <h3 class="idea__name">禪吃茶</h3>
-        <p>喝上一杯蟬吃好茶<br>寧靜、專注的感受當下</p>
-      </figcaption>
-    </figure>
-    <figure class="idea" data-drift="none" data-stagger="3">
-      <img class="idea__icon" src="assets/img/idea-chan-stream.png" alt="潺吃茶">
-      <figcaption class="idea__text">
-        <h3 class="idea__name">潺吃茶</h3>
-        <p>好喝、自然健康、心靈寧靜<br>進一步有能量，善予他人<br>成為轉動世界正向能量的因子<br>如潺潺流水般，涓涓不息！</p>
-      </figcaption>
-    </figure>
+<section class="philo" id="session-4">
+  <!-- 四個理念：捲到時逐一浮現；滑鼠移上去卡片會跟著傾斜（js/philosophy.js）。連結之後接各自的頁面，現在先放 # -->
+  <img class="philo__hills" src="assets/img/ideas/mist-hills.webp" alt="" aria-hidden="true">
+  <img class="philo__corner" src="assets/img/ideas/leaf-corner.webp" alt="" aria-hidden="true">
+  <p class="philo__seal" aria-hidden="true"><span>蟬吃茶</span><i></i><b></b></p>
+
+  <div class="philo__head" data-philo-item>
+    <p class="philo__eyebrow">WHY CHAN CHIH CHA</p>
+    <h2 class="philo__title">一個名字<br>藏著我們看待茶的<br>方式</h2>
+    <span class="philo__rule" aria-hidden="true"></span>
+    <p class="philo__lede">不只是一杯茶，而是一種生活的態度。<br>從一口好茶，到對土地、自然與內心的理解，<br>四個字，藏著我們想傳遞的茶之道。</p>
+  </div>
+
+  <div class="philo__body">
+  <svg class="philo__lines" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M150 20 C 40 80, 60 170, 300 190"/>
+    <path d="M430 255 C 560 250, 620 290, 700 300"/>
+    <path d="M940 470 C 860 520, 800 560, 690 590"/>
+    <path d="M260 640 C 230 700, 300 760, 450 800"/>
+    <path d="M300 930 C 480 960, 600 990, 720 1000"/>
+  </svg>
+  <ol class="philo__list">
+    <li class="philo-item philo-item--1" data-philo-item>
+      <img class="philo-item__deco philo-item__deco--leaf-cloud" src="assets/img/ideas/leaf-cloud.webp" alt="" aria-hidden="true">
+      <a class="philo-card" href="#" data-philo-link>
+        <img class="philo-card__icon" src="assets/img/idea-chan-crave.png" alt="">
+        <span class="philo-card__body">
+          <span class="philo-card__name"><strong>饞</strong><span>吃茶</span></span>
+          <span class="philo-card__sub">先讓茶好喝</span>
+          <span class="philo-card__text">風味，是所有理念成立的前提。</span>
+        </span>
+      </a>
+    </li>
+    <li class="philo-item philo-item--2" data-philo-item>
+      <img class="philo-item__deco philo-item__deco--leaf-left" src="assets/img/ideas/leaf-left.webp" alt="" aria-hidden="true">
+      <a class="philo-card" href="#" data-philo-link>
+        <img class="philo-card__icon" src="assets/img/idea-chan-cicada.png" alt="">
+        <span class="philo-card__body">
+          <span class="philo-card__name"><strong>蟬</strong><span>吃茶</span></span>
+          <span class="philo-card__sub">尊重自然關係</span>
+          <span class="philo-card__text">土地、生態與茶，從來不是分開的。</span>
+        </span>
+      </a>
+    </li>
+    <li class="philo-item philo-item--3" data-philo-item>
+      <img class="philo-item__deco philo-item__deco--cup-rock" src="assets/img/ideas/cup-rock.webp" alt="" aria-hidden="true">
+      <a class="philo-card" href="#" data-philo-link>
+        <img class="philo-card__icon" src="assets/img/idea-chan-zen.png" alt="">
+        <span class="philo-card__body">
+          <span class="philo-card__name"><strong>禪</strong><span>吃茶</span></span>
+          <span class="philo-card__sub">回到這一刻</span>
+          <span class="philo-card__text">喝茶不是表演，是把自己安放回來。</span>
+        </span>
+      </a>
+    </li>
+    <li class="philo-item philo-item--4" data-philo-item>
+      <img class="philo-item__deco philo-item__deco--ripple" src="assets/img/ideas/ripple.webp" alt="" aria-hidden="true">
+      <a class="philo-card" href="#" data-philo-link>
+        <img class="philo-card__icon" src="assets/img/idea-chan-stream.png" alt="">
+        <span class="philo-card__body">
+          <span class="philo-card__name"><strong>潺</strong><span>吃茶</span></span>
+          <span class="philo-card__sub">讓善意流動</span>
+          <span class="philo-card__text">像水一樣，緩慢、悠長，持續往前。</span>
+        </span>
+      </a>
+    </li>
+  </ol>
   </div>
 </section>
 
@@ -392,6 +429,7 @@
 <script src="js/site-nav.js?v=fbe69245"></script>
 <script src="js/teas.js?v=5ccfd166"></script>
 <script src="js/tea-quiz.js?v=8305d2ad"></script>
+<script src="js/philosophy.js?v=314fcc88"></script>
 <script src="js/know-tea.js?v=832ac5cc"></script>
 <script>
   // 「走進蟬吃茶」與「關於蟬吃茶」：平滑捲到品牌理念，讓四個理念置中出現
@@ -400,7 +438,7 @@
       const target = document.querySelector(a.getAttribute("href"));
       if (!target) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: a.hash === "#session-4" ? "center" : "start" });
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
   // 測驗與認識茶區塊：捲到時淡入
