@@ -9,11 +9,14 @@
  *   - 茶色用茶改場的水色用語；每題都有不計分的「還不確定」
  *   - 「什麼時候喝」不計分，只決定結果頁先給熱泡還是冷泡建議
  * 同分時先看 tie 指定的那一題（證據最強的題），再依新手友善順序 NOVICE_ORDER。
+ * 2026-10-21 依 /srv/storage/projects/reports/選茶測驗與配茶文章查證.md 逐格查證後修正：
+ *   拿掉佳葉龍沒有依據的分數（最不苦、焙火、琥珀、中焙、蜜香、老派焙火、長輩），「不喜歡苦」首選改玉山（高海拔兒茶素較低），
+ *   金黃補炭焙、蜜綠改以玉山為主，點心題向茶改場與自家文章靠攏，新手順序蜜香移到佳葉龍前面。
  * 純前端，不需要後端；茶的連結指到商品頁 product.html?slug=…
  */
 (function () {
   const TEAS = window.ZENTEA_TEAS; // js/teas.js
-  const NOVICE_ORDER = ["yushan-oolong", "fresh-oolong", "gaba", "honey-black", "charcoal-oolong", "ruby-black"];
+  const NOVICE_ORDER = ["yushan-oolong", "fresh-oolong", "honey-black", "gaba", "charcoal-oolong", "ruby-black"];
   const UNSURE = ["還不確定", "star", {}];
   const PAIRING_ARTICLES = [
     ["點心配哪杯茶？先比重量，再找香氣", "茶與點心搭配_先比重量再找香氣"],
@@ -32,10 +35,11 @@
           hint: "不用懂茶，選一個讓你心動的味道就好。",
           next: "接著，聊聊苦跟澀",
           options: [
-            ["清爽淡雅", "leaf", { "fresh-oolong": 3, "yushan-oolong": 1 }],
+            ["清爽淡雅", "leaf", { "fresh-oolong": 3, "yushan-oolong": 2 }],
             ["花香清亮", "flower", { "yushan-oolong": 3, "fresh-oolong": 1 }],
-            ["溫厚醇甜", "cup", { "honey-black": 3, "ruby-black": 2, gaba: 1 }],
-            ["焙火沉穩", "mountain", { "charcoal-oolong": 3, gaba: 2 }],
+            ["溫厚醇甜", "cup", { "honey-black": 3, "ruby-black": 2, gaba: 1, "charcoal-oolong": 1 }],
+            ["焙火沉穩", "mountain", { "charcoal-oolong": 3, "fresh-oolong": 1 }],
+            ["柔和果香、帶一點酸甜", "moon", { gaba: 3, "honey-black": 1 }],
           ],
         },
         {
@@ -44,9 +48,9 @@
           hint: "能接受多少苦澀，最能看出你適合哪一類茶。",
           next: "接著，聊聊配什麼吃",
           options: [
-            ["不太喜歡，順口最好", "wave", { gaba: 3, "honey-black": 1, "yushan-oolong": 1 }],
+            ["不太喜歡，順口最好", "wave", { "yushan-oolong": 3, "honey-black": 1, gaba: 1 }],
             ["偶爾可以，不要太重", "leaf", { "fresh-oolong": 2, "yushan-oolong": 2, "honey-black": 1 }],
-            ["很喜歡那種濃厚感", "mountain", { "charcoal-oolong": 3, "ruby-black": 3 }],
+            ["喜歡茶味濃、香氣重", "mountain", { "charcoal-oolong": 2, "ruby-black": 3 }],
             UNSURE,
           ],
         },
@@ -57,9 +61,9 @@
           next: "最後，什麼時候喝",
           options: [
             ["鳳梨酥、蛋糕、餅乾", "cup", { "honey-black": 2, "ruby-black": 2 }],
-            ["綠豆椪、太陽餅、蛋黃酥", "mountain", { "charcoal-oolong": 3, gaba: 1 }],
-            ["豆花、麻糬、水果", "flower", { "fresh-oolong": 2, "yushan-oolong": 2 }],
-            ["瓜子、花生、鹹酥雞", "sun", { "fresh-oolong": 2, "charcoal-oolong": 1 }],
+            ["綠豆椪、太陽餅、蛋黃酥", "mountain", { "charcoal-oolong": 2, "honey-black": 1 }],
+            ["豆花、麻糬、水果", "flower", { "yushan-oolong": 2, "fresh-oolong": 1, gaba: 1 }],
+            ["瓜子、花生、鹹酥雞", "sun", { "fresh-oolong": 2, "charcoal-oolong": 2 }],
             ["什麼都不配，單喝", "leaf", { "yushan-oolong": 2, "fresh-oolong": 1 }],
           ],
         },
@@ -87,9 +91,9 @@
           hint: "用的是評茶時描述水色的說法：發酵越深，顏色越紅。",
           next: "接著，聊聊製程",
           options: [
-            ["蜜綠，清透帶黃綠", "leaf", { "fresh-oolong": 3, "yushan-oolong": 2 }],
-            ["金黃，明亮如蜜", "flower", { "yushan-oolong": 2, gaba: 2, "fresh-oolong": 1 }],
-            ["琥珀，焙過的深金", "mountain", { "charcoal-oolong": 3, gaba: 1 }],
+            ["蜜綠，清透帶黃綠", "leaf", { "yushan-oolong": 3, "fresh-oolong": 1 }],
+            ["金黃，明亮如蜜", "flower", { "fresh-oolong": 2, "charcoal-oolong": 2, "yushan-oolong": 1, gaba: 1 }],
+            ["琥珀，焙過的深金", "mountain", { "charcoal-oolong": 3 }],
             ["橙紅、紅亮", "cup", { "honey-black": 3, "ruby-black": 3 }],
             UNSURE,
           ],
@@ -101,7 +105,7 @@
           next: "最後，選一個你最想喝到的",
           options: [
             ["輕焙，留住清香", "wave", { "yushan-oolong": 3, "fresh-oolong": 1 }],
-            ["中焙，香氣圓潤", "sun", { "fresh-oolong": 3, gaba: 1 }],
+            ["中焙，香氣圓潤", "sun", { "fresh-oolong": 3 }],
             ["炭焙，溫潤炭香", "mountain", { "charcoal-oolong": 3 }],
             ["全發酵的紅茶", "cup", { "honey-black": 2, "ruby-black": 2 }],
             UNSURE,
@@ -115,8 +119,8 @@
             ["高山茶的清幽花香", "mountain", { "yushan-oolong": 3 }],
             ["清甜甘醇的日常烏龍", "leaf", { "fresh-oolong": 3 }],
             ["龍眼木炭焙的炭香", "sun", { "charcoal-oolong": 3 }],
-            ["小綠葉蟬的蜜香", "flower", { "honey-black": 3, gaba: 1 }],
-            ["厭氧發酵的熟果香", "moon", { gaba: 3 }],
+            ["小綠葉蟬的蜜香", "flower", { "honey-black": 3 }],
+            ["厭氧發酵的柔和果香", "moon", { gaba: 3 }],
             ["肉桂薄荷的台灣香", "heart", { "ruby-black": 3 }],
             UNSURE,
           ],
@@ -133,7 +137,7 @@
           hint: "想著對方的樣子選就好。",
           next: "接著，對方平常怎麼喝",
           options: [
-            ["長輩家人", "home", { "charcoal-oolong": 1, gaba: 1 }],
+            ["長輩家人", "home", { "charcoal-oolong": 1 }],
             ["同事客戶", "people", { "yushan-oolong": 1, "fresh-oolong": 1 }],
             ["好朋友", "heart", { "honey-black": 1, "ruby-black": 1 }],
             ["懂茶的人", "leaf", { "ruby-black": 1, "yushan-oolong": 1, "charcoal-oolong": 1 }],
@@ -146,7 +150,7 @@
           next: "最後，想留下的感覺",
           options: [
             ["清香、不要太重", "flower", { "fresh-oolong": 3, "yushan-oolong": 2 }],
-            ["老派的焙火茶", "mountain", { "charcoal-oolong": 3, gaba: 1 }],
+            ["老派的焙火茶", "mountain", { "charcoal-oolong": 3 }],
             ["紅茶、奶茶", "cup", { "honey-black": 3, "ruby-black": 2 }],
             ["新奇、特別的味道", "star", { "ruby-black": 3, gaba: 3 }],
             ["不太清楚", "people", { "yushan-oolong": 2, "fresh-oolong": 1 }],

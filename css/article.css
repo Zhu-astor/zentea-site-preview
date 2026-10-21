@@ -25,6 +25,13 @@ body.article-page { background: #FDFBF6; color: var(--ink); margin: 0; }
 .ar__body h4 { font-size: 17px; }
 .ar__body hr { border: 0; border-top: 1px solid #E5E0D0; margin: 2.4em 0; }
 .ar__body a { color: var(--ink); text-underline-offset: 3px; }
+.ar__body ul, .ar__body ol { margin: 0 0 1.3em; padding-left: 1.4em; }
+.ar__body li { margin-bottom: 0.5em; }
+/* 對照表：手機上可以左右滑 */
+.ar__body table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin: 0 0 1.6em; font-size: 14.5px; line-height: 1.7; }
+.ar__body th, .ar__body td { padding: 9px 12px; border-bottom: 1px solid #E5E0D0; text-align: left; vertical-align: top; min-width: 5.5em; }
+.ar__body th { font-weight: 600; color: var(--ink); background: #F3EFE6; white-space: nowrap; }
+.ar__body tbody tr:nth-child(even) td { background: rgba(243, 239, 230, 0.45); }
 .ar__body blockquote { margin: 1.5em 0; padding-left: 1em; border-left: 3px solid #D8CFC2; color: var(--muted); }
 
 .ar__gallery { display: grid; gap: 20px; margin: 48px 0 0; }
