@@ -740,3 +740,14 @@ body.home-page {
     .boat-wrapper { width: 32vw; left: 50%; bottom: 13%; }
     .hero-enter { left: 50%; bottom: 7%; transform: translateX(-50%); }
 }
+
+/* 底圖與小船：底圖寬度跟著螢幕寬，水面在原圖（寬 941）第 335～490 列，吃水線取第 392 列（＝底圖頂端 + 41.7vw）。
+   電腦版的底圖下移量 --bg-shift 依螢幕比例算：讓水面落在畫面約 72% 高，
+   但遠山（原圖第 200 列 ≈ 底圖頂端 + 21.3vw）至少要在畫面 42% 以下，不能壓到大標。
+   船的位置也用同一套座標，所以不管螢幕多寬多矮，船都浮在同一片水上；「走進蟬吃茶」接在船下方。 */
+@media (min-width: 861px) {
+    :root { --bg-shift: max(calc(72vh - 41.7vw), calc(42vh - 21.3vw)); }
+    .home-bg-layer { top: var(--bg-shift); }
+    .boat-wrapper { top: calc(var(--bg-shift) + 38.1vw); bottom: auto; }
+    .hero-enter { top: calc(var(--bg-shift) + 43.4vw); bottom: auto; }
+}

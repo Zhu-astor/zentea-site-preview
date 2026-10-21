@@ -1,127 +1,103 @@
 /*
  * 首頁第四段：品牌理念「饞・蟬・禪・潺」。
- * 左上大標＋右上直排印記，四個理念左右交錯往下排，中間用細細的墨線串起來。
+ * 版面照「茶之道：四字茶語」示意圖（1024×1536）：舞台固定 2:3 比例，所有元素用示意圖上的座標換算成百分比／cqw，
+ * 所以不論螢幕多寬，文字、圖示、水墨與細線的相對位置都跟示意圖一樣（1cqw = 示意圖上 10.24px）。
+ * 水墨與細線圖層（assets/img/ideas/m-*.webp）是直接從示意圖取出、去掉文字後的透明圖。
  * 捲到時逐一浮現（.is-in），滑鼠移上去卡片浮起、跟著游標微微傾斜（js/philosophy.js）。
- * 水墨裝飾圖在 assets/img/ideas/，目前是從示意圖裁下來的暫用素材。
+ * 手機（760px 以下）字會太小，改成一般的上下排列。
  */
 .philo {
   --philo-red: #A6432E;
-  --philo-line: #CFC5B6;
   position: relative;
   z-index: 10;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 14vh 5vw 16vh;
+  padding: 10vh 3vw 12vh;
 }
 
+.philo-stage {
+  position: relative;
+  width: min(100%, 1080px);
+  aspect-ratio: 1024 / 1536;
+  margin: 0 auto;
+  container-type: inline-size;
+}
+
+/* ---------- 水墨與細線（位置＝示意圖座標） ---------- */
+.philo-layer--lines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 2.4s ease; }
+.philo-stage.is-drawn .philo-layer--lines { opacity: 1; }
+
+.philo-deco { position: absolute; pointer-events: none; }
+.philo-deco--hills { left: 49.32%; top: 12.70%; width: 50.68%; }
+.philo-deco--corner { left: 89.84%; top: 89.19%; width: 10.16%; }
+.philo-deco--leaf-cloud { left: 60.06%; top: 32.55%; width: 29.79%; }
+.philo-deco--leaf-left { left: 10.74%; top: 47.53%; width: 31.25%; }
+.philo-deco--cup-rock { left: 65.92%; top: 69.34%; width: 22.95%; }
+.philo-deco--ripple { left: 10.25%; top: 85.61%; width: 44.92%; }
+
 /* ---------- 大標 ---------- */
-.philo__head { position: relative; z-index: 2; max-width: 520px; }
-.philo__eyebrow { font-size: 12px; letter-spacing: 0.24em; color: var(--philo-red); margin: 0 0 22px; }
+.philo__head { position: absolute; left: 11.52%; top: 4.49%; width: 46%; }
+.philo__eyebrow { font-size: 1.17cqw; letter-spacing: 0.16em; color: var(--philo-red); margin: 0; }
 .philo__title {
   font-family: "Noto Serif TC", serif;
   font-weight: 500;
-  font-size: clamp(30px, 3.6vw, 46px);
-  line-height: 1.45;
-  letter-spacing: 0.08em;
+  font-size: 4.5cqw;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
   color: var(--ink);
-  margin: 0 0 26px;
+  margin: 2.1cqw 0 0;
 }
-.philo__rule { display: block; width: 26px; height: 2px; background: var(--philo-red); margin-bottom: 26px; }
-.philo__lede { font-size: 14px; line-height: 2.1; letter-spacing: 0.1em; color: var(--muted); margin: 0; }
+.philo__rule { display: block; width: 2.5cqw; height: 2px; background: var(--philo-red); margin-top: 1.7cqw; }
+.philo__lede { font-size: 1.37cqw; line-height: 2.07; letter-spacing: 0.12em; color: #5A5249; margin: 2.3cqw 0 0; }
 
 /* 右上直排印記 */
-.philo__seal {
-  position: absolute;
-  top: 14vh;
-  right: 2vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin: 0;
-}
-.philo__seal span { writing-mode: vertical-rl; font-family: "Noto Serif TC", serif; font-size: 13px; letter-spacing: 0.3em; color: var(--ink); }
-.philo__seal i { width: 1px; height: 64px; background: var(--philo-red); opacity: 0.6; }
-.philo__seal b { width: 10px; height: 14px; border: 1px solid var(--philo-red); border-radius: 2px; }
+.philo__seal { position: absolute; left: 89.6%; top: 4.1%; display: flex; flex-direction: column; align-items: center; gap: 1.2cqw; margin: 0; }
+.philo__seal span { writing-mode: vertical-rl; font-family: "Noto Serif TC", serif; font-size: 1.2cqw; letter-spacing: 0.25em; color: var(--ink); }
+.philo__seal i { width: 1px; height: 4cqw; background: var(--philo-red); opacity: 0.6; }
+.philo__seal b { width: 1.1cqw; height: 1.6cqw; border: 1px solid var(--philo-red); border-radius: 2px; }
 
-/* 背景水墨 */
-.philo__hills { position: absolute; top: calc(14vh + 120px); right: 0; width: min(52%, 560px); opacity: 0.9; pointer-events: none; }
-.philo__corner { position: absolute; right: 0; bottom: 4vh; width: 70px; pointer-events: none; }
-
-/* ---------- 四個理念 ---------- */
-.philo__body { position: relative; margin-top: 8vh; }
-.philo__lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.philo__lines path {
-  fill: none;
-  stroke: var(--philo-line);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-  stroke-dasharray: 1200;
-  stroke-dashoffset: 1200;
-  transition: stroke-dashoffset 2.4s ease;
-}
-.philo__body.is-drawn .philo__lines path { stroke-dashoffset: 0; }
-
-.philo__list { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(60px, 9vh, 110px); }
-
-.philo-item { position: relative; display: flex; }
-.philo-item--1 { padding-left: 10%; }
-.philo-item--2 { padding-left: 40%; }
-.philo-item--3 { padding-left: 12%; }
-.philo-item--4 { padding-left: 40%; }
-
-/* 水墨裝飾：放在卡片的另一側 */
-.philo-item__deco { position: absolute; pointer-events: none; z-index: 0; }
-.philo-item__deco--leaf-cloud { left: 66%; top: -18%; width: min(30%, 300px); }
-.philo-item__deco--leaf-left { left: 6%; top: -4%; width: min(30%, 300px); }
-.philo-item__deco--cup-rock { left: 72%; top: 34%; width: min(26%, 260px); }
-.philo-item__deco--ripple { left: -2%; top: 10%; width: min(50%, 520px); }
-
-/* ---------- 卡片 ---------- */
+/* ---------- 四個理念（卡片左上角＝圖示左上角） ---------- */
+.philo__list { list-style: none; margin: 0; padding: 0; }
 .philo-card {
   --rx: 0deg;
   --ry: 0deg;
-  position: relative;
-  z-index: 1;
-  flex: none;
+  position: absolute;
+  z-index: 2;
   display: flex;
   align-items: flex-start;
-  gap: 30px;
-  padding: 22px 30px 22px 22px;
-  border-radius: 20px;
+  gap: var(--gap, 3.6cqw);
+  padding: 1cqw 2cqw 1cqw 1cqw;
+  margin: -1cqw 0 0 -1cqw; /* 內距不改變圖示的位置 */
+  border-radius: 1.8cqw;
   color: inherit;
   text-decoration: none;
   transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(0);
   transform-style: preserve-3d;
-  transition: transform 0.45s cubic-bezier(.2,.7,.2,1), box-shadow 0.45s ease, background-color 0.45s ease;
 }
+.philo-item--1 .philo-card { left: 22.07%; top: 32.03%; --gap: 3.6cqw; }
+.philo-item--2 .philo-card { left: 45.41%; top: 47.40%; --gap: 2.3cqw; }
+.philo-item--3 .philo-card { left: 23.24%; top: 64.91%; --gap: 3.4cqw; }
+.philo-item--4 .philo-card { left: 44.34%; top: 81.38%; --gap: 4.2cqw; }
+
 .philo-card__icon {
-  width: clamp(84px, 9vw, 108px);
+  width: 9.9cqw;
   height: auto;
   flex: none;
   border-radius: 50%;
   transition: transform 0.45s cubic-bezier(.2,.7,.2,1), box-shadow 0.45s ease;
 }
-.philo-card__body { display: flex; flex-direction: column; transform: translateZ(0); transition: transform 0.45s ease; }
-.philo-card__name { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
-.philo-card__name strong {
-  font-family: "Noto Serif TC", serif;
-  font-weight: 500;
-  font-size: clamp(44px, 5vw, 62px);
-  line-height: 1;
-  color: var(--philo-red);
-}
+.philo-card__body { display: flex; flex-direction: column; padding-top: 1.1cqw; white-space: nowrap; transition: transform 0.45s ease; }
+.philo-card__name { display: flex; align-items: center; gap: 1.6cqw; }
+.philo-card__name strong { font-family: "Noto Serif TC", serif; font-weight: 500; font-size: 5.6cqw; line-height: 1; color: var(--philo-red); }
 .philo-card__name span {
   font-family: "Noto Serif TC", serif;
-  font-size: clamp(20px, 2vw, 26px);
-  letter-spacing: 0.12em;
+  font-size: 2.5cqw;
+  letter-spacing: 0.1em;
   color: var(--ink);
-  padding-left: 16px;
+  padding-left: 1.6cqw;
   border-left: 1px solid #8A8072;
+  line-height: 1.5;
 }
-.philo-card__sub { font-family: "Noto Serif TC", serif; font-size: clamp(17px, 1.6vw, 20px); letter-spacing: 0.16em; color: var(--ink); margin-bottom: 10px; }
-.philo-card__text { font-size: 13.5px; letter-spacing: 0.12em; color: var(--muted); white-space: nowrap; }
-.philo-card__sub, .philo-card__name { white-space: nowrap; }
+.philo-card__sub { font-family: "Noto Serif TC", serif; font-size: 2.05cqw; letter-spacing: 0.16em; color: var(--ink); margin-top: 1.9cqw; }
+.philo-card__text { font-size: 1.42cqw; letter-spacing: 0.14em; color: #5A5249; margin-top: 1.5cqw; }
 
 /* 滑鼠移上去：浮起、陰影、圖示往前（JS 依游標位置設定 --rx/--ry） */
 .philo-card:hover,
@@ -136,33 +112,51 @@
 .philo-card:hover .philo-card__body,
 .philo-card:focus-visible .philo-card__body { transform: translateZ(24px); }
 
-/* ---------- 逐一浮現 ---------- */
-[data-philo-item] { opacity: 0; transform: translateY(40px); transition: opacity 1.1s ease, transform 1.1s cubic-bezier(.2,.7,.2,1); }
-[data-philo-item].is-in { opacity: 1; transform: none; }
-.philo-item__deco { opacity: 0; transform: translateY(16px); transition: opacity 1.6s ease 0.35s, transform 1.6s ease 0.35s; }
-.philo-item.is-in .philo-item__deco { opacity: 0.95; transform: none; }
+/* ---------- 逐一浮現：動畫加在卡片與水墨上（li 本身不能有 transform，不然絕對定位會跑掉） ---------- */
+.philo__head { opacity: 0; translate: 0 30px; transition: opacity 1.1s ease, translate 1.1s cubic-bezier(.2,.7,.2,1); }
+.philo__head.is-in { opacity: 1; translate: 0 0; }
+.philo-item .philo-card {
+  opacity: 0;
+  translate: 0 40px;
+  transition: opacity 1.1s ease, translate 1.1s cubic-bezier(.2,.7,.2,1),
+    transform 0.45s cubic-bezier(.2,.7,.2,1), box-shadow 0.45s ease, background-color 0.45s ease;
+}
+.philo-item .philo-deco { opacity: 0; translate: 0 16px; transition: opacity 1.6s ease 0.35s, translate 1.6s ease 0.35s; }
+.philo-item.is-in .philo-card,
+.philo-item.is-in .philo-deco { opacity: 1; translate: 0 0; }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-philo-item], .philo-item__deco, .philo__lines path, .philo-card { transition: none; }
+  .philo__head, .philo-item .philo-card, .philo-item .philo-deco, .philo-layer--lines { transition: none; }
 }
 
-/* ---------- 手機 ---------- */
+/* ---------- 手機：改成上下排列 ---------- */
 @media (max-width: 760px) {
   .philo { padding: 10vh 16px 12vh; }
-  .philo__seal { top: 10vh; right: 12px; }
-  .philo__seal i { height: 40px; }
-  .philo__hills { top: calc(10vh + 230px); width: 70%; opacity: 0.6; }
-  .philo__head { padding-right: 34px; }
+  .philo-stage { aspect-ratio: auto; width: 100%; }
+  .philo-layer--lines, .philo-deco--corner { display: none; }
+  .philo__head { position: relative; left: auto; top: auto; width: auto; padding-right: 40px; }
+  .philo__eyebrow { font-size: 11px; }
+  .philo__title { font-size: 28px; margin-top: 16px; }
+  .philo__rule { width: 22px; margin-top: 16px; }
+  .philo__lede { font-size: 13.5px; margin-top: 18px; }
   .philo__lede br { display: none; }
-  .philo__body { margin-top: 18vh; }
-  .philo__lines { display: none; }
-  .philo-item--1, .philo-item--2, .philo-item--3, .philo-item--4 { padding-left: 0; }
-  .philo-item:nth-child(even) { padding-left: 12%; }
-  .philo-card { gap: 18px; padding: 14px; flex: 1 1 auto; }
-  .philo-card__text { white-space: normal; }
+  .philo__seal { left: auto; right: 4px; top: 4px; gap: 8px; }
+  .philo__seal span { font-size: 12px; }
+  .philo__seal i { height: 36px; }
+  .philo__seal b { width: 10px; height: 14px; }
+  .philo-deco--hills { position: relative; display: block; left: auto; top: auto; width: 78%; margin: 10px 0 0 auto; }
+  .philo__list { display: grid; gap: 56px; margin-top: 24px; }
+  .philo-item { position: relative; }
+  .philo-item:nth-child(even) { padding-left: 14%; }
+  .philo-item .philo-card { position: relative; left: auto; top: auto; margin: 0; padding: 12px; gap: 16px; border-radius: 16px; }
   .philo-card__icon { width: 72px; }
-  .philo-item__deco--leaf-cloud, .philo-item__deco--cup-rock { left: auto; right: 0; top: -40%; width: 38%; }
-  .philo-item__deco--leaf-left { left: 0; top: -45%; width: 36%; }
-  .philo-item__deco--ripple { left: auto; right: 0; top: 40%; width: 60%; }
-  .philo__corner { width: 50px; }
+  .philo-card__body { padding-top: 6px; white-space: normal; }
+  .philo-card__name { gap: 12px; }
+  .philo-card__name strong { font-size: 40px; }
+  .philo-card__name span { font-size: 18px; padding-left: 12px; }
+  .philo-card__sub { font-size: 16px; margin-top: 12px; }
+  .philo-card__text { font-size: 13px; margin-top: 8px; }
+  .philo-item .philo-deco { left: auto; right: 0; top: -40%; width: 36%; }
+  .philo-item .philo-deco--leaf-left { right: auto; left: 0; }
+  .philo-item .philo-deco--ripple { top: 55%; width: 55%; }
 }

@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const section = document.querySelector(".philo");
   if (!section) return;
   const items = [...section.querySelectorAll("[data-philo-item]")];
-  const body = section.querySelector(".philo__body");
+  const body = section.querySelector(".philo-stage");
 
   // 同時進入畫面的幾項，依序錯開一點時間出現
   let queue = 0;
