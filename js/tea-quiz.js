@@ -3,7 +3,7 @@
  * 三種開始方式（第一次認識／深入探索台灣茶／挑份茶禮），每個選項替幾款茶加分，
  * 結果給主推一款＋備選一款，各附推薦理由，另有沖泡建議與配茶文章。
  * 題目與加分的依據見 /srv/storage/projects/reports/蟬吃茶選茶測驗依據.md：
- *   - 香氣題對應茶改場風味輪的五大香調（青香、花香、果香、甜香、焙香），用食物來比喻
+ *   - 第一題「喜歡的味道」維持原本的四個選項（品牌決定）
  *   - 苦澀接受度是台灣消費者偏好最好的預測因子（取代原本沒有依據的「心情」題）
  *   - 點心題只當輔助題，依蟬茶誌〈點心配哪杯茶？先比重量，再找香氣〉的對照表
  *   - 茶色用茶改場的水色用語；每題都有不計分的「還不確定」
@@ -27,16 +27,15 @@
       tie: 0,
       questions: [
         {
-          step: "喜歡的香氣",
-          title: "這幾種香氣，你最喜歡哪一種？",
-          hint: "想想平常吃的東西就好，不用懂茶。",
+          step: "喜歡的味道",
+          title: "你平常比較喜歡…",
+          hint: "不用懂茶，選一個讓你心動的味道就好。",
           next: "接著，聊聊苦跟澀",
           options: [
-            ["青草、黃瓜般的清爽", "leaf", { "fresh-oolong": 3, "yushan-oolong": 1 }],
-            ["梔子花、桂花般的花香", "flower", { "yushan-oolong": 3, "fresh-oolong": 1 }],
-            ["蜂蜜、熟芒果般的甜香", "cup", { "honey-black": 3, gaba: 2 }],
-            ["烤地瓜、焦糖般的焙香", "mountain", { "charcoal-oolong": 3, gaba: 1 }],
-            ["肉桂、薄荷般的特別香", "sun", { "ruby-black": 3, "honey-black": 1 }],
+            ["清爽淡雅", "leaf", { "fresh-oolong": 3, "yushan-oolong": 1 }],
+            ["花香清亮", "flower", { "yushan-oolong": 3, "fresh-oolong": 1 }],
+            ["溫厚醇甜", "cup", { "honey-black": 3, "ruby-black": 2, gaba: 1 }],
+            ["焙火沉穩", "mountain", { "charcoal-oolong": 3, gaba: 2 }],
           ],
         },
         {
