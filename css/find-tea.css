@@ -226,3 +226,106 @@
   .ft-rank1::-webkit-scrollbar { display: none; }
   .ft-rank1__item, .ft-rank1__label { flex: none; white-space: nowrap; }
 }
+
+/* ---------- 結果放大一點、不要擠：加寬版面，字級與間距加大（電腦版） ---------- */
+@media (min-width: 761px) {
+  .ft-done .ft-shell { width: min(1180px, 94vw); padding: 26px 0 30px; }
+  .ft-one { grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr); gap: clamp(30px, 4vw, 56px); padding: clamp(28px, 3.4vw, 48px); max-height: none; }
+  .ft-one__media { max-height: 64vh; }
+  .ft-one .ft-match { font-size: 14px; padding: 8px 14px; margin-bottom: 14px; }
+  .ft-one .ft-tea { font-size: clamp(32px, 3.4vw, 48px); margin-bottom: 8px; }
+  .ft-one .ft-tagline { font-size: 17px; margin-bottom: 18px; }
+  .ft-tabs { margin: 0 0 22px; }
+  .ft-tabs__bar { gap: 10px; margin-bottom: 14px; }
+  .ft-tabs__btn { font-size: 16px; padding: 9px 14px; }
+  .ft-tabs__panel { height: 9.2em; font-size: 16px; line-height: 1.9; }
+  .ft-list li + li { margin-top: 4px; }
+  .ft-panel__meta { font-size: 15px; }
+  .ft-tabs .ft-chips { gap: 8px; margin-top: 4px; }
+  .ft-tabs .ft-chip { font-size: 13.5px; padding: 6px 13px; }
+  .ft-one .ft-result__actions { gap: 14px; margin-bottom: 22px; }
+  .ft-one .ft-btn { font-size: 16px; padding: 15px 30px; }
+  .ft-alt1 { padding: 14px 18px; gap: 16px; margin-bottom: 16px; }
+  .ft-alt1__thumb { width: 56px; height: 56px; }
+  .ft-alt1__label { font-size: 12.5px; }
+  .ft-alt1__name { font-size: 16.5px; }
+  .ft-alt1__more { font-size: 14px; }
+  .ft-rank1 { gap: 8px; margin-bottom: 12px; }
+  .ft-rank1__label { font-size: 13.5px; }
+  .ft-rank1__item { font-size: 14px; padding: 6px 13px; }
+  .ft-fine { font-size: 12.5px; }
+  .ft-tie1 { font-size: 15px; padding: 12px 16px; gap: 10px; margin-bottom: 20px; }
+  .ft-tie1__btn { font-size: 15px; padding: 8px 18px; }
+}
+/* 手機：字也放大一點 */
+@media (max-width: 760px) {
+  .ft-one { grid-template-columns: 84px minmax(0, 1fr); column-gap: 16px; padding: 20px; }
+  .ft-one__media { width: 84px; height: 84px; }
+  .ft-one .ft-tea { font-size: 24px; }
+  .ft-one .ft-tagline { font-size: 14px; margin-bottom: 14px; }
+  .ft-tabs__btn { font-size: 14.5px; padding: 8px 10px; }
+  .ft-tabs__panel { font-size: 15px; line-height: 1.85; }
+  .ft-one .ft-btn { padding: 13px 22px; font-size: 15px; }
+  .ft-alt1__name { font-size: 15px; }
+  .ft-rank1__item { font-size: 13px; padding: 5px 11px; }
+  .ft-fine { font-size: 12px; }
+}
+
+/* ---------- 結果三欄（電腦版）：左商品圖、中主推＋分頁、右第二推薦＋相似度 ---------- */
+.ft-side { display: grid; gap: 16px; align-content: start; }
+.ft-alt1__score { font-size: 13px; color: var(--ft-accent); }
+.ft-rank1 { display: grid; gap: 4px; flex-wrap: initial; overflow: visible; }
+.ft-rank1__label { font-family: "Noto Serif TC", serif; font-weight: 600; letter-spacing: 0.08em; color: var(--ft-ink); margin: 0 0 6px; }
+.ft-rank1__item {
+  display: grid; grid-template-columns: 18px 76px minmax(0, 1fr) 30px; align-items: center; gap: 10px;
+  padding: 7px 8px; border: 0; border-radius: 10px; background: transparent; white-space: normal;
+}
+.ft-rank1__item:hover { background: rgba(239, 230, 213, 0.55); }
+.ft-rank1__no { font-family: "Noto Serif TC", serif; color: var(--ft-accent); text-align: center; }
+.ft-rank1__name { white-space: nowrap; }
+.ft-rank1__item .ft-bar { margin: 0; }
+.ft-rank1__item strong { text-align: right; }
+
+@media (min-width: 761px) {
+  .ft-done .ft-shell { width: min(1320px, 95vw); }
+  .ft-one { grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.3fr) minmax(0, 0.92fr); gap: clamp(24px, 2.8vw, 44px); align-items: start; min-height: 0; }
+  .ft-one__media { height: auto; aspect-ratio: 3 / 4; max-height: 70vh; }
+  .ft-alt1 { flex-wrap: wrap; margin-bottom: 0; }
+  .ft-alt1__text { flex: 1 1 140px; }
+  .ft-alt1__more { margin-left: auto; }
+  .ft-side { border-left: 1px solid var(--ft-line); padding-left: clamp(20px, 2.4vw, 36px); }
+  .ft-rank1__item { font-size: 14.5px; }
+}
+@media (max-width: 760px) {
+  .ft-side { grid-column: 1 / -1; margin-top: 4px; }
+  .ft-rank1__item { grid-template-columns: 16px 70px minmax(0, 1fr) 28px; font-size: 13.5px; padding: 6px 4px; }
+}
+@media (min-width: 761px) {
+  .ft-side .ft-tie1 { flex-wrap: wrap; margin-bottom: 0; font-size: 14px; }
+  .ft-side .ft-tie1 > span { flex-basis: 100%; }
+  .ft-side .ft-tie1__btn { font-size: 14px; padding: 7px 16px; }
+}
+/* 高度 800px 以下的電腦螢幕（1280×720、Windows 1366×768 等）：只收外框與清單的留白，字級不變 */
+@media (min-width: 761px) and (max-height: 800px) {
+  .ft-done .ft-shell { padding: 14px 0 16px; }
+  .ft-one { padding: 26px 36px; }
+  .ft-one .ft-match { margin-bottom: 8px; }
+  .ft-one .ft-tagline { margin-bottom: 12px; }
+  .ft-tabs { margin-bottom: 16px; }
+  .ft-tabs__panel { height: 8.4em; }
+  .ft-side { gap: 12px; }
+  .ft-rank1__item { padding: 4px 8px; }
+  .ft-alt1 { padding: 10px 14px; }
+  .ft-one__media { max-height: 60vh; }
+}
+@media (min-width: 761px) and (max-height: 680px) {
+  .ft-fine { display: none; }
+  .ft-tabs .ft-chips { display: none; }
+  .ft-tabs__panel { height: 7em; }
+  .ft-alt1__score { display: none; }
+}
+@media (min-width: 761px) and (max-height: 740px) {
+  .ft-one { padding-top: 22px; padding-bottom: 22px; }
+}
+/* 分頁內容（理由清單＋標籤）不要被切到 */
+@media (min-width: 761px) { .ft-tabs__panel { height: auto; min-height: 7.4em; max-height: none; overflow: visible; } }

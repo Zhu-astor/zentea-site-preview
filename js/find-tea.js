@@ -388,8 +388,9 @@
     body.append(tabs);
     openTab(0);
 
+    let tie = null;
     if (close) {
-      const tie = el("div", "ft-tie1");
+      tie = el("div", "ft-tie1");
       tie.append(el("span", "", `${top.short}和${second.short}很接近，你比較想要：`));
       [["日常方便", true], ["細緻品飲", false]].forEach(([label, everyday]) => {
         const b = el("button", "ft-tie1__btn", label);
@@ -400,7 +401,6 @@
         });
         tie.append(b);
       });
-      body.append(tie);
     }
 
     const actions = el("div", "ft-result__actions");
@@ -415,28 +415,33 @@
     actions.append(detail, again);
     body.append(actions);
 
-    // 第二推薦：一列
+    // 右欄：第二推薦、六款相似度、說明（電腦版在右邊，手機版排在下面）
+    const side = el("aside", "ft-side");
+    if (tie) side.append(tie);
     const alt = el("a", "ft-alt1");
     alt.href = detailUrl(secondKey);
     alt.append(teaImage(secondKey, "ft-alt1__thumb"));
     const altText = el("span", "ft-alt1__text");
-    altText.append(el("span", "ft-alt1__label", "第二推薦"), el("span", "ft-alt1__name", `${second.name}・${score(secondKey)} 分`));
+    altText.append(el("span", "ft-alt1__label", "第二推薦"), el("span", "ft-alt1__name", second.name), el("span", "ft-alt1__score", `${score(secondKey)} 分・${TAGLINE[secondKey]}`));
     alt.append(altText, el("span", "ft-alt1__more", "了解更多 →"));
-    body.append(alt);
+    side.append(alt);
 
-    // 六款分數：一排小標籤
     const rank = el("div", "ft-rank1");
-    rank.append(el("span", "ft-rank1__label", "相似度"));
-    ranked.forEach((k) => {
+    rank.append(el("p", "ft-rank1__label", "六款茶和你的相似度"));
+    ranked.forEach((k, i) => {
       const a = el("a", "ft-rank1__item");
       a.href = detailUrl(k);
-      a.append(el("span", "", TEAS[SLUG[k]].short), el("strong", "", String(score(k))));
+      const bar = el("span", "ft-bar");
+      const fill = el("i");
+      fill.style.width = `${d.scores[k]}%`;
+      bar.append(fill);
+      a.append(el("span", "ft-rank1__no", String(i + 1)), el("span", "ft-rank1__name", TEAS[SLUG[k]].short), bar, el("strong", "", String(score(k))));
       rank.append(a);
     });
-    body.append(rank);
-    body.append(el("p", "ft-fine", "依你的答案與各款茶的香氣、焙火、茶湯厚度比對相似度；「感覺」題是喝茶情境，不代表茶的功效。"));
+    side.append(rank);
+    side.append(el("p", "ft-fine", "依你的答案與各款茶的香氣、焙火、茶湯厚度比對相似度；「感覺」題是喝茶情境，不代表茶的功效。"));
 
-    card.append(body);
+    card.append(body, side);
     r.append(card);
     scrollTop();
   }
