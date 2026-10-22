@@ -194,7 +194,6 @@
     const $ = (sel) => root.querySelector(sel);
     const stepsBox = $("[data-quiz-steps]");
     const resultBox = $("[data-quiz-result]");
-    const dialog = $("[data-quiz-dialog]");
     let path = null;
     let answers = [];
 
@@ -363,13 +362,7 @@
       fb.querySelectorAll("button").forEach((b) => (b.disabled = false));
       fb.querySelector("[data-fb-thanks]").hidden = true;
 
-      $("[data-d-name]").textContent = tea.name;
-      $("[data-d-meta]").textContent = `${tea.origin}　${tea.process}`;
-      $("[data-d-desc]").replaceChildren(...tea.story.map((t) => Object.assign(document.createElement("p"), { textContent: t })));
-      const link = $("[data-d-link]");
-      link.href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
-      $("[data-d-soon]").hidden = !tea.soon;
-      $("[data-r-detail]").href = link.href;
+      $("[data-r-detail]").href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
       resultBox.dataset.tea = slug;
       resultBox.hidden = false;
       resultBox.classList.remove("is-in");
@@ -398,8 +391,5 @@
       scrollToEl(root);
       setTimeout(() => start(pathKey()), reduceMotion ? 0 : 450);
     });
-    $("[data-quiz-open]").addEventListener("click", () => dialog.showModal());
-    dialog.querySelector("[data-quiz-close]").addEventListener("click", () => dialog.close());
-    dialog.addEventListener("click", (e) => e.target === dialog && dialog.close());
   });
 })();
