@@ -163,5 +163,11 @@
     -webkit-backdrop-filter: saturate(140%) blur(10px);
     backdrop-filter: saturate(140%) blur(10px);
   }
-  .site-nav--frost.is-open { background: #FAF8F4; }
+  /* 打開選單時，上方功能列維持跟電腦版一樣的半透明；側邊選單也用半透明毛玻璃 */
+  .site-nav--frost.is-open { background: transparent; }
+  .site-nav--frost .site-nav__links {
+    background: rgba(250, 248, 244, 0.55);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    backdrop-filter: saturate(140%) blur(14px);
+  }
 }
