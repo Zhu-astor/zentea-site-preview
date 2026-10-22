@@ -64,9 +64,9 @@
   display: flex;
   align-items: flex-start;
   gap: var(--gap, 3.6cqw);
-  padding: 1cqw 2cqw 1cqw 1cqw;
-  margin: -1cqw 0 0 -1cqw; /* 內距不改變圖示的位置 */
-  border-radius: 1.8cqw;
+  padding: 2.4cqw 3.6cqw 2.4cqw 2.4cqw; /* 滑鼠移上去時的白底範圍 */
+  margin: -2.4cqw 0 0 -2.4cqw; /* 內距不改變圖示的位置 */
+  border-radius: 2.4cqw;
   color: inherit;
   text-decoration: none;
   transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(0);
