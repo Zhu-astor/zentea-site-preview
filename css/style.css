@@ -765,3 +765,16 @@ body.home-page {
     #session-1 .session-text .eyebrow { margin-bottom: 10px; }
     #session-1 .session-text h1 { font-size: clamp(24px, 5.4vh, 36px); line-height: 1.45; margin-bottom: 10px; }
 }
+
+/* 第三段「一片葉子」的寬幅山林圖（3:1）在手機上：原本被桌面版的 66vw／right:-8vw 蓋過，縮得很小又被推出畫面。
+   手機改成跟電腦版同樣的感覺：一道大幅遠山從右側延伸進來，放在文字下方 */
+@media (max-width: 860px) {
+    #session-3 .session-asset.session-asset--fade {
+        width: 150vw;
+        max-width: none;
+        right: -38vw;
+        left: auto;
+        top: 46vh;
+        bottom: auto;
+    }
+}
