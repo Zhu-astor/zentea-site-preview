@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/shop.css?v=e1ae40b8">
 <link rel="stylesheet" href="css/find-tea.css?v=65d45e5b">
 </head>
-<!-- 選茶測驗（首頁「開始找茶」進來）：5 題＋喜好補充題，依相似度給六款茶 0～100 分排序。
+<!-- 選茶測驗（首頁「一起找找看」進來，直接從第一題開始）：5 題＋喜好補充題，依相似度給六款茶 0～100 分排序。
      題目、選項、加權照 chan_tea_find_your_tea_v1_2_balanced.html；計分與畫面在 js/find-tea.js。
      結果附商品圖、描述、推薦理由與「了解更多」（商品詳細頁 product.html）。 -->
 <body class="products-page shop-ui ft-page">
@@ -39,17 +39,7 @@
     </button>
   </div>
 </header><main class="ft-shell">
-  <section class="ft-card ft-hero" data-ft-hero>
-    <div>
-      <p class="ft-eyebrow">Find your tea</p>
-      <h1 class="ft-h1">找一款，<br>會想一直放在家裡的茶。</h1>
-      <p class="ft-lead">不用懂茶，也不用每一題都有答案。<br>從平常怎麼喝、想要什麼感覺、喜歡什麼味道，到在家怎麼泡，我們幫你慢慢縮小選擇。</p>
-      <button type="button" class="ft-btn" data-ft-start>開始找茶</button>
-      <p class="ft-note">約 30–45 秒</p>
-    </div>
-  </section>
-
-  <section class="ft-card" data-ft-quiz hidden>
+  <section class="ft-card" data-ft-quiz>
     <div class="ft-progress" data-ft-progress></div>
     <div data-ft-question></div>
   </section>
@@ -79,7 +69,7 @@
 
 <script src="js/cart.js?v=63202081"></script>
 <script src="js/teas.js?v=fbec620c"></script>
-<script src="js/find-tea.js?v=b8046bd7"></script>
+<script src="js/find-tea.js?v=6290dbd2"></script>
 <script src="js/site-nav.js?v=fbe69245"></script>
 </body>
 </html>

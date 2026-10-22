@@ -121,7 +121,6 @@
 
   // ---------- 作答 ----------
   function start() {
-    $("[data-ft-hero]").hidden = true;
     $("[data-ft-result]").hidden = true;
     $("[data-ft-quiz]").hidden = false;
     idx = 0; answers = {}; pairing = []; fallbackShown = false;
@@ -444,8 +443,6 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     if (!TEAS) return;
-    $("[data-ft-start]").addEventListener("click", start);
-    // 首頁帶 ?start=1 進來時直接開始作答
-    if (new URLSearchParams(location.search).get("start") === "1") start();
+    start(); // 一進來就是第一題，不另外放介紹頁
   });
 })();
