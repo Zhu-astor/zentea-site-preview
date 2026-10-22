@@ -307,128 +307,139 @@
     return a;
   }
 
-  // ---------- 結果 ----------
+  // ---------- 結果：一個畫面看完，只放重點；細節在商品詳細頁 ----------
   function showResult(order) {
     const d = calc();
-    let ranked = order || d.arr.map(([k]) => k);
-    const close = d.margin < 5;
+    const ranked = order || d.arr.map(([k]) => k);
+    const close = d.margin < 5 && !order;
     const [topKey, secondKey] = ranked;
     const top = TEAS[SLUG[topKey]];
     const second = TEAS[SLUG[secondKey]];
     const score = (k) => Math.round(d.scores[k]);
 
     $("[data-ft-quiz]").hidden = true;
+    document.body.classList.add("ft-done");
     const r = $("[data-ft-result]");
     r.hidden = false;
     r.replaceChildren();
 
-    // 主推
-    const main = el("section", "ft-card ft-result");
-    main.append(teaImage(topKey, "ft-result__media"));
-    const body = el("div", "ft-result__body");
-    const badge = el("p", "ft-match", tone(d.confidence) + (d.confidence >= 0.8 ? `・${score(topKey)}% Match` : ""));
-    body.append(badge, el("p", "ft-eyebrow", close ? "Two good choices" : "Your tea"), el("h1", "ft-tea", top.name));
-    body.append(el("p", "ft-tagline", TAGLINE[topKey]));
-    body.append(el("p", "ft-copy", close
-      ? "你的答案剛好落在兩種風味之間。與其硬替你決定，我們更想把差異說清楚，讓你知道自己是在「哪兩種日常」之間選茶。"
-      : "它最接近你平常喝茶的方式：不是只在第一口討喜，而是更有機會在買回家之後，被你一泡再泡。"));
-    body.append(el("p", "ft-desc", top.summary));
-
-    const why = el("div", "ft-why");
-    why.append(el("p", "ft-why__title", "為什麼推薦這款"));
+    const card = el("section", "ft-card ft-one");
+    card.append(teaImage(topKey, "ft-one__media"));
+    const body = el("div", "ft-one__body");
+    body.append(
+      el("p", "ft-match", tone(d.confidence) + (d.confidence >= 0.8 ? `・${score(topKey)}% Match` : "")),
+      el("h1", "ft-tea", top.name),
+      el("p", "ft-tagline", TAGLINE[topKey])
+    );
+    // 小分頁：為什麼推薦／茶的特色／怎麼泡（同一時間只顯示一項，畫面不會被撐長）
     const reasons = reasonsFor(topKey);
-    const list = el("ul", "ft-why__list");
+    const whyList = el("ul", "ft-list");
     if (reasons.length) {
       reasons.forEach((x) => {
         const li = el("li");
-        li.append(el("strong", "", `${x.step}：「${x.title}」`), ` — ${top.short} 在這一項 ${x.score} / 5`);
-        list.append(li);
+        li.append(el("strong", "", `${x.step}「${x.title}」`), ` ${top.short}在這一項 ${x.score} / 5`);
+        whyList.append(li);
       });
-    } else list.append(el("li", "", "你跳過了大部分題目，我們先推薦最容易開始、多數人都喝得順的一款。"));
-    const flavorLi = el("li");
-    flavorLi.append(el("strong", "", "風味："), `${top.aroma}；${top.taste}。`);
-    list.append(flavorLi);
-    why.append(list);
+    } else whyList.append(el("li", "", "你跳過了大部分題目，先推薦最容易開始、多數人都喝得順的一款。"));
+    const whyPanel = el("div");
+    whyPanel.append(whyList);
     const chips = el("div", "ft-chips");
-    tags().forEach((t) => chips.append(el("span", "ft-chip", t)));
-    if (chips.childElementCount) why.append(chips);
-    body.append(why);
+    tags().slice(0, 4).forEach((t) => chips.append(el("span", "ft-chip", t)));
+    if (chips.childElementCount) whyPanel.append(chips);
 
-    const brew = el("p", "ft-brew");
-    brew.append(el("strong", "", "怎麼泡："), answers.brew?.id === "cold" ? top.brew.cold : top.brew.hot);
-    body.append(brew);
+    const descPanel = el("div");
+    descPanel.append(el("p", "ft-panel__p", top.summary));
+    const flavor = el("p", "ft-panel__p ft-panel__meta");
+    flavor.append(el("strong", "", "香氣　"), top.aroma, el("br"), el("strong", "", "口感　"), top.taste);
+    descPanel.append(flavor);
+
+    const cold = answers.brew?.id === "cold";
+    const brewPanel = el("div");
+    const brewList = el("ul", "ft-list");
+    [[cold ? "推薦冷泡" : "推薦熱泡", cold ? top.brew.cold : top.brew.hot], [cold ? "也可以熱泡" : "也可以冷泡", cold ? top.brew.hot : top.brew.cold]]
+      .forEach(([label, text]) => {
+        const li = el("li");
+        li.append(el("strong", "", label + "　"), text.replace(/^(熱泡|冷泡)：/, ""));
+        brewList.append(li);
+      });
+    brewPanel.append(brewList);
+
+    const tabs = el("div", "ft-tabs");
+    const tabBar = el("div", "ft-tabs__bar");
+    tabBar.setAttribute("role", "tablist");
+    const panelBox = el("div", "ft-tabs__panel");
+    const panels = [["為什麼推薦", whyPanel], ["茶的特色", descPanel], ["怎麼泡", brewPanel]];
+    function openTab(i) {
+      tabBar.querySelectorAll("button").forEach((b, k) => {
+        b.classList.toggle("is-on", k === i);
+        b.setAttribute("aria-selected", String(k === i));
+      });
+      panelBox.replaceChildren(panels[i][1]);
+      panelBox.classList.remove("is-in");
+      requestAnimationFrame(() => panelBox.classList.add("is-in"));
+    }
+    panels.forEach(([label], i) => {
+      const b = el("button", "ft-tabs__btn", label);
+      b.type = "button";
+      b.setAttribute("role", "tab");
+      b.addEventListener("click", () => openTab(i));
+      tabBar.append(b);
+    });
+    tabs.append(tabBar, panelBox);
+    body.append(tabs);
+    openTab(0);
+
+    if (close) {
+      const tie = el("div", "ft-tie1");
+      tie.append(el("span", "", `${top.short}和${second.short}很接近，你比較想要：`));
+      [["日常方便", true], ["細緻品飲", false]].forEach(([label, everyday]) => {
+        const b = el("button", "ft-tie1__btn", label);
+        b.type = "button";
+        b.addEventListener("click", () => {
+          const pick = [topKey, secondKey].find((k) => EVERYDAY.has(k) === everyday) || topKey;
+          showResult([pick, ...ranked.filter((k) => k !== pick)]);
+        });
+        tie.append(b);
+      });
+      body.append(tie);
+    }
 
     const actions = el("div", "ft-result__actions");
     const detail = el("a", "ft-btn", "了解更多 →");
     detail.href = detailUrl(topKey);
     const again = el("button", "ft-btn ft-btn--ghost", "再測一次");
     again.type = "button";
-    again.addEventListener("click", start);
+    again.addEventListener("click", () => {
+      document.body.classList.remove("ft-done");
+      start();
+    });
     actions.append(detail, again);
     body.append(actions);
-    main.append(body);
-    r.append(main);
 
-    // 兩款很接近：多問一題決定先後
-    if (close && !order) {
-      const tie = el("section", "ft-card ft-tie");
-      tie.append(el("p", "ft-why__title", "你的兩款很接近"));
-      tie.append(el("p", "ft-mini", `${top.short}只領先 ${d.margin.toFixed(1)} 分。最後一題：你比較想要哪一種？`));
-      const row = el("div", "ft-tie__row");
-      [["日常方便", "隨手泡、天天喝都順口", true], ["細緻品飲", "願意花時間，慢慢感受香氣與層次", false]].forEach(([label, desc, everyday]) => {
-        const b = el("button", "ft-option");
-        b.type = "button";
-        b.append(el("span", "ft-option__title", label), el("span", "ft-option__desc", desc));
-        b.addEventListener("click", () => {
-          const pick = [topKey, secondKey].find((k) => EVERYDAY.has(k) === everyday) || topKey;
-          const rest = ranked.filter((k) => k !== pick);
-          showResult([pick, ...rest]);
-          scrollTop();
-        });
-        row.append(b);
-      });
-      tie.append(row);
-      r.append(tie);
-    }
+    // 第二推薦：一列
+    const alt = el("a", "ft-alt1");
+    alt.href = detailUrl(secondKey);
+    alt.append(teaImage(secondKey, "ft-alt1__thumb"));
+    const altText = el("span", "ft-alt1__text");
+    altText.append(el("span", "ft-alt1__label", "第二推薦"), el("span", "ft-alt1__name", `${second.name}・${score(secondKey)} 分`));
+    alt.append(altText, el("span", "ft-alt1__more", "了解更多 →"));
+    body.append(alt);
 
-    // 第二推薦
-    const alt = el("section", "ft-card ft-alt");
-    alt.append(teaImage(secondKey, "ft-alt__media"));
-    const altBody = el("div");
-    altBody.append(el("p", "ft-eyebrow", "第二推薦"), el("h2", "ft-alt__name", second.name));
-    altBody.append(el("p", "ft-score", `${score(secondKey)} 分・${TAGLINE[secondKey]}`), el("p", "ft-mini", second.summary));
-    const altWhy = reasonsFor(secondKey)[0];
-    if (altWhy) altBody.append(el("p", "ft-mini", `你選了「${altWhy.title}」，${second.short}在這一項 ${altWhy.score} / 5。`));
-    altBody.append(moreLink(secondKey));
-    alt.append(altBody);
-    r.append(alt);
-
-    // 六款排序
-    const rank = el("section", "ft-card ft-rank");
-    rank.append(el("p", "ft-why__title", "六款茶和你的相似度"));
-    ranked.forEach((k, i) => {
-      const row = el("a", "ft-rank__row");
-      row.href = detailUrl(k);
-      row.append(el("span", "ft-rank__no", String(i + 1)), teaImage(k, "ft-rank__thumb"));
-      const info = el("span", "ft-rank__info");
-      info.append(el("span", "ft-rank__name", TEAS[SLUG[k]].name), el("span", "ft-rank__tag", TAGLINE[k]));
-      const bar = el("span", "ft-bar");
-      const fill = el("i");
-      fill.style.width = `${d.scores[k]}%`;
-      bar.append(fill);
-      info.append(bar);
-      row.append(info, el("strong", "ft-rank__score", String(score(k))), el("span", "ft-rank__more", "了解更多 →"));
-      rank.append(row);
+    // 六款分數：一排小標籤
+    const rank = el("div", "ft-rank1");
+    rank.append(el("span", "ft-rank1__label", "相似度"));
+    ranked.forEach((k) => {
+      const a = el("a", "ft-rank1__item");
+      a.href = detailUrl(k);
+      a.append(el("span", "", TEAS[SLUG[k]].short), el("strong", "", String(score(k))));
+      rank.append(a);
     });
-    r.append(rank);
+    body.append(rank);
+    body.append(el("p", "ft-fine", "依你的答案與各款茶的香氣、焙火、茶湯厚度比對相似度；「感覺」題是喝茶情境，不代表茶的功效。"));
 
-    // 計分說明（不寫成功效）
-    const note = el("section", "ft-card ft-note-box");
-    note.append(el("p", "ft-why__title", "這個推薦怎麼算的"));
-    note.append(el("p", "ft-mini",
-      "分數是你的答案和每款茶的相似度：喜好 43%、泡法 20%、日常 15%、感覺 12%、搭配 10%，跳過的題目不計入。" +
-      "「感覺」題描述的是你想要的喝茶情境，我們依茶的香氣、焙火、茶湯厚度去對應，不代表茶有放鬆、提神等功效。"));
-    r.append(note);
+    card.append(body);
+    r.append(card);
+    scrollTop();
   }
 
   document.addEventListener("DOMContentLoaded", () => {
