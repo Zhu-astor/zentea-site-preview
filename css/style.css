@@ -741,13 +741,27 @@ body.home-page {
     .hero-enter { left: 50%; bottom: 7%; transform: translateX(-50%); }
 }
 
-/* 底圖與小船：底圖寬度跟著螢幕寬，水面在原圖（寬 941）第 335～490 列，吃水線取第 392 列（＝底圖頂端 + 41.7vw）。
-   電腦版的底圖下移量 --bg-shift 依螢幕比例算：讓水面落在畫面約 72% 高，
-   但遠山（原圖第 200 列 ≈ 底圖頂端 + 21.3vw）至少要在畫面 42% 以下，不能壓到大標。
-   船的位置也用同一套座標，所以不管螢幕多寬多矮，船都浮在同一片水上；「走進蟬吃茶」接在船下方。 */
-@media (min-width: 861px) {
-    :root { --bg-shift: max(calc(72vh - 41.7vw), calc(42vh - 21.3vw)); }
-    .home-bg-layer { top: var(--bg-shift); }
-    .boat-wrapper { top: calc(var(--bg-shift) + 38.1vw); bottom: auto; }
-    .hero-enter { top: calc(var(--bg-shift) + 43.4vw); bottom: auto; }
+/* 底圖與小船、山崖：全部用 --bg-shift（js/hero-layout.js 依標題位置算出的底圖下移量）定位。
+   底圖寬＝螢幕寬，原圖寬 941，所以原圖第 N 列在畫面上的位置＝ --bg-shift ＋ N/941×100vw。
+   - 船：吃水線在第 392 列（41.66vw），船高＝船寬 × 437/1685，船身約 90% 在水面上
+   - 左側山崖（有倒影，寬 30vw）：水面在圖高 70% 處，對齊第 457 列（48.6vw）
+   - 右側小島（寬 20vw）：水面在圖高 40% 處，對齊第 405 列（43.0vw）
+   JS 還沒跑之前先用 8vw 頂著。 */
+:root { --bg-shift: 8vw; --boat-w: 15.4vw; }
+.home-bg-layer { top: var(--bg-shift); }
+.boat-wrapper { width: var(--boat-w); left: 50%; top: calc(var(--bg-shift) + 41.66vw - var(--boat-w) * 0.2593 * 0.9); bottom: auto; }
+.hero-enter { left: 50%; top: calc(var(--bg-shift) + 41.66vw + var(--boat-w) * 0.2593 * 0.1 + 14px); bottom: auto; transform: translateX(-50%); white-space: nowrap; }
+.leaf-wrapper-left { width: 30vw; min-width: 0; top: calc(var(--bg-shift) + 48.6vw - 30vw * 0.604 * 0.70); }
+.leaf-wrapper-right { width: 20vw; min-width: 0; top: calc(var(--bg-shift) + 43.0vw - 20vw * 0.942 * 0.40); }
+@media (max-width: 860px) {
+    :root { --boat-w: 32vw; }
+    .leaf-wrapper-left { width: 46vw; top: calc(var(--bg-shift) + 48.6vw - 46vw * 0.604 * 0.70); }
+    .leaf-wrapper-right { width: 30vw; top: calc(var(--bg-shift) + 43.0vw - 30vw * 0.942 * 0.40); }
+}
+
+/* 矮螢幕（Windows 1366×768、1920×1080 開 150% 縮放等）：標題縮小、往上，讓水面和船留在第一屏 */
+@media (min-width: 861px) and (max-height: 760px) {
+    #session-1 .session-text { top: 9vh; }
+    #session-1 .session-text .eyebrow { margin-bottom: 10px; }
+    #session-1 .session-text h1 { font-size: clamp(24px, 5.4vh, 36px); line-height: 1.45; margin-bottom: 10px; }
 }
