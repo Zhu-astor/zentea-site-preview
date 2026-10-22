@@ -778,3 +778,30 @@ body.home-page {
         bottom: auto;
     }
 }
+
+/* 手機第二段：文字在上、女生圖緊接在下（原本圖片貼在畫面最底，跟文字隔了一大段） */
+@media (max-width: 860px) {
+    #session-2 {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        padding: 8vh 0 6vh;
+    }
+    #session-2 .session-text.session-text--right {
+        position: relative;
+        top: auto;
+        right: auto;
+        left: auto;
+        margin: 0 6vw 0 auto;
+    }
+    #session-2 .session-asset.session-asset--portrait {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        right: auto;
+        left: auto;
+        width: 88vw;
+        margin: 6vh auto 0;
+        transform: none;
+    }
+}

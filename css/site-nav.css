@@ -145,3 +145,23 @@
   border-bottom-color: rgba(74, 64, 54, 0.1);
 }
 .site-nav--solid.is-scrolled { box-shadow: 0 6px 20px rgba(42, 38, 32, 0.06); }
+
+/* 手機：毛玻璃（backdrop-filter）如果直接加在功能列上，會讓裡面 position: fixed 的側邊選單
+   只能長到功能列那麼高（iPhone 上選單只剩一小條底色）。手機改成由 ::before 這層負責毛玻璃，外觀不變 */
+@media (max-width: 960px) {
+  .site-nav--frost {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .site-nav--frost::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(255, 255, 255, 0.2);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    backdrop-filter: saturate(140%) blur(10px);
+  }
+  .site-nav--frost.is-open { background: #FAF8F4; }
+}
