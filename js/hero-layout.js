@@ -1,7 +1,7 @@
 /*
  * 首頁第一段的版面：山水底圖（assets/img/bg-main.png，原圖寬 941）寬度跟著螢幕寬，
  * 這裡依「標題實際佔的位置」決定底圖要往下移多少（--bg-shift），讓山不會壓到標題；
- * 在不壓到標題的前提下，盡量讓水面落在畫面約 72% 的高度。
+ * 在不壓到標題的前提下，盡量讓水面落在畫面約 72%（手機 82%）的高度。
  * 船、「走進蟬吃茶」、兩側山崖都用同一個 --bg-shift 定位（css/style.css 最後），所以永遠浮在同一片水上。
  * 不同螢幕比例（Mac / Windows 縮放 / 平板 / 手機）都靠這個公式，不需要個別調。
  */
@@ -26,7 +26,9 @@
     const to = Math.min(23, Math.floor((right / W) * 24));
     const peak = Math.min(...MOUNTAIN_TOP.slice(from, to + 1)) - 6; // 山頂往上多抓一點霧
     const minShift = bottom + GAP - peak * scale;
-    const waterShift = 0.72 * H - WATERLINE * scale;
+    // 水面落在畫面幾成高：電腦 72%；手機直式畫面比較長，放低到 82%，山水和船才不會離標題太近
+    const waterAt = W <= 860 ? 0.82 : 0.72;
+    const waterShift = waterAt * H - WATERLINE * scale;
     const shift = Math.max(minShift, waterShift);
     document.documentElement.style.setProperty("--bg-shift", `${Math.round(shift)}px`);
   }

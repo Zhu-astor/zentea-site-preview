@@ -805,3 +805,16 @@ body.home-page {
         transform: none;
     }
 }
+
+/* 手機首屏：標題往下一點（山水與船的位置由 js/hero-layout.js 依水面高度另外往下調） */
+@media (max-width: 860px) {
+    #session-1 .session-text { top: calc(8vh + 44px); }
+}
+
+/* 手機詩句：九行維持一整排（原本每行固定 45vh 高，手機寬度裝不下就換成兩排）。
+   九張圖寬高比加總約 1.872，所以每行高度＝（可用寬度－8 個間距）÷ 1.872 */
+@media (max-width: 860px) {
+    .poem-session { padding: 10vh 16px; min-height: 0; }
+    .poem-container-split { flex-wrap: nowrap; gap: 4px; }
+    .poem-line { height: calc((100vw - 32px - 32px) / 1.872); min-height: 0; flex: none; }
+}
