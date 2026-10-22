@@ -166,74 +166,15 @@
 
 
 <!-- ==================================== -->
-<!-- 找到適合自己的茶：互動測驗（js/tea-quiz.js） -->
+<!-- 找到適合自己的茶：測驗在獨立頁面 find-tea.html（js/find-tea.js），首頁只放入口 -->
 <!-- ==================================== -->
-<section class="tq" id="find-tea" data-quiz>
+<section class="tq" id="find-tea">
   <div class="tq-intro" data-reveal>
-    <p class="tq-eyebrow">小蟬陪你選茶 ・ 從喜歡的味道開始</p>
+    <p class="tq-eyebrow">小蟬陪你選茶 ・ Find your tea</p>
     <h2 class="tq-title">不知道選哪一杯<br>也沒關係</h2>
-    <p class="tq-lede">從喜歡的味道、能接受的苦澀，到常配的點心，<br>小蟬陪你找到適合的那一杯。</p>
-    <button type="button" class="tq-start" data-quiz-path="first">一起找找看 <span aria-hidden="true">↓</span></button>
-    <p class="tq-or">或者，你想要…</p>
-    <div class="tq-paths">
-      <button type="button" class="tq-path" data-quiz-path="explore">
-        <strong>深入探索台灣茶</strong><span>從茶色、焙火選口味</span>
-      </button>
-      <button type="button" class="tq-path" data-quiz-path="gift">
-        <strong>為重要的人挑份茶禮</strong><span>依對象、對方口味挑選</span>
-      </button>
-    </div>
+    <p class="tq-lede">從平常怎麼喝、想要什麼感覺、喜歡什麼味道，到在家怎麼泡，<br>五個問題、約 30 秒，小蟬陪你找到會想一直放在家裡的那一款。</p>
+    <a class="tq-start" href="find-tea.html?start=1">一起找找看 <span aria-hidden="true">→</span></a>
   </div>
-
-  <div class="tq-steps" data-quiz-steps></div>
-
-  <section class="tq-result" data-quiz-result hidden>
-    <figure class="tq-result__art">
-      <p class="tq-result__mood" data-r-mood></p>
-      <div class="tq-result__arch">
-        <img src="" alt="" data-r-img>
-        <span class="tq-glyph" data-r-glyph hidden></span>
-        <p class="tq-result__caption" data-r-caption></p>
-      </div>
-      <figcaption>茶品示意</figcaption>
-    </figure>
-    <div class="tq-result__text">
-      <p class="tq-eyebrow">YOUR TEA ・ 從你的喜歡出發</p>
-      <p class="tq-result__sub">小蟬想推薦你這一杯</p>
-      <h3 class="tq-result__name" data-r-name></h3>
-      <p class="tq-result__tags" data-r-tags></p>
-      <p class="tq-result__desc" data-r-desc></p>
-      <p class="tq-result__picked" data-r-picked></p>
-      <div class="tq-result__ctas">
-        <a class="tq-next tq-detail" href="#" data-r-detail>了解更多 <span aria-hidden="true">→</span></a>
-      </div>
-
-      <div class="tq-extra">
-        <div class="tq-extra__block">
-          <p class="tq-extra__label">怎麼泡</p>
-          <ul class="tq-brew" data-r-brew></ul>
-        </div>
-        <div class="tq-extra__block tq-alt" data-r-alt>
-          <p class="tq-extra__label">也可以試試</p>
-          <p class="tq-alt__name" data-alt-name></p>
-          <p class="tq-alt__why" data-alt-why></p>
-          <a class="tq-alt__link" href="#" data-alt-link>了解更多 →</a>
-        </div>
-        <div class="tq-extra__block">
-          <p class="tq-extra__label">配茶小讀物</p>
-          <ul class="tq-reads" data-r-reads></ul>
-        </div>
-      </div>
-
-      <div class="tq-feedback" data-r-feedback>
-        <span>這個推薦適合你嗎？</span>
-        <button type="button" data-fb="up" aria-label="適合"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10v10H4V10z"/><path d="M7 10l4-7c1.5 0 2.5 1.2 2.2 2.7L12.6 9H19a2 2 0 0 1 2 2.3l-1.2 7A2 2 0 0 1 17.8 20H7"/></svg></button>
-        <button type="button" data-fb="down" aria-label="不太適合"><svg style="transform:rotate(180deg)" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10v10H4V10z"/><path d="M7 10l4-7c1.5 0 2.5 1.2 2.2 2.7L12.6 9H19a2 2 0 0 1 2 2.3l-1.2 7A2 2 0 0 1 17.8 20H7"/></svg></button>
-        <span class="tq-feedback__thanks" data-fb-thanks hidden>謝謝你，小蟬記下來了。</span>
-      </div>
-      <button type="button" class="tq-link" data-quiz-again>換個方向，再選一次 ↑</button>
-    </div>
-  </section>
 </section>
 
 <!-- ==================================== -->
@@ -393,7 +334,6 @@
 <script src="js/cart.js?v=63202081"></script>
 <script src="js/site-nav.js?v=fbe69245"></script>
 <script src="js/teas.js?v=fbec620c"></script>
-<script src="js/tea-quiz.js?v=83f01f8f"></script>
 <script src="js/hero-layout.js?v=e6fec0a6"></script>
 <script src="js/philosophy.js?v=86f1db5a"></script>
 <script src="js/know-tea.js?v=61c29b4a"></script>
