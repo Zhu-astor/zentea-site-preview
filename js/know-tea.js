@@ -1,12 +1,10 @@
 /*
- * 首頁「認識茶」：用 js/teas.js 的資料產生六張茶卡，點卡片打開深入介紹（產地、製程、香氣、口感、故事、多知道一點）。
+ * 首頁「認識茶」：用 js/teas.js 的資料產生六張茶卡，點卡片直接進該款茶的商品詳細頁（product.html?slug=…）。
  */
 document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector("[data-kt-grid]");
-  const dialog = document.querySelector("[data-kt-dialog]");
   const TEAS = window.ZENTEA_TEAS;
-  if (!grid || !dialog || !TEAS) return;
-  const $ = (sel) => dialog.querySelector(sel);
+  if (!grid || !TEAS) return;
 
   function el(tag, className, text) {
     const node = document.createElement(tag);
@@ -27,31 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return el("span", "tq-glyph", tea.glyph);
   }
 
-  function open(key) {
-    const tea = TEAS[key];
-    $("[data-kt-media]").replaceChildren(media(tea));
-    $("[data-kt-mood]").textContent = tea.mood;
-    $("[data-kt-name]").textContent = tea.name;
-    $("[data-kt-facts]").replaceChildren(
-      ...[["產地", tea.origin], ["製程", tea.process], ["香氣", tea.aroma], ["口感", tea.taste]].map(([k, v]) => {
-        const row = el("div");
-        row.append(el("dt", "", k), el("dd", "", v));
-        return row;
-      })
-    );
-    $("[data-kt-story]").replaceChildren(...tea.story.map((t) => el("p", "", t)));
-    $("[data-kt-more]").textContent = tea.more;
-    const link = $("[data-kt-link]");
-    link.href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
-    $("[data-kt-soon]").hidden = !tea.soon;
-    dialog.showModal();
-    dialog.scrollTop = 0;
-  }
-
   grid.replaceChildren(
-    ...Object.entries(TEAS).map(([key, tea], i) => {
-      const card = el("button", "kt-card");
-      card.type = "button";
+    ...Object.values(TEAS).map((tea, i) => {
+      const card = el("a", "kt-card");
+      card.href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
       card.style.transitionDelay = `${(i % 3) * 0.06}s`;
       card.setAttribute("data-reveal", "");
       const m = el("div", "kt-card__media");
@@ -71,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
         notes,
         el("span", "kt-card__more", "深入認識 →")
       );
-      card.addEventListener("click", () => open(key));
       return card;
     })
   );
@@ -86,7 +62,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { threshold: 0.15 });
   grid.querySelectorAll("[data-reveal]").forEach((c) => io.observe(c));
-
-  $("[data-kt-close]").addEventListener("click", () => dialog.close());
-  dialog.addEventListener("click", (e) => e.target === dialog && dialog.close());
 });
