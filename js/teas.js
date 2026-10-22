@@ -1,7 +1,8 @@
 /*
  * 蟬吃茶六款茶的介紹資料，首頁「找到適合自己的茶」測驗與「認識茶」共用。
  * 內容依品牌提供的茶品說明整理，「多知道一點」是補充的製茶背景知識。
- * shop：商品頁的 slug（product.html?slug=…）；還沒上架的茶填 null，按鈕會改成「即將上架」。
+ * shop：商品詳細頁的 slug（product.html?slug=…），六款都有詳細頁。
+ * soon：還沒開賣的茶填 true，卡片與測驗結果會標「即將上架」（詳細頁照常可以看）。
  * brew：熱泡／冷泡建議，測驗結果頁用。
  * img：商品圖；還沒有照片的茶填 null，畫面上改用茶名的字樣代替。
  *
@@ -35,7 +36,8 @@ window.ZENTEA_TEAS = {
     name: "蟬吃炭焙烏龍茶",
     short: "炭焙烏龍",
     glyph: "炭",
-    shop: null,
+    shop: "charcoal-oolong",
+    soon: true,
     img: null,
     tags: ["炭香", "溫潤", "沉穩"],
     brew: { hot: "熱泡：100°C 滾水，3 克配 150 毫升，第一泡約 45 秒，炭香才出得來。", cold: "冷泡：10 克配 1 公升冷水，冷藏 8 小時，炭香會變得柔和。" },
@@ -101,7 +103,8 @@ window.ZENTEA_TEAS = {
     name: "蟬吃手採紅玉紅茶",
     short: "手採紅玉紅",
     glyph: "玉",
-    shop: null,
+    shop: "ruby-black",
+    soon: true,
     img: null,
     tags: ["肉桂香", "薄荷香", "台灣香"],
     brew: { hot: "熱泡：90°C 熱水，3 克配 150 毫升，泡 50 秒到 1 分鐘，太久容易澀。", cold: "冷泡：8 克配 1 公升冷水，冷藏 6 小時，薄荷般的清涼感更明顯。" },

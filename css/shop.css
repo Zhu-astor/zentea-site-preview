@@ -417,3 +417,8 @@
   .shop-foot__links { flex-wrap: wrap; justify-content: center; gap: 12px 22px; }
   .shop-foot__motto::after { display: none; }
 }
+
+/* 頁尾在 1280 左右的寬度會被擠成直排：文字不換行，空間不夠時整組換到下一行 */
+.shop-foot { flex-wrap: wrap; row-gap: 14px; }
+.shop-foot__logo, .shop-foot__links, .shop-foot__social, .shop-foot__motto { flex-shrink: 0; }
+.shop-foot__links a, .shop-foot__motto, .shop-logo__name, .shop-logo__en { white-space: nowrap; }

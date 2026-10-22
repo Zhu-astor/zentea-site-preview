@@ -538,3 +538,9 @@ button.kt-card { font: inherit; cursor: pointer; width: 100%; }
 @media (max-width: 760px) {
   .tq-result__text .tq-link { margin-left: auto; margin-right: auto; }
 }
+
+/* 測驗結果：主按鈕「查看茶品介紹」進商品詳細頁，旁邊保留「快速認識」小視窗 */
+.tq-result__ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.tq-result__text .tq-result__ctas .tq-open { margin-right: 0; }
+.tq-detail { text-decoration: none; }
+@media (max-width: 760px) { .tq-result__ctas { justify-content: center; } }

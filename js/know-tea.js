@@ -42,9 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
     $("[data-kt-story]").replaceChildren(...tea.story.map((t) => el("p", "", t)));
     $("[data-kt-more]").textContent = tea.more;
     const link = $("[data-kt-link]");
-    link.hidden = !tea.shop;
-    if (tea.shop) link.href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
-    $("[data-kt-soon]").hidden = !!tea.shop;
+    link.href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
+    $("[data-kt-soon]").hidden = !tea.soon;
     dialog.showModal();
     dialog.scrollTop = 0;
   }
@@ -57,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.setAttribute("data-reveal", "");
       const m = el("div", "kt-card__media");
       m.append(media(tea));
-      if (!tea.shop) m.append(el("span", "kt-card__badge", "即將上架"));
+      if (tea.soon) m.append(el("span", "kt-card__badge", "即將上架"));
       const notes = el("dl", "kt-card__notes");
       [["香氣", tea.aroma], ["口感", tea.taste]].forEach(([k, v]) => {
         const row = el("div");

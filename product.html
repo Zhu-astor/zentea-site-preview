@@ -7,11 +7,13 @@
 <link rel="stylesheet" href="css/style.css?v=4c69e8d2">
 <link rel="stylesheet" href="css/products.css?v=dc02391a">
 <link rel="stylesheet" href="css/cart.css?v=8e9b63c2">
-<link rel="stylesheet" href="css/product.css?v=3a55002c">
 <link rel="stylesheet" href="css/site-nav.css?v=c312661f">
-<link rel="stylesheet" href="css/shop.css?v=df7b1d7f">
+<link rel="stylesheet" href="css/shop.css?v=e1ae40b8">
+<link rel="stylesheet" href="css/product-detail.css?v=f20e4282">
 </head>
-<body class="products-page product-page">
+<!-- 商品詳細頁：product.html?slug=…。三個入口都進到這裡：首頁測驗結果、首頁「認識茶」卡片、蟬茶鋪「了解更多」。
+     內容全部來自後端 /api/products/<slug>/（後台「商品」的「商品詳細頁」欄位），js/product-page.js 負責填入。 -->
+<body class="products-page product-page pdx-page shop-ui">
 
 <header class="site-nav shop-head" data-site-nav data-variant="solid">
   <a href="index.html" class="site-nav__logo shop-head__logo" aria-label="蟬吃茶 首頁"><span class="shop-logo"><span class="shop-logo__name">蟬吃茶<img src="assets/img/seal.png" alt="" class="shop-logo__seal"></span><span class="shop-logo__en">CHAN CHIH CHA</span></span></a>
@@ -37,54 +39,103 @@
   </div>
 </header>
 
-<div class="c-wrap">
-  <a href="products.html" class="c-head__back product-back">← 全部茶品</a>
+<main class="pdx" data-product-root>
+  <nav class="pdx-crumb" aria-label="目前位置">
+    <a href="index.html">首頁</a><span aria-hidden="true">›</span><a href="products.html">探索茶品</a><span aria-hidden="true">›</span><span data-field="crumb"></span>
+  </nav>
 
-  <p class="c-status" data-product-status>載入中…</p>
+  <p class="pdx-status" data-product-status>載入中…</p>
 
-  <article class="pd" data-product hidden>
-    <div class="pd__media">
-      <img data-field="image" alt="">
-    </div>
-
-    <div class="pd__info">
-      <div class="pd__tags">
-        <span class="p-card__tag pd__tag" data-field="flavor" hidden></span>
-        <span class="pd__category" data-field="category" hidden></span>
-      </div>
-      <h1 class="pd__name" data-field="name"></h1>
-      <p class="pd__summary" data-field="summary"></p>
-      <p class="pd__price" data-field="price"></p>
-
-      <div class="pd__field" data-variant-field>
-        <p class="p-label">規格</p>
-        <div class="pd__variants" data-variants role="radiogroup" aria-label="規格"></div>
-      </div>
-
-      <div class="pd__field">
-        <p class="p-label">數量</p>
-        <div class="c-qty">
-          <button type="button" class="c-qty__btn" data-step="-1" aria-label="減少數量">−</button>
-          <input type="number" class="c-qty__input" value="1" min="1" max="99" inputmode="numeric" aria-label="數量" data-qty>
-          <button type="button" class="c-qty__btn" data-step="1" aria-label="增加數量">+</button>
+  <article data-product hidden>
+    <!-- 圖片＋購買資訊 -->
+    <section class="pdx-top">
+      <div class="pdx-gallery">
+        <div class="pdx-thumbs" data-thumbs role="tablist" aria-label="商品圖片"></div>
+        <div class="pdx-stage">
+          <div class="pdx-stage__frame" data-stage></div>
+          <button type="button" class="pdx-stage__arrow pdx-stage__arrow--prev" data-prev aria-label="上一張">‹</button>
+          <button type="button" class="pdx-stage__arrow pdx-stage__arrow--next" data-next aria-label="下一張">›</button>
+          <div class="pdx-dots" data-dots aria-hidden="true"></div>
         </div>
       </div>
 
-      <div class="pd__actions">
-        <button type="button" class="c-checkout pd__add" data-add>加入購物車</button>
-        <a href="cart.html" class="pd__to-cart">查看購物車</a>
+      <div class="pdx-buy">
+        <div class="pdx-tags" data-tags></div>
+        <h1 class="pdx-name" data-field="name"></h1>
+        <p class="pdx-summary" data-field="summary"></p>
+        <hr class="pdx-rule">
+        <div class="pdx-price-row">
+          <p class="pdx-price" data-field="price"></p>
+          <div class="pdx-variants-wrap" data-variant-field>
+            <span class="pdx-label">選擇規格</span>
+            <div class="pdx-variants" data-variants role="radiogroup" aria-label="規格"></div>
+          </div>
+        </div>
+        <div class="pdx-actions">
+          <div class="pdx-qty">
+            <button type="button" data-step="-1" aria-label="減少數量">−</button>
+            <input type="number" value="1" min="1" max="99" inputmode="numeric" aria-label="數量" data-qty>
+            <button type="button" data-step="1" aria-label="增加數量">+</button>
+          </div>
+          <button type="button" class="pdx-add" data-add>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.2l2.1 11.2a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6.1"/><circle cx="9.5" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>
+            <span data-add-label>加入購物車</span>
+          </button>
+          <button type="button" class="pdx-fav" data-fav aria-pressed="false" aria-label="加入收藏">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg>
+          </button>
+        </div>
+        <p class="pdx-soon-note" data-soon-note hidden>這款茶即將上架，歡迎先把它加入收藏。</p>
       </div>
+    </section>
 
-      <section class="pd__notes" data-notes hidden>
-        <h2 class="pd__section-title">風味筆記</h2>
-        <dl class="pd__notes-list" data-notes-list></dl>
-      </section>
+    <!-- 四格基本資料 -->
+    <section class="pdx-facts" data-facts aria-label="基本資料"></section>
 
-      <section class="pd__desc" data-desc-section hidden>
-        <h2 class="pd__section-title">關於這款茶</h2>
-        <div class="pd__desc-body" data-field="description"></div>
-      </section>
-    </div>
+    <!-- 風味輪廓＋一句話 -->
+    <section class="pdx-flavor">
+      <div class="pdx-flavor__bars">
+        <h2 class="pdx-h2">風味輪廓</h2>
+        <p class="pdx-sub">用簡單的指標，快速感受這款茶的風味特色。</p>
+        <div data-bars></div>
+      </div>
+      <aside class="pdx-oneliner">
+        <div class="pdx-oneliner__head">
+          <span class="pdx-icon pdx-icon--plain" data-icon="leaf"></span>
+          <h2 class="pdx-oneliner__title">一句話認識這款茶</h2>
+        </div>
+        <p class="pdx-oneliner__text" data-field="one_liner"></p>
+        <img class="pdx-oneliner__leaf" src="assets/img/leaf-1.png" alt="" aria-hidden="true">
+      </aside>
+    </section>
+
+    <!-- 適合時刻＋建議沖泡 -->
+    <section class="pdx-use">
+      <div class="pdx-moments-wrap" data-moments-section>
+        <h2 class="pdx-h2">適合這些時刻</h2>
+        <p class="pdx-sub">一杯好茶，讓日常多一點美好。</p>
+        <div class="pdx-moments" data-moments></div>
+      </div>
+      <div class="pdx-brew-wrap" data-brew-section>
+        <h2 class="pdx-h2">建議沖泡</h2>
+        <p class="pdx-sub">簡單幾步，輕鬆品味最好的風味。</p>
+        <div class="pdx-brew" data-brew></div>
+        <div class="pdx-tip" data-tip-box>
+          <span class="pdx-icon pdx-icon--plain" data-icon="cup"></span>
+          <div><p class="pdx-tip__title">小提醒</p><p class="pdx-tip__text" data-field="brew_tip"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 茶品故事 -->
+    <section class="pdx-story" data-story-section>
+      <div class="pdx-story__text">
+        <h2 class="pdx-h2">茶品故事</h2>
+        <div class="pdx-story__body" data-story></div>
+      </div>
+      <div class="pdx-story__media" data-story-media></div>
+      <a class="pdx-story__more" href="knowledge.html" data-story-link>查看更多 <span aria-hidden="true">→</span></a>
+    </section>
   </article>
 
   <div class="c-empty" data-product-missing hidden>
@@ -92,11 +143,29 @@
     <p>找不到這款茶，可能已經下架了</p>
     <a href="products.html" class="p-card__cta c-empty__cta">看看其他茶品</a>
   </div>
-</div>
+</main>
+
+<footer class="shop-foot">
+  <img src="assets/img/footer-leaves.png" alt="" class="shop-foot__leaf">
+  <a href="index.html" class="shop-foot__logo" aria-label="蟬吃茶 首頁"><span class="shop-logo"><span class="shop-logo__name">蟬吃茶<img src="assets/img/seal.png" alt="" class="shop-logo__seal"></span><span class="shop-logo__en">CHAN CHIH CHA</span></span></a>
+  <nav class="shop-foot__links" aria-label="頁尾選單">
+    <a href="index.html#session-4">關於我們</a>
+    <a href="products.html">蟬茶鋪</a>
+    <a href="journal.html">蟬茶誌</a>
+    <a href="knowledge.html">茶知識</a>
+    <a href="experience.html">蟬茗齋</a>
+  </nav>
+  <div class="shop-foot__social">
+    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-1.6 19.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 12 2z"/></svg></a>
+    <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.3 5 12 5 12 5s-6.3 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8c1.5.4 7.8.4 7.8.4s6.3 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+  </div>
+  <p class="shop-foot__motto">一葉一日・與茶相伴</p>
+</footer>
 
 <script src="js/demo-api.js?v=ee72c7f3"></script><!-- 預覽站：商品讀 demo/ 快照 -->
 <script src="js/cart.js?v=63202081"></script>
-<script src="js/product-page.js?v=900281a9"></script>
+<script src="js/product-page.js?v=3ecfe6db"></script>
 <script src="js/site-nav.js?v=fbe69245"></script>
 </body>
 </html>

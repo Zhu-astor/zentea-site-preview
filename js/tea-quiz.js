@@ -346,8 +346,8 @@
       $("[data-alt-name]").textContent = alt.name;
       $("[data-alt-why]").textContent = `${reasonFor(altSlug) || "換個方向的話，"}也可以試試這款：${alt.tags.join("、")}。`;
       const altLink = $("[data-alt-link]");
-      altLink.href = alt.shop ? `product.html?slug=${encodeURIComponent(alt.shop)}` : "#know-tea";
-      altLink.textContent = alt.shop ? "到蟬茶鋪看看 →" : "認識這款茶 →";
+      altLink.href = `product.html?slug=${encodeURIComponent(alt.shop)}`;
+      altLink.textContent = alt.soon ? "了解更多（即將上架）→" : "了解更多 →";
 
       $("[data-r-reads]").replaceChildren(
         ...PAIRING_ARTICLES.map(([title, s]) => {
@@ -367,9 +367,9 @@
       $("[data-d-meta]").textContent = `${tea.origin}　${tea.process}`;
       $("[data-d-desc]").replaceChildren(...tea.story.map((t) => Object.assign(document.createElement("p"), { textContent: t })));
       const link = $("[data-d-link]");
-      link.hidden = !tea.shop;
-      if (tea.shop) link.href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
-      $("[data-d-soon]").hidden = !!tea.shop;
+      link.href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
+      $("[data-d-soon]").hidden = !tea.soon;
+      $("[data-r-detail]").href = link.href;
       resultBox.dataset.tea = slug;
       resultBox.hidden = false;
       resultBox.classList.remove("is-in");

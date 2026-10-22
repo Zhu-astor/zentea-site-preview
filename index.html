@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/style.css?v=4c69e8d2">
 <link rel="stylesheet" href="css/site-nav.css?v=c312661f">
 <link rel="stylesheet" href="css/philosophy.css?v=15988853">
-<link rel="stylesheet" href="css/tea-quiz.css?v=379f593d">
+<link rel="stylesheet" href="css/tea-quiz.css?v=60212fe8">
 </head>
 
 <body class="home-page">
@@ -204,7 +204,10 @@
       <p class="tq-result__tags" data-r-tags></p>
       <p class="tq-result__desc" data-r-desc></p>
       <p class="tq-result__picked" data-r-picked></p>
-      <button type="button" class="tq-open" data-quiz-open>認識這杯茶 <span aria-hidden="true">↗</span></button>
+      <div class="tq-result__ctas">
+        <a class="tq-next tq-detail" href="#" data-r-detail>查看茶品介紹 <span aria-hidden="true">→</span></a>
+        <button type="button" class="tq-open" data-quiz-open>快速認識 <span aria-hidden="true">↗</span></button>
+      </div>
 
       <div class="tq-extra">
         <div class="tq-extra__block">
@@ -215,7 +218,7 @@
           <p class="tq-extra__label">也可以試試</p>
           <p class="tq-alt__name" data-alt-name></p>
           <p class="tq-alt__why" data-alt-why></p>
-          <a class="tq-alt__link" href="#" data-alt-link>到蟬茶鋪看看 →</a>
+          <a class="tq-alt__link" href="#" data-alt-link>了解更多 →</a>
         </div>
         <div class="tq-extra__block">
           <p class="tq-extra__label">配茶小讀物</p>
@@ -239,7 +242,7 @@
       <p class="tq-dialog__note">這是依你的口味偏好提供的推薦，實際風味會隨茶葉與沖泡方式而變化。</p>
       <div class="tq-dialog__actions">
         <button type="button" class="tq-next" data-quiz-close>繼續品味</button>
-        <a class="tq-open" href="#" data-d-link>到蟬茶鋪看看 <span aria-hidden="true">→</span></a>
+        <a class="tq-open" href="#" data-d-link>了解更多 <span aria-hidden="true">→</span></a>
         <span class="tq-soon" data-d-soon hidden>即將上架</span>
       </div>
     </dialog>
@@ -271,7 +274,7 @@
       </div>
       <p class="kt-leaf">＋ 裡面是原葉的茶葉</p>
       <div class="tq-dialog__actions">
-        <a class="tq-next" href="#" data-kt-link>到蟬茶鋪看看 <span aria-hidden="true">→</span></a>
+        <a class="tq-next" href="#" data-kt-link>了解更多 <span aria-hidden="true">→</span></a>
         <span class="tq-soon" data-kt-soon hidden>即將上架</span>
       </div>
     </div>
@@ -421,11 +424,11 @@
 <script src="js/main.js?v=f7983aa5"></script>
 <script src="js/cart.js?v=63202081"></script>
 <script src="js/site-nav.js?v=fbe69245"></script>
-<script src="js/teas.js?v=5ccfd166"></script>
-<script src="js/tea-quiz.js?v=9ca29b21"></script>
+<script src="js/teas.js?v=fbec620c"></script>
+<script src="js/tea-quiz.js?v=636785c5"></script>
 <script src="js/hero-layout.js?v=152b5a03"></script>
 <script src="js/philosophy.js?v=86f1db5a"></script>
-<script src="js/know-tea.js?v=832ac5cc"></script>
+<script src="js/know-tea.js?v=92cb0662"></script>
 <script>
   // 「走進蟬吃茶」與「關於蟬吃茶」：平滑捲到品牌理念，讓四個理念置中出現
   document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach((a) => {
