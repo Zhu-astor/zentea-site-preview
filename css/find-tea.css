@@ -329,3 +329,9 @@
 }
 /* 分頁內容（理由清單＋標籤）不要被切到 */
 @media (min-width: 761px) { .ft-tabs__panel { height: auto; min-height: 7.4em; max-height: none; overflow: visible; } }
+/* 平板寬度（761～1023）三欄太擠：改成兩欄，第二推薦與相似度排到下面 */
+@media (min-width: 761px) and (max-width: 1023px) {
+  .ft-one { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+  .ft-side { grid-column: 1 / -1; border-left: 0; padding-left: 0; border-top: 1px solid var(--ft-line); padding-top: 18px; grid-template-columns: 1fr 1fr; align-items: start; }
+  .ft-side .ft-fine { grid-column: 1 / -1; }
+}

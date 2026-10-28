@@ -724,7 +724,7 @@ body.home-page {
 }
 
 /* 第三段「一片葉子」文字整段稍微往右 */
-#session-3 .session-text { left: 11vw; }
+@media (min-width: 861px) { #session-3 .session-text { left: 11vw; } }
 
 /* 第二段人物換成橫式的女生品茶圖：比直式竹林人物寬一些 */
 .session-asset.session-asset--portrait { width: 40vw; max-width: 640px; left: 5vw; }
@@ -817,4 +817,33 @@ body.home-page {
     .poem-session { padding: 10vh 16px; min-height: 0; }
     .poem-container-split { flex-wrap: nowrap; gap: 4px; }
     .poem-line { height: calc((100vw - 32px - 32px) / 1.872); min-height: 0; flex: none; }
+}
+
+/* =========================================
+   全站：標題、短句、按鈕只在標點或空白換行，不在詞中間斷開（內文不套用）。
+   keep-all 讓中文字之間不換行，只在「，。、？」等標點或空白後換行；
+   真的一整句都塞不下時，overflow-wrap: anywhere 才讓它斷開，避免超出畫面。
+   ========================================= */
+h1, h2, h3, h4, h5, h6,
+[class*="title"], [class*="__name"], [class*="eyebrow"], [class*="tagline"], [class*="lede"],
+[class*="label"], [class*="caption"], [class*="__sub"], [class*="chip"], [class*="__tag"],
+[class*="btn"], [class*="cta"], [class*="__more"], .text-link, .site-nav__links a,
+.philo-card__text, .ft-option__title, .ft-option__desc, .ft-why1, .ft-copy, .j-more__desc, .tq-start {
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    line-break: strict;
+}
+/* 內文照一般方式換行 */
+.ar__body, .ar__body *, .pdx-story__body, .pdx-story__body *, .ft-tabs__panel, .ft-tabs__panel * {
+    word-break: normal;
+    overflow-wrap: normal;
+}
+/* 頁尾欄位標題很短，不換行 */
+.footer-col h4 { white-space: nowrap; }
+
+/* 手機首頁第一、二、三段：文字全部靠左、對齊同一條左邊線 */
+@media (max-width: 860px) {
+    #session-1 .session-text, #session-3 .session-text { left: 6vw; right: auto; text-align: left; }
+    #session-2 .session-text.session-text--right { margin: 0 6vw; text-align: left; align-self: stretch; }
+    #session-2 .text-links { justify-content: flex-start; }
 }

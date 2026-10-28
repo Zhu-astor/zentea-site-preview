@@ -44,7 +44,7 @@ a.jd-card:hover .jd-card__media img { transform: scale(1.03); }
   color: #6B6B63;
 }
 
-.jd-card__body { display: flex; flex-direction: column; align-items: flex-start; padding: 50px 40px 40px; }
+.jd-card__body { display: flex; flex-direction: column; align-items: flex-start; padding: 50px clamp(26px, 2.6vw, 40px) 40px; }
 .jd-card--big .jd-card__body { padding: 44px 38px 36px; }
 
 .jd-card__eyebrow { font-size: 10.5px; letter-spacing: 0.16em; color: #6B6B63; margin: 0 0 26px; text-transform: uppercase; }
