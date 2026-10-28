@@ -38,9 +38,6 @@
 .ft-btn--ghost { background: transparent; color: var(--ft-muted); border: 1px solid var(--ft-line); }
 
 /* ---------- 題目 ---------- */
-.ft-progress { display: flex; gap: 7px; margin-bottom: 26px; }
-.ft-progress span { height: 5px; flex: 1; border-radius: 999px; background: #e8e2d7; }
-.ft-progress span.is-on { background: var(--ft-accent); }
 .ft-step { font-size: 12px; letter-spacing: 0.14em; color: var(--ft-accent); margin: 0 0 10px; }
 .ft-sub { color: var(--ft-muted); line-height: 1.8; margin: 0 0 26px; }
 .ft-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
@@ -53,7 +50,6 @@
 .ft-option__title { display: block; font-size: 16.5px; font-weight: 700; margin-bottom: 6px; }
 .ft-option__desc { display: block; color: var(--ft-muted); font-size: 14px; line-height: 1.6; }
 .ft-actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
-.ft-skip { border: 0; background: none; color: #8b8d88; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; padding: 10px 0 0; font: inherit; font-size: 14px; }
 
 /* ---------- 結果：主推 ---------- */
 .ft-result { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(22px, 4vw, 44px); align-items: start; }
@@ -335,3 +331,120 @@
   .ft-side { grid-column: 1 / -1; border-left: 0; padding-left: 0; border-top: 1px solid var(--ft-line); padding-top: 18px; grid-template-columns: 1fr 1fr; align-items: start; }
   .ft-side .ft-fine { grid-column: 1 / -1; }
 }
+
+/* ---------- 題目畫面：照 tea-quiz-ui.zip（尋茶日常）視覺稿 ----------
+   紙質紋理底、模糊枝葉、置中品牌字、圓角面板、01 / 05 進度點、兩欄圓形勾選卡、綠色「下一題」。 */
+.ft-page {
+  --ft-paper: #f3eee3; --ft-green: #505f35; --ft-qline: #d5cbbb;
+  --ft-serif: "Noto Serif TC", "Source Han Serif TC", "Songti TC", "PMingLiU", serif;
+  background-color: var(--ft-paper) !important;
+  background-image: radial-gradient(ellipse at 15% 18%, #c6b79730, transparent 45%), radial-gradient(ellipse at 90% 75%, #b2a17e20, transparent 43%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23917e5b' opacity='.07' filter='url(%23n)' d='M0 0h200v200H0z'/%3E%3C/svg%3E") !important;
+  background-size: auto, auto, 180px 180px !important;
+}
+.ft-shell { position: relative; z-index: 1; }
+.ft-done .ft-brand { display: none; }
+
+.ft-brand { text-align: center; margin: 4px auto 30px; font-family: var(--ft-serif); }
+.ft-brand p { margin: 0; }
+.ft-brand__name { font-size: 30px; letter-spacing: 0.25em; padding-left: 0.25em; color: #444d30; }
+.ft-brand__en { font-size: 9px; letter-spacing: 0.6em; padding-left: 0.6em; margin-top: 7px !important; color: #626447; }
+.ft-brand__sprout { display: block; font-size: 24px; line-height: 28px; color: var(--ft-green); transform: rotate(-25deg); }
+.ft-brand__motto { display: flex; align-items: center; justify-content: center; gap: 24px; font-size: 12px; letter-spacing: 0.3em; color: #6b6955; }
+.ft-brand__motto span { width: 18px; height: 1px; background: #aaa18a; }
+
+.ft-panel {
+  max-width: 1000px; margin: 0 auto; padding: 34px 64px 15px; border-radius: 26px; font-family: var(--ft-serif); color: #252c24;
+  background: linear-gradient(110deg, #fdfaf3dd, #fcf9f2e8); border: 1px solid #fffcf1a6; box-shadow: 0 12px 40px #7969470c;
+}
+.ft-progress { display: flex; align-items: center; gap: 45px; margin: 0 10px 22px; }
+.ft-stepno { white-space: nowrap; font-style: italic; font-size: 18px; color: #55584a; }
+.ft-stepno strong { font-size: 26px; font-weight: 400; color: #252c24; }
+.ft-dots { display: flex; align-items: center; justify-content: space-between; list-style: none; padding: 0; margin: 0; width: 250px; position: relative; }
+.ft-dots::before { content: ""; height: 1px; position: absolute; left: 6px; right: 6px; top: 50%; background: #929382; }
+.ft-dots li { width: 13px; height: 13px; border: 1px solid #8d9182; background: #f7f3e9; border-radius: 50%; z-index: 1; }
+.ft-dots .is-on, .ft-dots .is-done { background: var(--ft-green); border-color: var(--ft-green); }
+.ft-dots .is-done { opacity: 0.45; }
+.ft-back { margin-left: auto; font: 15px var(--ft-serif); color: #6e705b; border: 0; background: none; cursor: pointer; padding: 4px 0; }
+.ft-back:hover { color: var(--ft-green); }
+
+.ft-cat { display: table; margin-left: 10px; padding: 5px 16px; background: #cabaa5; border-radius: 4px; font-size: 18px; letter-spacing: 0.12em; line-height: 1.2; }
+.ft-q { font-weight: 400; font-size: clamp(32px, 4.3vw, 56px); line-height: 1.3; letter-spacing: 0.035em; margin: 12px 10px 14px; }
+.ft-help { font-size: 20px; letter-spacing: 0.2em; margin: 0 10px 24px; line-height: 1.7; }
+
+.ft-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.ft-choice {
+  position: relative; display: flex; align-items: center; gap: 24px; min-height: 77px; padding: 16px 28px;
+  border: 1px solid var(--ft-qline); border-radius: 8px; font-size: 19px; line-height: 1.5; cursor: pointer;
+  background: #fcfaf420; transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.ft-choice:hover { background: #e9e8db90; border-color: #a9ae94; }
+.ft-choice:has(input:checked) { background: linear-gradient(100deg, #dedfcf, #e9e9dc); border-color: #a6af91; }
+.ft-choice:has(input:focus-visible) { outline: 3px solid #647647; outline-offset: 3px; }
+.ft-choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.ft-choice__mark { flex: 0 0 29px; height: 29px; border: 1.5px solid #94958c; border-radius: 50%; position: relative; }
+.ft-choice input[type="checkbox"] + .ft-choice__mark { border-radius: 7px; }
+.ft-choice input:checked + .ft-choice__mark { background: var(--ft-green); border-color: var(--ft-green); }
+.ft-choice input:checked + .ft-choice__mark::after {
+  content: ""; position: absolute; left: 9px; top: 5px; width: 8px; height: 14px;
+  border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(42deg);
+}
+.ft-choice__leaves { display: none; position: absolute; right: 29px; bottom: 1px; width: 33px; height: 53px; border-left: 1px solid #89927666; transform: rotate(28deg); pointer-events: none; }
+.ft-choice:has(input:checked) .ft-choice__leaves { display: block; }
+.ft-choice__leaves i { position: absolute; width: 12px; height: 27px; background: linear-gradient(90deg, #7c886255, #acb39388); border-radius: 100% 0 100% 0; left: 2px; top: 0; transform: rotate(9deg); }
+.ft-choice__leaves i:nth-child(2) { left: -13px; top: 15px; transform: rotate(-70deg); }
+.ft-choice__leaves i:nth-child(3) { top: 27px; height: 20px; }
+
+.ft-act { display: flex; align-items: center; flex-direction: column; gap: 16px; margin-top: 22px; }
+.ft-next {
+  font-family: inherit; background: linear-gradient(120deg, #59693b, #4c5b31); color: #fffdf2; border: 1px solid #7c895c; border-radius: 40px;
+  min-height: 60px; width: 346px; max-width: 100%; font-size: 25px; letter-spacing: 0.13em; cursor: pointer;
+  box-shadow: 0 5px 14px #4d5d2c13; transition: transform 0.15s, background 0.2s;
+}
+.ft-next span { margin-left: 17px; }
+.ft-next:hover { background: #3e4d29; transform: translateY(-1px); }
+.ft-next:focus-visible, .ft-skip:focus-visible, .ft-back:focus-visible { outline: 3px solid #7b8a54; outline-offset: 4px; }
+.ft-skip { font: 16px var(--ft-serif); color: #6e705b; border: 0; background: none; padding: 2px 0; border-bottom: 1px solid #9a9985; cursor: pointer; }
+.ft-status { font-size: 14px; color: var(--ft-green); text-align: center; margin: 8px 0 0; min-height: 20px; line-height: 1.5; }
+
+/* 模糊枝葉裝飾（純 CSS），固定在畫面左上、右上 */
+.ft-branch { position: fixed; pointer-events: none; z-index: 0; width: 260px; height: 390px; border-left: 9px solid #6d704943; filter: blur(8px); transform: rotate(22deg); opacity: 0.55; left: -70px; top: -70px; }
+.ft-branch i { position: absolute; left: 0; top: 50px; width: 46px; height: 97px; border-radius: 100% 0 100% 0; background: #686d3d88; transform: rotate(-30deg); }
+.ft-branch i:nth-child(2) { top: 110px; left: 30px; transform: rotate(50deg); }
+.ft-branch i:nth-child(3) { top: 190px; left: -35px; transform: rotate(-90deg); }
+.ft-branch i:nth-child(4) { top: 250px; left: 5px; transform: rotate(30deg); }
+.ft-branch i:nth-child(5) { top: 320px; left: 30px; transform: rotate(65deg); }
+.ft-branch i:nth-child(6) { top: 10px; left: -40px; transform: rotate(-65deg); }
+.ft-branch--right { left: auto; right: -35px; top: -90px; transform: rotate(65deg) scale(1.6); opacity: 0.19; filter: blur(12px); }
+
+@media (max-width: 900px) {
+  .ft-panel { padding: 30px 30px 18px; }
+  .ft-choice { font-size: 17px; gap: 15px; padding: 16px 19px; }
+  .ft-choice__leaves { opacity: 0.5; right: 12px; }
+  .ft-help { font-size: 18px; }
+  .ft-brand { margin-bottom: 24px; }
+}
+@media (max-width: 600px) {
+  .ft-brand__name { font-size: 26px; }
+  .ft-brand__motto { font-size: 10px; gap: 15px; }
+  .ft-brand { margin-bottom: 22px; }
+  .ft-panel { border-radius: 20px; padding: 25px 19px 15px; }
+  .ft-progress { gap: 22px; margin: 0 0 20px; }
+  .ft-dots { width: 130px; }
+  .ft-back { font-size: 14px; }
+  .ft-stepno strong { font-size: 23px; }
+  .ft-cat { margin-left: 0; font-size: 15px; padding: 5px 12px; }
+  .ft-q { font-size: clamp(24px, 6.4vw, 34px); margin: 14px 0; letter-spacing: 0; line-height: 1.5; }
+  .ft-help { margin: 0 0 22px; font-size: 15px; letter-spacing: 0.1em; }
+  .ft-choices { grid-template-columns: 1fr; gap: 10px; }
+  .ft-choice { min-height: 63px; padding: 15px 18px; font-size: 17px; gap: 18px; }
+  .ft-choice__mark { flex-basis: 25px; height: 25px; }
+  .ft-choice input:checked + .ft-choice__mark::after { left: 7px; top: 4px; width: 7px; height: 12px; }
+  .ft-next { min-height: 54px; font-size: 21px; }
+  .ft-skip { font-size: 15px; }
+  .ft-branch { opacity: 0.22; }
+  .ft-branch--right { opacity: 0.1; }
+  .ft-act { margin-top: 24px; }
+  .ft-status { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .ft-choice, .ft-next { transition: none; } }

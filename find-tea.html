@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/cart.css?v=8e9b63c2">
 <link rel="stylesheet" href="css/site-nav.css?v=6c3d938d">
 <link rel="stylesheet" href="css/shop.css?v=e1ae40b8">
-<link rel="stylesheet" href="css/find-tea.css?v=a82ae474">
+<link rel="stylesheet" href="css/find-tea.css?v=5b7be01e">
 </head>
 <!-- 選茶測驗（首頁「一起找找看」進來，直接從第一題開始）：5 題＋喜好補充題，依相似度給六款茶 0～100 分排序。
      題目、選項、加權照 chan_tea_find_your_tea_v1_2_balanced.html；計分與畫面在 js/find-tea.js。
@@ -38,8 +38,17 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </div>
-</header><main class="ft-shell">
-  <section class="ft-card" data-ft-quiz>
+</header><div class="ft-branch ft-branch--left" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="ft-branch ft-branch--right" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<main class="ft-shell">
+  <!-- 題目畫面照 tea-quiz-ui.zip（尋茶日常）視覺稿 -->
+  <div class="ft-brand" data-ft-brand>
+    <p class="ft-brand__name">尋茶日常</p>
+    <p class="ft-brand__en" lang="en">SEEK TEA DAILY</p>
+    <span class="ft-brand__sprout" aria-hidden="true">❧</span>
+    <p class="ft-brand__motto"><span></span>一杯好茶，讓日常更好<span></span></p>
+  </div>
+  <section class="ft-panel" data-ft-quiz>
     <div class="ft-progress" data-ft-progress></div>
     <div data-ft-question></div>
   </section>
@@ -69,7 +78,7 @@
 
 <script src="js/cart.js?v=63202081"></script>
 <script src="js/teas.js?v=fbec620c"></script>
-<script src="js/find-tea.js?v=30559487"></script>
+<script src="js/find-tea.js?v=b9f7333d"></script>
 <script src="js/site-nav.js?v=fbe69245"></script>
 <script src="js/wrap-guard.js?v=b43c0132"></script>
 </body>

@@ -127,78 +127,127 @@
     render();
   }
 
+  // 題目畫面照 tea-quiz-ui（尋茶日常）視覺稿：01 / 05 進度點、分類標籤、大標、
+  // 兩欄單選卡（圓形勾選）、「下一題」按鈕、「先跳過這題」。選了之後按下一題才前進。
+  const CATEGORY = { daily: "日常", feeling: "感覺", flavor: "喜好", pairing: "搭配", brew: "泡法" };
+
   function render() {
-    const prog = $("[data-ft-progress]");
-    prog.replaceChildren(...QS.map((_, i) => el("span", i <= Math.min(idx, 4) ? "is-on" : "")));
     const q = QS[idx];
     const fb = fallbackShown;
-    const box = $("[data-ft-question]");
-    box.replaceChildren();
-    box.append(
-      el("p", "ft-step", fb ? "03.5 喜好補充" : q.step),
-      el("h2", "ft-h2", fb ? "沒關係，換個簡單的方式。" : q.title),
-      el("p", "ft-sub", fb ? "哪一組味道聞起來，你比較想靠近？" : q.sub)
-    );
-    const opts = el("div", "ft-options");
-    (fb ? q.fallback : q.options).forEach((o) => {
-      const b = el("button", "ft-option");
-      b.type = "button";
-      if (q.type === "multi" && pairing.includes(o.id)) b.classList.add("is-selected");
-      b.append(el("span", "ft-option__title", o.title));
-      if (o.desc) b.append(el("span", "ft-option__desc", o.desc));
-      b.addEventListener("click", () => choose(q, o));
-      opts.append(b);
-    });
-    box.append(opts);
-    const actions = el("div", "ft-actions");
+    const list = fb ? q.fallback : q.options;
+    const multi = q.type === "multi" && !fb;
+    const prev = answers[q.key];
+    const prevId = fb ? prev && prev.fbId : prev && (prev.choice || prev.id);
+
+    const prog = $("[data-ft-progress]");
+    const num = el("span", "ft-stepno");
+    num.append(el("strong", "", String(idx + 1).padStart(2, "0")), el("span", "", ` / ${String(QS.length).padStart(2, "0")}`));
+    const dots = el("ol", "ft-dots");
+    dots.setAttribute("aria-hidden", "true");
+    QS.forEach((_, i) => dots.append(el("li", i < idx ? "is-done" : i === idx ? "is-on" : "")));
+    prog.replaceChildren(num, dots);
+    prog.setAttribute("aria-label", `測驗進度：第 ${idx + 1} 題，共 ${QS.length} 題`);
     if (idx > 0 || fb) {
-      const back = el("button", "ft-btn ft-btn--ghost", "上一步");
+      const back = el("button", "ft-back", "← 上一題");
       back.type = "button";
       back.addEventListener("click", () => {
         if (fallbackShown) fallbackShown = false;
         else idx = Math.max(0, idx - 1);
         render();
       });
-      actions.append(back);
-    } else actions.append(el("span"));
-    if (q.type === "multi") {
-      const next = el("button", "ft-btn", "下一步");
-      next.type = "button";
-      next.addEventListener("click", nextFromMulti);
-      actions.append(next);
+      prog.append(back);
     }
-    box.append(actions);
-    const skip = el("button", "ft-skip", "先跳過這題 →");
+
+    const form = el("form", "ft-form");
+    form.noValidate = true;
+    const h = el("h1", "ft-q", fb ? "沒關係，換個簡單的方式。" : q.title);
+    h.id = "ft-q";
+    form.append(
+      el("span", "ft-cat", fb ? "喜好・補充" : CATEGORY[q.key]),
+      h,
+      el("p", "ft-help", fb ? "哪一組味道聞起來，你比較想靠近？" : q.sub)
+    );
+    const fs = el("fieldset", "ft-choices");
+    fs.setAttribute("aria-labelledby", "ft-q");
+    list.forEach((o) => {
+      const lab = el("label", "ft-choice");
+      const input = el("input");
+      input.type = multi ? "checkbox" : "radio";
+      input.name = "ft-" + q.key;
+      input.value = o.id;
+      input.checked = multi ? pairing.includes(o.id) || (o.id === "neutral" && prevId === "neutral") : o.id === prevId;
+      const leaves = el("span", "ft-choice__leaves");
+      leaves.setAttribute("aria-hidden", "true");
+      leaves.append(el("i"), el("i"), el("i"));
+      lab.append(input, el("span", "ft-choice__mark"), el("span", "ft-choice__text", o.title), leaves);
+      if (o.desc) lab.title = o.desc;
+      fs.append(lab);
+    });
+    // 搭配題最多 2 個；選「沒有固定」就清掉其他
+    if (multi) {
+      fs.addEventListener("change", (e) => {
+        const t = e.target;
+        const boxes = [...fs.querySelectorAll("input")];
+        if (t.checked && t.value === "neutral") boxes.forEach((x) => x !== t && (x.checked = false));
+        else if (t.checked) boxes.find((x) => x.value === "neutral").checked = false;
+        pairing = pairing.filter((id) => id !== t.value);
+        if (t.checked && t.value !== "neutral") pairing.push(t.value);
+        while (pairing.length > q.max) {
+          const drop = pairing.shift();
+          boxes.find((x) => x.value === drop).checked = false;
+        }
+        pairing = pairing.filter((id) => boxes.find((x) => x.value === id).checked);
+      });
+    }
+    form.append(fs);
+
+    const status = el("p", "ft-status");
+    status.setAttribute("role", "status");
+    status.setAttribute("aria-live", "polite");
+    fs.addEventListener("change", () => (status.textContent = ""));
+    const actions = el("div", "ft-act");
+    const next = el("button", "ft-next");
+    next.type = "submit";
+    next.append(idx === QS.length - 1 ? "看結果 " : "下一題 ", el("span", "", "→"));
+    next.lastChild.setAttribute("aria-hidden", "true");
+    const skip = el("button", "ft-skip", "先跳過這題");
     skip.type = "button";
     skip.addEventListener("click", () => {
+      if (q.key === "pairing") pairing = [];
       answers[q.key] = { status: "skip" };
       advance();
     });
-    box.append(skip);
+    actions.append(next, skip);
+    form.append(actions, status);
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const checked = [...fs.querySelectorAll("input:checked")];
+      if (!checked.length) {
+        status.textContent = multi ? "請選 1～2 個，或按「先跳過這題」。" : "請先選一個最接近你的選項。";
+        return;
+      }
+      if (multi) return checked[0].value === "neutral" ? choose(q, list.find((o) => o.id === "neutral")) : nextFromMulti();
+      choose(q, list.find((o) => o.id === checked[0].value));
+    });
+
+    $("[data-ft-question]").replaceChildren(form);
   }
 
   function choose(q, o) {
     if (q.type === "multi") {
-      if (o.status === "neutral") {
-        pairing = [];
-        answers[q.key] = { status: "neutral" };
-        return advance();
-      }
-      const i = pairing.indexOf(o.id);
-      if (i >= 0) pairing.splice(i, 1);
-      else {
-        if (pairing.length >= q.max) pairing.shift();
-        pairing.push(o.id);
-      }
-      return render();
+      pairing = [];
+      answers[q.key] = { status: "neutral", choice: "neutral" };
+      return advance();
     }
     if (o.status === "unknown") {
-      answers[q.key] = { status: "unknown" };
+      answers[q.key] = { status: "unknown", choice: "unknown" };
       fallbackShown = true;
       return render();
     }
-    if (o.status === "beginner_default") answers[q.key] = { status: "beginner_default", beginner: true };
-    else if (o.status === "neutral") answers[q.key] = { status: "neutral" };
+    if (o.status === "beginner_default") answers[q.key] = { status: "beginner_default", beginner: true, fbId: o.id, choice: "unknown" };
+    else if (o.status === "neutral") answers[q.key] = { status: "neutral", choice: o.id };
+    else if (fallbackShown) answers[q.key] = { status: "normal", scores: o.scores, id: o.id, fbId: o.id, title: o.title, choice: "unknown" };
     else answers[q.key] = { status: "normal", scores: o.scores, id: o.id, title: o.title, beginner: !!o.beginner, explore: !!o.explore };
     advance();
   }
