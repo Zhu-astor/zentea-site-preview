@@ -158,5 +158,5 @@
   .philo-card__text { font-size: 13px; margin-top: 8px; }
   .philo-item .philo-deco { left: auto; right: 0; top: -40%; width: 36%; }
   .philo-item .philo-deco--leaf-left { right: auto; left: 0; }
-  .philo-item .philo-deco--ripple { top: 55%; width: 55%; }
+  .philo-item .philo-deco--ripple { right: auto; left: -2%; top: -40%; width: 42%; } /* 手機版：移到「潺」左上方的空白處，不壓字 */
 }
