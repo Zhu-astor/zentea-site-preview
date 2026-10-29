@@ -340,7 +340,7 @@ html, body {
    全站共用：頂部橫幅 (背景圖 + HTML文字)
    ========================================= */
 .journal-hero-bg {
-    background-image: url('../assets/img/first_up.png'); 
+    background-image: url('../assets/img/first_up.webp'); 
     background-size: cover;
     background-position: center bottom;
     width: 100%;
@@ -417,7 +417,7 @@ html, body {
 }
 
 .site-footer-bg {
-    background-image: url('../assets/img/second_down.png'); 
+    background-image: url('../assets/img/second_down.webp'); 
     background-size: 100% auto; 
     background-position: top center; 
     background-repeat: no-repeat;
@@ -545,7 +545,7 @@ body.home-page {
     height: 100%; 
     display: flex;
     flex-direction: column;
-    background-image: url('../assets/img/bg-main.png');
+    background-image: url('../assets/img/bg-main.webp');
     background-size: 100% auto;
     background-position: top center;
     background-repeat: no-repeat;

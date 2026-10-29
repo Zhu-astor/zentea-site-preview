@@ -221,7 +221,7 @@
   border-radius: 999px 999px 18px 18px;
   background:
     linear-gradient(180deg, rgba(250, 248, 244, 0) 40%, rgba(250, 248, 244, 0.9) 100%),
-    url("../assets/img/landscape-1.png") center 30% / cover,
+    url("../assets/img/landscape-1.webp") center 30% / cover,
     #F1EEE6;
   box-shadow: 0 24px 50px rgba(42, 38, 32, 0.1);
 }
@@ -467,7 +467,7 @@ button.kt-card { font: inherit; cursor: pointer; width: 100%; }
   padding: 40px 28px;
   background:
     linear-gradient(180deg, rgba(243, 239, 230, 0.2), rgba(243, 239, 230, 0.95)),
-    url("../assets/img/landscape-1.png") center / cover;
+    url("../assets/img/landscape-1.webp") center / cover;
 }
 .kt-dialog__media img { width: 88%; filter: drop-shadow(0 16px 20px rgba(42, 38, 32, 0.2)); }
 .kt-dialog__media .tq-glyph { width: 70%; }
