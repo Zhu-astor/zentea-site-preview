@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
     $("[data-error]").hidden = true;
     grid.replaceChildren(...skeleton(6));
     if (scroll) {
-      const top = document.querySelector(".ax-wrap").getBoundingClientRect().top + window.scrollY - 16;
+      const top = document.querySelector(".ax-wrap").getBoundingClientRect().top + window.scrollY - 88; // 要讓開固定功能列
       if (window.scrollY > top) window.scrollTo({ top, behavior: "smooth" });
     }
 

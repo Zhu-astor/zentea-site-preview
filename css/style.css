@@ -806,7 +806,7 @@ body.home-page {
 
 /* 矮螢幕（Windows 1366×768、1920×1080 開 150% 縮放等）：標題縮小、往上，讓水面和船留在第一屏 */
 @media (min-width: 861px) and (max-height: 760px) {
-    #session-1 .session-text { top: 9vh; }
+    #session-1 .session-text { top: max(9vh, 88px); } /* 不能小於功能列高度（72px），否則小標題會被蓋住 */
     #session-1 .session-text .eyebrow { margin-bottom: 10px; }
     #session-1 .session-text h1 { font-size: clamp(24px, 5.4vh, 36px); line-height: 1.45; margin-bottom: 10px; }
 }
