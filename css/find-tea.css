@@ -128,7 +128,7 @@
 .ft-done .ft-footer { display: none; }
 .ft-one {
   display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(22px, 4vw, 44px); align-items: center;
-  min-height: calc(100vh - var(--nav-h, 86px) - 48px); max-height: calc(100vh - var(--nav-h, 86px) - 40px);
+  min-height: calc(100vh - var(--nav-h, 72px) - 48px); max-height: calc(100vh - var(--nav-h, 72px) - 40px);
   padding: clamp(22px, 3.5vw, 40px); margin: 0;
 }
 .ft-one__media { position: relative; display: flex; align-items: center; justify-content: center; height: 100%; max-height: 62vh; min-height: 240px; border-radius: 22px; background: linear-gradient(135deg, #f1ebdf, #e7dfd0); overflow: hidden; }

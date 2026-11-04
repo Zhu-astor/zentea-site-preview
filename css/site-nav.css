@@ -20,6 +20,7 @@
   padding: 0 5vw;
   transition: background-color 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   border-bottom: 1px solid transparent;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; /* 購物頁 body 是明體，功能列要跟首頁同字體 */
 }
 
 .site-nav--clear { background: transparent; }
@@ -38,7 +39,7 @@
 
 .site-nav__links {
   display: flex;
-  gap: 30px;
+  gap: 46.5px; /* 原本 30px，再加一個字寬 */
   margin: 0 auto;
 }
 
@@ -47,7 +48,7 @@
   text-decoration: none;
   color: #4A4036;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 16.5px;
   letter-spacing: 0.04em;
   padding: 6px 0;
   transition: color 0.3s;
@@ -170,4 +171,10 @@
     -webkit-backdrop-filter: saturate(140%) blur(14px);
     backdrop-filter: saturate(140%) blur(14px);
   }
+}
+
+/* 沒有橫幅的頁面：功能列固定在上方，內容要往下讓開 */
+body.nav-offset { padding-top: 72px; }
+@media (max-width: 960px) {
+  body.nav-offset { padding-top: 60px; }
 }

@@ -5,30 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>購物車 | 蟬吃茶 ZenEaTea</title>
-<link rel="stylesheet" href="css/style.css?v=58ab7d6b">
-<link rel="stylesheet" href="css/products.css?v=0376c498">
-<link rel="stylesheet" href="css/cart.css?v=8e9b63c2">
-<link rel="stylesheet" href="css/site-nav.css?v=6c3d938d">
+<link rel="stylesheet" href="css/style.css?v=08803d99">
+<link rel="stylesheet" href="css/products.css?v=b228deee">
+<link rel="stylesheet" href="css/cart.css?v=bf89e140">
+<link rel="stylesheet" href="css/site-nav.css?v=849657f3">
 <link rel="stylesheet" href="css/shop.css?v=e1ae40b8">
 </head>
-<body class="products-page cart-page shop-ui">
+<body class="products-page cart-page shop-ui nav-offset">
 
-<header class="site-nav shop-head" data-site-nav data-variant="solid">
-  <a href="index.html" class="site-nav__logo shop-head__logo" aria-label="蟬吃茶 首頁"><span class="shop-logo"><span class="shop-logo__name">蟬吃茶<img src="assets/img/seal.png" alt="" class="shop-logo__seal"></span><span class="shop-logo__en">CHAN CHIH CHA</span></span></a>
-  <nav class="site-nav__links shop-head__links" id="site-nav-links" aria-label="主要選單">
+<header class="site-nav" data-site-nav data-variant="frost">
+  <a href="index.html" class="site-nav__logo"><img src="assets/img/logo.png" alt="蟬吃茶"></a>
+  <nav class="site-nav__links" id="site-nav-links" aria-label="主要選單">
     <a href="index.html#session-4">關於我們</a>
-    <a href="products.html" class="is-active">蟬茶鋪</a>
+    <a href="products.html">蟬茶鋪</a>
     <a href="journal.html">蟬茶誌</a>
     <a href="knowledge.html">茶知識</a>
     <a href="experience.html">蟬茗齋</a>
   </nav>
   <div class="site-nav__icons">
-    <form class="shop-search" action="articles.html" role="search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
-      <input type="search" name="q" placeholder="搜尋茶品、文章或關鍵字…" aria-label="搜尋" maxlength="50">
-    </form>
-    <a href="cart.html" class="site-nav__icon shop-head__cart" aria-label="購物車" title="購物車">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>
+    <a href="order-lookup.html" class="site-nav__icon" aria-label="訂單查詢" title="訂單查詢">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+    </a>
+    <a href="cart.html" class="site-nav__icon" aria-label="購物車" title="購物車">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>
       <span class="site-nav__count" data-cart-count hidden>0</span>
     </a>
     <button type="button" class="site-nav__icon site-nav__menu-btn" data-nav-toggle aria-label="選單" aria-controls="site-nav-links" aria-expanded="false">
@@ -83,22 +82,54 @@
   </div>
 </div>
 
-<footer class="shop-foot">
-  <img src="assets/img/footer-leaves.png" alt="" class="shop-foot__leaf">
-  <a href="index.html" class="shop-foot__logo" aria-label="蟬吃茶 首頁"><span class="shop-logo"><span class="shop-logo__name">蟬吃茶<img src="assets/img/seal.png" alt="" class="shop-logo__seal"></span><span class="shop-logo__en">CHAN CHIH CHA</span></span></a>
-  <nav class="shop-foot__links" aria-label="頁尾選單">
-    <a href="index.html#session-4">關於我們</a>
-    <a href="products.html" class="">蟬茶鋪</a>
-    <a href="journal.html">蟬茶誌</a>
-    <a href="knowledge.html">茶知識</a>
-    <a href="experience.html">蟬茗齋</a>
-  </nav>
-  <div class="shop-foot__social">
-    <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
-    <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-1.6 19.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 12 2z"/></svg></a>
-    <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.3 5 12 5 12 5s-6.3 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8c1.5.4 7.8.4 7.8.4s6.3 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+<footer class="site-footer-bg">
+  <div class="footer-container">
+    <div class="footer-logo-col">
+      <img src="assets/img/logo.png" alt="蟬吃茶 Logo" class="footer-logo">
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-col">
+        <h4>關於蟬吃茶</h4>
+        <a href="#">品牌故事</a>
+        <a href="#">門市資訊</a>
+        <a href="#">製茶師</a>
+      </div>
+      <div class="footer-col">
+        <h4>茶品知識</h4>
+        <a href="#">茶品介紹</a>
+        <a href="#">沖泡指南</a>
+      </div>
+      <div class="footer-col">
+        <h4>蟬茶誌・茶知識</h4>
+        <a href="journal.html">蟬茶誌</a>
+        <a href="knowledge.html">茶知識</a>
+        <a href="articles.html">全部文章</a>
+      </div>
+      <div class="footer-col">
+        <h4>購物</h4>
+        <a href="#">茶包</a>
+        <a href="#">茶葉</a>
+        <a href="#">茶具</a>
+        <a href="#">禮盒</a>
+      </div>
+      <div class="footer-col">
+        <h4>客服</h4>
+        <a href="#">常見問答</a>
+        <a href="#">聯絡我們</a>
+        <a href="#">LINE 官方帳號</a>
+      </div>
+    </div>
+    <div class="footer-social-col">
+      <div class="social-icons">
+        <a href="#" target="_blank"><img src="assets/img/icon-fb.svg" alt="Facebook"></a>
+        <a href="#" target="_blank"><img src="assets/img/icon-ig.svg" alt="Instagram"></a>
+        <a href="#" target="_blank"><img src="assets/img/icon-line.svg" alt="LINE"></a>
+      </div>
+    </div>
   </div>
-  <p class="shop-foot__motto">一葉一日・與茶相伴</p>
+  <div class="copyright">
+    © 2024 蟬吃茶 CHAN CHA TEA・版權所有
+  </div>
 </footer>
 
 <template id="cart-line">
@@ -120,7 +151,7 @@
   </li>
 </template>
 
-<script src="js/demo-api.js?v=ee72c7f3"></script><!-- 預覽站：文章、商品讀 demo/ 快照 -->
+<script src="js/demo-api.js?v=ee72c7f3"></script>
 <script src="js/cart.js?v=63202081"></script>
 <script src="js/cart-page.js?v=909bb1f7"></script>
 <script src="js/site-nav.js?v=fbe69245"></script>

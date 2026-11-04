@@ -347,35 +347,7 @@ html, body {
     min-height: 400px; 
     display: flex;
     flex-direction: column;
-    padding: 20px 5vw;
-}
-
-.top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.logo img {
-    height: 40px; 
-}
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
-.nav-links a {
-    text-decoration: none;
-    color: #4A4036;
-    font-weight: 500;
-    font-size: 15px;
-    transition: color 0.3s;
-}
-.nav-links a:hover, .nav-links a.active {
-    color: #9B3D38; 
-}
-.nav-icons {
-    display: flex;
-    gap: 15px;
-    font-size: 20px;
+    padding: 60px 5vw 20px;
 }
 
 .hero-content {
@@ -416,10 +388,83 @@ html, body {
     color: #554d44;
 }
 
+/* 蟬茶鋪、蟬茗齋、茶知識、蟬茶誌共用的頁首橫幅：米色紙底、左邊文字、右邊插圖，功能列疊在上面 */
+.page-banner {
+    position: relative;
+    height: 248px;
+    padding: 72px 0 0 19vw;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: #F3EDE3 url('../assets/img/bg-paper.jpg') center top / 100% auto;
+}
+.page-banner__text { position: relative; z-index: 1; }
+.page-banner__eyebrow {
+    margin: 0 0 12px;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    color: #6b6257;
+}
+.page-banner__eyebrow em { font-style: normal; color: #9B3D38; }
+.page-banner__heading { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.page-banner__heading h1 {
+    margin: 0;
+    font-family: "Noto Serif TC", serif;
+    font-size: 33px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: #3a332b;
+}
+.page-banner__seal {
+    flex: none;
+    writing-mode: vertical-rl;
+    padding: 5px 3px;
+    font-family: "Noto Serif TC", serif;
+    font-size: 9.5px;
+    line-height: 1.1;
+    letter-spacing: 0.12em;
+    color: #9B3D38;
+    border: 1px solid rgba(155, 61, 56, 0.55);
+    border-radius: 2px;
+    transform: rotate(-5deg);
+}
+.page-banner__sub { margin: 0; font-size: 13.5px; letter-spacing: 0.08em; color: #6b6257; }
+.page-banner__art {
+    position: absolute;
+    right: 11vw;
+    bottom: 10px;
+    height: 156px;
+    width: auto;
+}
+.page-banner__art--knowledge { height: 136px; bottom: 18px; }
+.page-banner__art--experience { right: 0; height: 130px; bottom: 14px; }
+.page-banner__poem {
+    position: absolute;
+    right: 20vw;
+    top: 88px;
+    z-index: 1;
+    margin: 0;
+    writing-mode: vertical-rl;
+    font-family: "Noto Serif TC", serif;
+    font-size: 10.5px;
+    letter-spacing: 0.3em;
+    color: #6b6257;
+}
+@media (max-width: 760px) {
+    .page-banner { height: 230px; padding: 60px 6vw 0; }
+    .page-banner__heading h1 { font-size: 22px; letter-spacing: 0.08em; }
+    .page-banner__heading { gap: 10px; }
+    .page-banner__text { max-width: 76vw; }
+    .page-banner__sub { font-size: 12.5px; }
+    .page-banner__art { right: -4vw; height: 110px; bottom: 0; opacity: 0.55; }
+    .page-banner__art--experience { right: 0; height: 70px; }
+    .page-banner__poem { display: none; }
+}
+
 .site-footer-bg {
-    background-image: url('../assets/img/second_down.webp'); 
-    background-size: 100% auto; 
-    background-position: top center; 
+    background-image: url('../assets/img/footer-bg.jpg'); 
+    background-size: cover; 
+    background-position: right bottom; 
     background-repeat: no-repeat;
     background-color: #FAF8F4; 
     

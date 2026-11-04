@@ -5,16 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>訂單查詢 | 蟬吃茶 ZenEaTea</title>
-<link rel="stylesheet" href="css/style.css?v=58ab7d6b">
-<link rel="stylesheet" href="css/products.css?v=0376c498">
-<link rel="stylesheet" href="css/cart.css?v=8e9b63c2">
+<link rel="stylesheet" href="css/style.css?v=08803d99">
+<link rel="stylesheet" href="css/products.css?v=b228deee">
+<link rel="stylesheet" href="css/cart.css?v=bf89e140">
 <link rel="stylesheet" href="css/checkout.css?v=731ecba9">
+<link rel="stylesheet" href="css/site-nav.css?v=849657f3">
 </head>
-<body class="products-page checkout-page">
+<body class="products-page checkout-page nav-offset">
+
+<header class="site-nav" data-site-nav data-variant="frost">
+  <a href="index.html" class="site-nav__logo"><img src="assets/img/logo.png" alt="蟬吃茶"></a>
+  <nav class="site-nav__links" id="site-nav-links" aria-label="主要選單">
+    <a href="index.html#session-4">關於我們</a>
+    <a href="products.html">蟬茶鋪</a>
+    <a href="journal.html">蟬茶誌</a>
+    <a href="knowledge.html">茶知識</a>
+    <a href="experience.html">蟬茗齋</a>
+  </nav>
+  <div class="site-nav__icons">
+    <a href="order-lookup.html" class="site-nav__icon" aria-label="訂單查詢" title="訂單查詢">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+    </a>
+    <a href="cart.html" class="site-nav__icon" aria-label="購物車" title="購物車">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>
+      <span class="site-nav__count" data-cart-count hidden>0</span>
+    </a>
+    <button type="button" class="site-nav__icon site-nav__menu-btn" data-nav-toggle aria-label="選單" aria-controls="site-nav-links" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
 
 <div class="c-wrap">
   <header class="c-head">
-    <a href="index.html" class="c-head__logo"><img src="assets/img/logo.png" alt="蟬吃茶"></a>
     <a href="products.html" class="c-head__back">← 繼續逛逛</a>
   </header>
 
@@ -57,8 +80,59 @@
   </div>
 </div>
 
+<footer class="site-footer-bg">
+  <div class="footer-container">
+    <div class="footer-logo-col">
+      <img src="assets/img/logo.png" alt="蟬吃茶 Logo" class="footer-logo">
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-col">
+        <h4>關於蟬吃茶</h4>
+        <a href="#">品牌故事</a>
+        <a href="#">門市資訊</a>
+        <a href="#">製茶師</a>
+      </div>
+      <div class="footer-col">
+        <h4>茶品知識</h4>
+        <a href="#">茶品介紹</a>
+        <a href="#">沖泡指南</a>
+      </div>
+      <div class="footer-col">
+        <h4>蟬茶誌・茶知識</h4>
+        <a href="journal.html">蟬茶誌</a>
+        <a href="knowledge.html">茶知識</a>
+        <a href="articles.html">全部文章</a>
+      </div>
+      <div class="footer-col">
+        <h4>購物</h4>
+        <a href="#">茶包</a>
+        <a href="#">茶葉</a>
+        <a href="#">茶具</a>
+        <a href="#">禮盒</a>
+      </div>
+      <div class="footer-col">
+        <h4>客服</h4>
+        <a href="#">常見問答</a>
+        <a href="#">聯絡我們</a>
+        <a href="#">LINE 官方帳號</a>
+      </div>
+    </div>
+    <div class="footer-social-col">
+      <div class="social-icons">
+        <a href="#" target="_blank"><img src="assets/img/icon-fb.svg" alt="Facebook"></a>
+        <a href="#" target="_blank"><img src="assets/img/icon-ig.svg" alt="Instagram"></a>
+        <a href="#" target="_blank"><img src="assets/img/icon-line.svg" alt="LINE"></a>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    © 2024 蟬吃茶 CHAN CHA TEA・版權所有
+  </div>
+</footer>
+
 <script src="js/cart.js?v=63202081"></script>
 <script src="js/order-lookup-page.js?v=4fbe95e7"></script>
+<script src="js/site-nav.js?v=fbe69245"></script>
 <script src="js/wrap-guard.js?v=b43c0132"></script>
 </body>
 </html>

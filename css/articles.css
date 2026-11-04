@@ -29,7 +29,7 @@ body.articles-page { background: #FDFBF6; }
 
 .ax-side {
   position: sticky;
-  top: 24px;
+  top: 96px;
   align-self: start;
   display: flex;
   flex-direction: column;

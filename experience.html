@@ -14,52 +14,47 @@
 <meta property="og:image" content="https://www.organic-naturetea.com/assets/img/og-share.jpg">
 <meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/style.css?v=58ab7d6b">
-<link rel="stylesheet" href="css/site-nav.css?v=6c3d938d">
-<link rel="stylesheet" href="css/journal.css?v=89d7214c">
+<link rel="stylesheet" href="css/style.css?v=08803d99">
+<link rel="stylesheet" href="css/site-nav.css?v=849657f3">
+<link rel="stylesheet" href="css/journal.css?v=f5e580c4">
 </head>
 <body class="journal-page experience-page">
 
-<header class="journal-hero-bg">
-  <!-- 頂部導覽列 -->
-  <div class="top-nav">
-    <a href="index.html" class="logo">
-      <!-- 替換成你的去背 Logo 圖片，若暫無可用文字 <h2>蟬吃茶</h2> 代替 -->
-      <img src="assets/img/logo.png" alt="蟬吃茶">
+<header class="site-nav" data-site-nav data-variant="frost">
+  <a href="index.html" class="site-nav__logo"><img src="assets/img/logo.png" alt="蟬吃茶"></a>
+  <nav class="site-nav__links" id="site-nav-links" aria-label="主要選單">
+    <a href="index.html#session-4">關於我們</a>
+    <a href="products.html">蟬茶鋪</a>
+    <a href="journal.html">蟬茶誌</a>
+    <a href="knowledge.html">茶知識</a>
+    <a href="experience.html" class="is-active">蟬茗齋</a>
+  </nav>
+  <div class="site-nav__icons">
+    <a href="order-lookup.html" class="site-nav__icon" aria-label="訂單查詢" title="訂單查詢">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
     </a>
-    
-    <nav class="nav-links">
-      <a href="index.html#session-4">關於我們</a>
-      <a href="products.html">蟬茶鋪</a>
-      <a href="journal.html">蟬茶誌</a>
-      <a href="knowledge.html">茶知識</a>
-      <a href="experience.html" class="active">蟬茗齋</a>
-    </nav>
-    
-    <!-- 右側功能圖示 (會員、購物車、漢堡選單) 可先留空或放入你的圖示 -->
-    <div class="site-nav__icons">
-      <a href="order-lookup.html" class="site-nav__icon" aria-label="訂單查詢" title="訂單查詢">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
-      </a>
-      <a href="cart.html" class="site-nav__icon" aria-label="購物車" title="購物車">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>
-        <span class="site-nav__count" data-cart-count hidden>0</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- 大標題區塊 -->
-  <div class="hero-content">
-    
-    <!-- 幫文字與印章建立一個橫排的群組 -->
-    <div class="title-with-seal">
-      <h1>蟬茗齋</h1>
-      <img src="assets/img/seal.png" alt="蟬吃茶印章" class="hero-seal">
-    </div>
-    
-    <p>一張茶席、一壺好茶，來蟬茗齋坐一會兒。</p>
+    <a href="cart.html" class="site-nav__icon" aria-label="購物車" title="購物車">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>
+      <span class="site-nav__count" data-cart-count hidden>0</span>
+    </a>
+    <button type="button" class="site-nav__icon site-nav__menu-btn" data-nav-toggle aria-label="選單" aria-controls="site-nav-links" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </div>
 </header>
+
+<section class="page-banner">
+  <div class="page-banner__text">
+    <p class="page-banner__eyebrow">TEA EXPERIENCE<span aria-hidden="true">・</span><em>蟬茗齋</em></p>
+    <div class="page-banner__heading">
+      <h1>蟬茗齋</h1>
+      <span class="page-banner__seal" aria-hidden="true">吃茶</span>
+    </div>
+    <p class="page-banner__sub">一張茶席，一壺好茶，留一段時間給自己。</p>
+  </div>
+  <p class="page-banner__poem">山水有時・茶有日常</p>
+  <img src="assets/img/banner-experience.webp" alt="" class="page-banner__art page-banner__art--experience">
+</section>
 
 <main class="soon">
   <img src="assets/img/tea-figure-bamboo.webp" alt="" class="soon__img">
@@ -74,14 +69,9 @@
 
 <footer class="site-footer-bg">
   <div class="footer-container">
-    
-    <!-- 1. 最左側：Logo -->
     <div class="footer-logo-col">
-      <!-- 注意：請確認你的 assets/img/ 裡面真的有 logo.png 這個檔案，否則會破圖 -->
       <img src="assets/img/logo.png" alt="蟬吃茶 Logo" class="footer-logo">
     </div>
-
-    <!-- 2. 正中間：連結欄位 -->
     <div class="footer-links-group">
       <div class="footer-col">
         <h4>關於蟬吃茶</h4>
@@ -114,8 +104,6 @@
         <a href="#">LINE 官方帳號</a>
       </div>
     </div>
-
-    <!-- 3. 最右側：社群圖示 -->
     <div class="footer-social-col">
       <div class="social-icons">
         <a href="#" target="_blank"><img src="assets/img/icon-fb.svg" alt="Facebook"></a>
@@ -123,15 +111,14 @@
         <a href="#" target="_blank"><img src="assets/img/icon-line.svg" alt="LINE"></a>
       </div>
     </div>
-    
   </div>
-  
   <div class="copyright">
     © 2024 蟬吃茶 CHAN CHA TEA・版權所有
   </div>
 </footer>
 
 <script src="js/cart.js?v=63202081"></script>
+<script src="js/site-nav.js?v=fbe69245"></script>
 <script src="js/wrap-guard.js?v=b43c0132"></script>
 </body>
 </html>
