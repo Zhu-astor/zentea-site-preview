@@ -518,7 +518,10 @@ html, body.products-page {
   .p-main-head__title { font-size: 17px; }
 }
 
-/* 蟬茶鋪：內容整體放大 25%，維持一排 4 張（1440 寬時卡片只會寬約 10%）；手機不放大 */
+/* 蟬茶鋪：內容整體放大 25%，維持一排 4 張；手機不放大。
+   側欄固定窄寬（170 × 1.25 ≈ 212px），省下的寬度給商品卡 */
 @media (min-width: 1081px) {
   .p-wrap { zoom: 1.25; }
+  .p-layout { gap: 26px; }
+  .p-sidebar { flex: 0 0 170px; padding-right: 18px; }
 }
