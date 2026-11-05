@@ -396,7 +396,7 @@ html, body {
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: #F3EDE3 url('../assets/img/bg-paper.jpg') center top / 100% auto;
+    background: #F9F6EF url('../assets/img/banner-paper.jpg') center / cover; /* 宣紙紋路，平均色和頁尾底色相同 */
 }
 .page-banner__text { position: relative; z-index: 1; }
 .page-banner__eyebrow {
