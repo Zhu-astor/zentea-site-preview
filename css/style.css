@@ -457,6 +457,7 @@ html, body {
     .page-banner__text { max-width: 76vw; }
     .page-banner__sub { font-size: 12.5px; }
     .page-banner__art { right: -4vw; height: 110px; bottom: 0; opacity: 0.55; }
+    .page-banner__art--shop, .page-banner__art--journal { right: 3vw; } /* 手機圖完整露出，壓到文字沒關係 */
     .page-banner__art--experience { right: 0; height: 70px; }
     .page-banner__poem { display: none; }
 }
@@ -527,26 +528,16 @@ html, body {
     color: #9B3D38;
 }
 
-.social-icons {
-    display: flex;
-    gap: 16px;
-    padding-left: 20px;
-}
-.social-icons img {
-    width: 26px; 
-    height: 26px;
-    transition: all 0.3s ease;
-}
-.social-icons a:hover img {
-    transform: translateY(-3px);
-}
-
 .copyright {
     text-align: center;
     font-size: 11px;
     color: #999;
     padding-top: 20px;
     letter-spacing: 0.05em;
+}
+
+@media (max-width: 760px) {
+    .footer-logo { height: 31.5px; } /* 手機縮小 30%（45 → 31.5） */
 }
 
 @media (max-width: 900px) {

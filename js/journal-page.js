@@ -110,7 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function setup() {
     tabs.replaceChildren(
       ...slides.map((s, i) => {
-        const b = el("button", "j-feature__tab", s.title);
+        const b = el("button", "j-feature__tab");
+        const half = Math.ceil(s.title.length / 2);
+        b.append(el("span", "", s.title.slice(0, half)), el("span", "", s.title.slice(half)));
         b.type = "button";
         b.setAttribute("role", "tab");
         b.addEventListener("click", () => go(i));

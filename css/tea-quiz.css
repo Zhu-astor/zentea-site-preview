@@ -394,6 +394,9 @@ button.kt-card { font: inherit; cursor: pointer; width: 100%; }
   .kt-grid { gap: 14px; }
   .kt-card { padding: 0 14px 20px; }
   .kt-card__media { width: calc(100% + 28px); margin: 0 -14px 14px; }
+  /* 文字左右間距一致，以右邊為準（離卡片邊約 26px） */
+  .kt-card__summary { padding-left: 11px; padding-right: 11px; }
+  .kt-card__notes { width: calc(100% - 22px); }
   .kt-card__name { font-size: 16px; }
   .kt-card__notes div { flex-direction: column; gap: 0; }
 }

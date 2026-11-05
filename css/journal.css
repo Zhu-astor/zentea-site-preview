@@ -311,6 +311,11 @@ html, body.journal-page {
   transition: background-color 0.25s, color 0.25s;
 }
 
+/* 手機：按鈕文字固定兩字一行 */
+@media (max-width: 600px) {
+  .j-feature__tab span { display: block; }
+}
+
 .j-feature__tab:hover { color: var(--ink); }
 .j-feature__tab.is-active { background: #fff; color: var(--seal); box-shadow: 0 1px 4px rgba(42, 38, 32, 0.1); }
 
@@ -447,4 +452,23 @@ html, body.journal-page {
 @media (min-width: 1081px) {
   .knowledge-page .j-feature,
   .knowledge-page .j-more { zoom: 1.25; }
+  /* 左右留白收窄：卡片和「更多」區塊同寬，左右各留約 20px（16 × 1.25）；大螢幕最寬 1560px */
+  .knowledge-page .journal-columns { padding-left: 16px; padding-right: 16px; }
+  .knowledge-page .j-more { width: calc(100% - 32px); max-width: 1248px; }
+  /* 滿版圖卡：卡片變寬後標題不要一行壓到圖上的主體 */
+  .knowledge-page .j-card--fade-a .j-card__title { max-width: 8em; }
 }
+/* 螢幕夠寬時，箭頭移到卡片外側，不壓到卡片 */
+@media (min-width: 1760px) {
+  .knowledge-page .j-feature__arrow--prev { left: -44px; }
+  .knowledge-page .j-feature__arrow--next { right: -44px; }
+}
+
+/* 茶知識：文章卡片的標題與摘要再大 2pt（約 2.67px）。電腦版外層已放大 1.25 倍，換算後加 2.13px */
+.knowledge-page { --card-text-plus: 2.67px; }
+@media (min-width: 1081px) {
+  .knowledge-page { --card-text-plus: 2.13px; }
+}
+.knowledge-page .j-card__title { font-size: calc(13px + var(--card-text-plus)); }
+.knowledge-page .j-card--hero .j-card__title { font-size: calc(19px + var(--card-text-plus)); }
+.knowledge-page .j-card__desc { font-size: calc(11px + var(--card-text-plus)); }
