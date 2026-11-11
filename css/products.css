@@ -278,19 +278,20 @@ html, body.products-page {
   padding: 3px 10px;
 }
 
+/* 三種風味用不同色系，一眼分得出來：濃郁＝紅褐、均衡＝琥珀、清爽＝嫩綠 */
 .p-card__tag.p-card__tag--rich {
-  background: #EDF1E4;
-  color: var(--leaf-deep);
+  background: #F3E1DA;
+  color: #96442F;
 }
 
 .p-card__tag.p-card__tag--balance {
-  background: #F0F4E9;
-  color: #708A4F;
+  background: #F6E8D2;
+  color: #9A6420;
 }
 
 .p-card__tag.p-card__tag--light {
-  background: #F5F8F0;
-  color: #8CA36D;
+  background: #E5EEDB;
+  color: #557A35;
 }
 
 .p-card__wish {
@@ -342,56 +343,21 @@ html, body.products-page {
   mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 38%);
 }
 
-/* 上半部（商品照後方）自己的山水襯底，下緣用遮罩淡出，
-   不會在圖片區邊界形成硬線；與下半部的山水各自獨立。 */
+/* 商品照後方：各款茶自己的暈染色塊（設計師素材），取代原本的山水襯底與兩側茶葉 */
 .p-card__media::before {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 6%;
-  bottom: 0;
-  background: url("../assets/img/landscape-1.webp") no-repeat center 82%;
-  background-size: 128% auto;
-  opacity: 0.16;
-  pointer-events: none;
-  z-index: 0;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%);
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 100%);
-}
-
-/* 商品照兩側的葉子點綴（右側） */
-.p-card__media::after {
-  content: "";
-  position: absolute;
-  right: 2%;
-  bottom: 12%;
-  width: 34%;
-  aspect-ratio: 493 / 505;
-  background: url("../assets/img/leaf-1.png") no-repeat center / contain;
-  opacity: 0.5;
-  transform: rotate(8deg);
+  inset: 10% 10% 20% 4%;
+  background: no-repeat 30% 40% / contain;
   pointer-events: none;
   z-index: 0;
 }
-
-/* 商品照兩側的葉子點綴（左側，鏡像）
-   注意：這是掛在 .p-card 上，百分比是相對整張卡片高度算的。
-   圖片區是 1:1、約佔卡片上半，所以 top 要壓在 30% 左右才會落在圖片區裡，
-   設成 46% 會掉到下面的文字區把說明文字蓋住。 */
-.p-card::before {
-  content: "";
-  position: absolute;
-  left: 1%;
-  top: 28%;
-  width: 28%;
-  aspect-ratio: 493 / 505;
-  background: url("../assets/img/leaf-1.png") no-repeat center / contain;
-  opacity: 0.42;
-  transform: scaleX(-1) rotate(6deg);
-  pointer-events: none;
-  z-index: 0;
-}
+.p-card[data-slug="honey-black"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-honey-black.webp"); }
+.p-card[data-slug="gaba"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-gaba.webp"); }
+.p-card[data-slug="fresh-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-fresh-oolong.webp"); }
+.p-card[data-slug="yushan-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-yushan-oolong.webp"); }
+.p-card[data-slug="charcoal-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-charcoal-oolong.webp"); }
+.p-card[data-slug="ruby-black"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-ruby-black.webp"); }
 
 /* 商品本體要壓在裝飾之上 */
 .p-card__media img {

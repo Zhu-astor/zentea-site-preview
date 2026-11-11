@@ -28,8 +28,8 @@
 .philo-deco { position: absolute; pointer-events: none; }
 .philo-deco--hills { left: 49.32%; top: 12.70%; width: 50.68%; }
 .philo-deco--corner { left: 89.84%; top: 89.19%; width: 10.16%; }
-.philo-deco--leaf-cloud { left: 60.06%; top: 32.55%; width: 29.79%; }
-.philo-deco--leaf-left { left: 10.74%; top: 47.53%; width: 31.25%; }
+.philo-deco--leaf-cloud { left: 67.75%; top: 35.5%; width: 7.5%; } /* 新素材單片茶葉：設計師要求再縮小一半 */
+.philo-deco--leaf-left { left: 13%; top: 49%; width: 19%; } /* 新素材：茶芽 */
 .philo-deco--cup-rock { left: 65.92%; top: 69.34%; width: 22.95%; }
 .philo-deco--ripple { left: 10.25%; top: 85.61%; width: 44.92%; }
 
@@ -157,6 +157,7 @@
   .philo-card__sub { font-size: 16px; margin-top: 12px; }
   .philo-card__text { font-size: 13px; margin-top: 8px; }
   .philo-item .philo-deco { left: auto; right: 0; top: -40%; width: 36%; }
-  .philo-item .philo-deco--leaf-left { right: auto; left: 0; }
+  .philo-item .philo-deco--leaf-left { right: auto; left: -4%; width: 26%; top: -30%; } /* 茶芽縮小、往左，不擠到文字 */
+  .philo-item .philo-deco--leaf-cloud { width: 18%; right: 4%; top: -30%; } /* 單片茶葉縮小一半，不會被切到 */
   .philo-item .philo-deco--ripple { right: auto; left: -2%; top: -40%; width: 42%; } /* 手機版：移到「潺」左上方的空白處，不壓字 */
 }

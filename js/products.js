@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const variant = p.variants.find((v) => v.in_stock) || p.variants[0];
     const card = el("a", "p-card");
     card.href = `product.html?slug=${encodeURIComponent(p.slug)}`;
+    card.dataset.slug = p.slug;
     if (variant) card.dataset.sku = variant.sku;
 
     if (p.flavor) card.append(el("span", `p-card__tag p-card__tag--${p.flavor}`, p.flavor_label));

@@ -417,16 +417,9 @@ html, body {
 }
 .page-banner__seal {
     flex: none;
-    writing-mode: vertical-rl;
-    padding: 5px 3px;
-    font-family: "Noto Serif TC", serif;
-    font-size: 9.5px;
-    line-height: 1.1;
-    letter-spacing: 0.12em;
-    color: #9B3D38;
-    border: 1px solid rgba(155, 61, 56, 0.55);
-    border-radius: 2px;
-    transform: rotate(-5deg);
+    height: 48px; /* 設計師的直式「蟬吃茶」印章 */
+    width: auto;
+    display: block;
 }
 .page-banner__sub { margin: 0; font-size: 13.5px; letter-spacing: 0.08em; color: #6b6257; }
 .page-banner__art {
@@ -436,7 +429,7 @@ html, body {
     height: 156px;
     width: auto;
 }
-.page-banner__art--knowledge { height: 136px; bottom: 18px; }
+.page-banner__art--journal { height: 136px; bottom: 18px; }
 .page-banner__art--experience { right: 0; height: 130px; bottom: 14px; }
 .page-banner__poem {
     position: absolute;
@@ -457,7 +450,8 @@ html, body {
     .page-banner__text { max-width: 76vw; }
     .page-banner__sub { font-size: 12.5px; }
     .page-banner__art { right: -4vw; height: 110px; bottom: 0; opacity: 0.55; }
-    .page-banner__art--shop, .page-banner__art--journal { right: 3vw; } /* 手機圖完整露出，壓到文字沒關係 */
+    .page-banner__art--shop, .page-banner__art--journal, .page-banner__art--knowledge { right: 3vw; } /* 手機圖完整露出，壓到文字沒關係 */
+    .page-banner__seal { height: 34px; }
     .page-banner__art--experience { right: 0; height: 70px; }
     .page-banner__poem { display: none; }
 }
@@ -467,7 +461,7 @@ html, body {
     background-size: cover; 
     background-position: right bottom; 
     background-repeat: no-repeat;
-    background-color: #FAF8F4; 
+ background-color: #F9F6EF; /* 和底圖左側同色 */
     
     /* 👇 解決關鍵：改回 vw，讓推擠距離跟著圖片一起縮放 */
     padding-top: 5vw; 
@@ -536,6 +530,11 @@ html, body {
     letter-spacing: 0.05em;
 }
 
+/* 電腦版：底圖用高度撐滿（cover 會把右上角的山頭裁掉） */
+@media (min-width: 901px) {
+    .site-footer-bg { background-size: auto 100%; }
+}
+
 @media (max-width: 760px) {
     .footer-logo { height: 31.5px; } /* 手機縮小 30%（45 → 31.5） */
 }
@@ -581,7 +580,7 @@ body.home-page {
     height: 100%; 
     display: flex;
     flex-direction: column;
-    background-image: url('../assets/img/bg-main.webp');
+    background-image: url('../assets/img/bg-main-2.webp');
     background-size: 100% auto;
     background-position: top center;
     background-repeat: no-repeat;
@@ -785,8 +784,8 @@ body.home-page {
    JS 還沒跑之前先用 8vw 頂著。 */
 :root { --bg-shift: 8vw; --boat-w: 15.4vw; }
 .home-bg-layer { top: var(--bg-shift); }
-.boat-wrapper { width: var(--boat-w); left: 50%; top: calc(var(--bg-shift) + 41.66vw - var(--boat-w) * 0.2593 * 0.9); bottom: auto; }
-.hero-enter { left: 50%; top: calc(var(--bg-shift) + 41.66vw + var(--boat-w) * 0.2593 * 0.1 + 14px); bottom: auto; transform: translateX(-50%); white-space: nowrap; }
+.boat-wrapper { width: var(--boat-w); left: 50%; top: calc(var(--bg-shift) + 41.66vw - var(--boat-w) * 0.2025); bottom: auto; } /* 新船圖（含倒影）：船身底在圖高 438/616，維持船身在原本的水面位置 */
+.hero-enter { left: 50%; top: calc(var(--bg-shift) + 41.66vw + var(--boat-w) * 0.2593 * 0.1 + 14px + var(--boat-w) * 0.07); bottom: auto; transform: translateX(-50%); white-space: nowrap; } /* 新船圖下方有倒影，字再往下讓開 */
 .leaf-wrapper-left { width: 30vw; min-width: 0; top: calc(var(--bg-shift) + 48.6vw - 30vw * 0.604 * 0.70); }
 .leaf-wrapper-right { width: 20vw; min-width: 0; top: calc(var(--bg-shift) + 43.0vw - 20vw * 0.942 * 0.40); }
 @media (max-width: 860px) {
