@@ -50,3 +50,22 @@ body.article-page { background: #FDFBF6; color: var(--ink); margin: 0; }
   .ar__body { font-size: 15.5px; }
 }
 .ar-head__nav { display: flex; gap: 20px; }
+
+/* 閱讀時圖片、文字慢慢浮現（js/article-page.js 加上 .ar-reveal，捲到時加 .is-in） */
+.ar-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 1s ease, transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.ar-reveal--media {
+  transform: translateY(32px);
+  transition-duration: 1.4s;
+}
+.ar-reveal.is-in { opacity: 1; transform: none; }
+@media (max-width: 760px) {
+  .ar-reveal { transform: translateY(14px); }
+  .ar-reveal--media { transform: translateY(20px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ar-reveal { opacity: 1; transform: none; transition: none; }
+}

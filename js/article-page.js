@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     status.hidden = true;
     $("[data-article]").hidden = false;
+    revealOnScroll($("[data-article]"));
     if (a.status === "published") countView(slug);
   } catch (e) {
     status.textContent = "暫時無法載入文章，請稍後再試。";
@@ -106,4 +107,36 @@ function countView(slug) {
   }
   const api = window.ZenteaCart ? window.ZenteaCart.apiBase : "";
   fetch(`${api}/api/articles/${encodeURIComponent(slug)}/view/`, { method: "POST", keepalive: true }).catch(() => {});
+}
+
+// 閱讀時圖片、文字慢慢浮現（設計師 11/18，參考王德傳官網）：捲到畫面上才淡入、往上浮一點。
+// 只有 JS 執行後才加上 .ar-reveal，沒有 JS 時內容照常顯示；開了「減少動態效果」就不播。
+function revealOnScroll(root) {
+  if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const targets = [
+    ...root.querySelectorAll(".ar__eyebrow, .ar__title, .ar__date"),
+    ...root.querySelectorAll(".ar__video:not([hidden]), .ar__body > *, .ar__gallery:not([hidden]) > figure, .ar__citations:not([hidden])"),
+  ];
+  targets.forEach((el) => {
+    el.classList.add("ar-reveal");
+    if (el.matches("figure, video, .ar__video") || el.querySelector("img")) el.classList.add("ar-reveal--media");
+  });
+  let batch = 0;
+  let timer = 0;
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        // 同一次一起進入畫面的，一個接一個出現（每個間隔 0.12 秒，最多 0.6 秒）
+        entry.target.style.transitionDelay = `${Math.min(batch, 5) * 0.12}s`;
+        batch += 1;
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target);
+      });
+      clearTimeout(timer);
+      timer = setTimeout(() => (batch = 0), 200);
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+  );
+  targets.forEach((el) => io.observe(el));
 }

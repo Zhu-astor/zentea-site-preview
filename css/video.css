@@ -1,0 +1,142 @@
+/* 蟬茶影音（video.html）：影片卡片一排 3 張（手機 1 張），點了在頁面上播放 */
+
+.page-banner__art--video { height: 110px; bottom: 22px; }
+@media (max-width: 760px) {
+  .page-banner__art--video { right: 3vw; height: 64px; bottom: 10px; }
+}
+
+.vd { max-width: 1120px; margin: 0 auto; padding: 48px 5vw 96px; }
+
+.vd-note {
+  margin: 0 0 32px;
+  text-align: center;
+  font-family: "Noto Serif TC", serif;
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  color: #6B6257;
+}
+
+.vd-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 0 36px; }
+.vd-tab {
+  font: inherit;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  color: #6B6257;
+  background: transparent;
+  border: 1px solid rgba(74, 64, 54, 0.2);
+  border-radius: 999px;
+  padding: 7px 18px;
+  cursor: pointer;
+}
+.vd-tab.is-active, .vd-tab:hover { color: #9B3D38; border-color: rgba(155, 61, 56, 0.5); }
+
+.vd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 28px; }
+@media (max-width: 900px) { .vd-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .vd-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+.vd-card {
+  display: block;
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.vd-card--soon { cursor: default; }
+
+.vd-card__thumb {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #F1ECE2 url("../assets/img/banner-paper.jpg") center / cover;
+  border: 1px solid rgba(74, 64, 54, 0.08);
+}
+.vd-card__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+.vd-card:hover .vd-card__thumb img { transform: scale(1.03); }
+
+/* 播放鍵：紅色圓角方塊＋白色三角形，和範例相同的辨識度 */
+.vd-card__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 58px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(155, 61, 56, 0.92);
+  border-radius: 10px;
+}
+.vd-card__play::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-35%, -50%);
+  border-style: solid;
+  border-width: 9px 0 9px 15px;
+  border-color: transparent transparent transparent #fff;
+}
+.vd-card--soon .vd-card__play { background: rgba(74, 64, 54, 0.22); }
+
+.vd-card__title {
+  margin: 18px 0 10px;
+  text-align: center;
+  font-family: "Noto Serif TC", serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #2C251D;
+}
+.vd-card__date {
+  margin: 0 0 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(74, 64, 54, 0.6);
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  color: #2C251D;
+}
+.vd-card__text {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.85;
+  color: #6B6257;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+.vd-card--soon .vd-card__title,
+.vd-card--soon .vd-card__date,
+.vd-card--soon .vd-card__text { color: #A39887; }
+.vd-card--soon .vd-card__date { border-bottom-color: rgba(74, 64, 54, 0.2); }
+
+/* 站內播放 */
+.vd-player {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(28, 24, 20, 0.78);
+}
+.vd-player[hidden] { display: none; }
+.vd-player__box { position: relative; width: min(960px, 100%); }
+.vd-player__frame { aspect-ratio: 16 / 9; background: #000; }
+.vd-player__frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+.vd-player__close {
+  position: absolute;
+  right: 0;
+  top: -44px;
+  width: 40px;
+  height: 40px;
+  font-size: 28px;
+  line-height: 1;
+  color: #fff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
