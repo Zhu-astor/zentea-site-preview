@@ -6,9 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>文章 | 蟬吃茶 ZenEaTea</title>
 <meta name="description" content="">
-<link rel="stylesheet" href="css/style.css?v=514ef1b3">
+<link rel="stylesheet" href="css/style.css?v=e88de1b2">
 <link rel="stylesheet" href="css/article.css?v=10a631f8">
-<link rel="stylesheet" href="css/site-nav.css?v=849657f3">
+<link rel="stylesheet" href="css/site-nav.css?v=5fc9016e">
 </head>
 <body class="article-page nav-offset">
 
@@ -17,7 +17,20 @@
   <nav class="site-nav__links" id="site-nav-links" aria-label="主要選單">
     <a href="products.html">蟬茶鋪</a>
     <a href="journal.html">蟬茶誌</a>
-    <a href="knowledge.html" class="is-active">茶知識</a>
+    <div class="site-nav__item site-nav__item--menu" data-nav-menu>
+      <a href="knowledge.html" class="is-active" aria-haspopup="true" aria-expanded="false">茶知識</a>
+      <div class="site-nav__dropdown">
+        <div class="site-nav__panel">
+          <img class="site-nav__panel-art" src="assets/img/nav-knowledge-cup.webp" alt="" aria-hidden="true">
+          <ul class="site-nav__panel-list">
+            <li><a href="articles.html?category=%E8%8C%B6%E7%9F%A5%E8%AD%98" data-nav-category="茶知識">茶葉入門</a></li>
+            <li><a href="articles.html?category=%E8%A3%BD%E8%8C%B6%E5%B7%A5%E8%97%9D" data-nav-category="製茶工藝">製茶工藝</a></li>
+            <li><a href="articles.html?category=%E6%B2%96%E6%B3%A1%E8%88%87%E4%BF%9D%E5%AD%98" data-nav-category="沖泡與保存">沖泡指南</a></li>
+            <li><a href="articles.html?category=%E8%8C%B6%E5%99%A8%E8%88%87%E5%93%81%E9%A3%B2" data-nav-category="茶器與品飲">茶器與品飲</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <a href="experience.html">蟬茗齋</a>
     <a href="index.html#session-4">關於我們</a>
   </nav>
@@ -103,7 +116,7 @@
 <script src="js/demo-api.js?v=ee72c7f3"></script>
 <script src="js/cart.js?v=63202081"></script>
 <script src="js/article-page.js?v=ba886612"></script>
-<script src="js/site-nav.js?v=fbe69245"></script>
+<script src="js/site-nav.js?v=ff527f13"></script>
 <script src="js/wrap-guard.js?v=b43c0132"></script>
 </body>
 </html>

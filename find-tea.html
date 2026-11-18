@@ -15,10 +15,10 @@
 <meta property="og:image" content="https://www.organic-naturetea.com/assets/img/og-share.jpg">
 <meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/style.css?v=514ef1b3">
+<link rel="stylesheet" href="css/style.css?v=e88de1b2">
 <link rel="stylesheet" href="css/products.css?v=d56cb4b5">
 <link rel="stylesheet" href="css/cart.css?v=bf89e140">
-<link rel="stylesheet" href="css/site-nav.css?v=849657f3">
+<link rel="stylesheet" href="css/site-nav.css?v=5fc9016e">
 <link rel="stylesheet" href="css/shop.css?v=e1ae40b8">
 <link rel="stylesheet" href="css/find-tea.css?v=db7207a1">
 </head>
@@ -32,7 +32,20 @@
   <nav class="site-nav__links" id="site-nav-links" aria-label="主要選單">
     <a href="products.html">蟬茶鋪</a>
     <a href="journal.html">蟬茶誌</a>
-    <a href="knowledge.html">茶知識</a>
+    <div class="site-nav__item site-nav__item--menu" data-nav-menu>
+      <a href="knowledge.html" aria-haspopup="true" aria-expanded="false">茶知識</a>
+      <div class="site-nav__dropdown">
+        <div class="site-nav__panel">
+          <img class="site-nav__panel-art" src="assets/img/nav-knowledge-cup.webp" alt="" aria-hidden="true">
+          <ul class="site-nav__panel-list">
+            <li><a href="articles.html?category=%E8%8C%B6%E7%9F%A5%E8%AD%98" data-nav-category="茶知識">茶葉入門</a></li>
+            <li><a href="articles.html?category=%E8%A3%BD%E8%8C%B6%E5%B7%A5%E8%97%9D" data-nav-category="製茶工藝">製茶工藝</a></li>
+            <li><a href="articles.html?category=%E6%B2%96%E6%B3%A1%E8%88%87%E4%BF%9D%E5%AD%98" data-nav-category="沖泡與保存">沖泡指南</a></li>
+            <li><a href="articles.html?category=%E8%8C%B6%E5%99%A8%E8%88%87%E5%93%81%E9%A3%B2" data-nav-category="茶器與品飲">茶器與品飲</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <a href="experience.html">蟬茗齋</a>
     <a href="index.html#session-4">關於我們</a>
   </nav>
@@ -114,7 +127,7 @@
 <script src="js/cart.js?v=63202081"></script>
 <script src="js/teas.js?v=fbec620c"></script>
 <script src="js/find-tea.js?v=b9f7333d"></script>
-<script src="js/site-nav.js?v=fbe69245"></script>
+<script src="js/site-nav.js?v=ff527f13"></script>
 <script src="js/wrap-guard.js?v=b43c0132"></script>
 </body>
 </html>

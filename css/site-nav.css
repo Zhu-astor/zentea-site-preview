@@ -178,3 +178,97 @@ body.nav-offset { padding-top: 72px; }
 @media (max-width: 960px) {
   body.nav-offset { padding-top: 60px; }
 }
+
+/* ---------- 茶知識下拉選單（設計師 11/18 附圖）：米色面板、左邊插圖、右邊直式選項 ---------- */
+.site-nav__item { position: relative; display: flex; align-items: center; }
+
+.site-nav__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  padding-top: 18px; /* 選項和面板之間的空隙也算在滑鼠範圍內，移過去不會消失 */
+  transform: translate(-50%, 6px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+  z-index: 20;
+}
+.site-nav__item--menu:hover .site-nav__dropdown,
+.site-nav__item--menu:focus-within .site-nav__dropdown,
+.site-nav__item--menu.is-open .site-nav__dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.site-nav__panel {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  width: 680px;
+  padding: 26px 56px 26px 36px;
+  background: #F9F6EF url("../assets/img/banner-paper.jpg") center / cover;
+  border: 1px solid rgba(74, 64, 54, 0.1);
+  box-shadow: 0 14px 30px rgba(42, 38, 32, 0.12);
+}
+.site-nav__panel-art { width: 210px; height: auto; flex: none; opacity: 0.95; }
+
+.site-nav__panel-list {
+  display: flex;
+  flex-direction: row-reverse; /* 直式由右往左讀：第一個選項放最右邊 */
+  justify-content: flex-start;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site-nav__panel-list li { display: flex; }
+.site-nav__panel-list li + li { border-right: 1px solid rgba(74, 64, 54, 0.22); }
+
+.site-nav__links .site-nav__panel-list a {
+  writing-mode: vertical-rl;
+  min-height: 130px;
+  padding: 2px 30px;
+  font-family: "Noto Serif TC", serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: #2C251D;
+  border: 0;
+}
+.site-nav__links .site-nav__panel-list a::after { display: none; }
+.site-nav__links .site-nav__panel-list a:hover,
+.site-nav__links .site-nav__panel-list a.is-current { color: #9B3D38; }
+
+/* 手機：抽屜選單裡，茶知識底下直接列出四個選項（橫排），不放插圖 */
+@media (max-width: 960px) {
+  .site-nav__item { display: block; }
+  .site-nav__item > a { display: block; }
+  .site-nav__dropdown {
+    position: static;
+    padding: 0;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: none;
+  }
+  .site-nav__panel { width: auto; padding: 4px 0 10px 14px; gap: 0; background: none; border: 0; box-shadow: none; border-bottom: 1px solid rgba(74, 64, 54, 0.08); }
+  .site-nav__panel-art { display: none; }
+  .site-nav__panel-list { flex-direction: row; flex-wrap: wrap; gap: 4px 18px; }
+  .site-nav__panel-list li + li { border-right: 0; }
+  .site-nav__links .site-nav__panel-list a {
+    writing-mode: horizontal-tb;
+    min-height: 0;
+    padding: 8px 0;
+    font-family: inherit;
+    font-size: 14.5px;
+    letter-spacing: 0.06em;
+    color: #6B6257;
+    border-bottom: 0;
+  }
+  .site-nav__item--menu > a { border-bottom: 0; }
+}

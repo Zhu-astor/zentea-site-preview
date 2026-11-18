@@ -417,7 +417,7 @@ html, body {
 }
 .page-banner__seal {
     flex: none;
-    height: 48px; /* 設計師的直式「蟬吃茶」印章 */
+    height: 24px; /* 設計師的直式「蟬吃茶」印章；11/18 再縮小 50%（48 → 24） */
     width: auto;
     display: block;
 }
@@ -451,7 +451,7 @@ html, body {
     .page-banner__sub { font-size: 12.5px; }
     .page-banner__art { right: -4vw; height: 110px; bottom: 0; opacity: 0.55; }
     .page-banner__art--shop, .page-banner__art--journal, .page-banner__art--knowledge { right: 3vw; } /* 手機圖完整露出，壓到文字沒關係 */
-    .page-banner__seal { height: 34px; }
+    .page-banner__seal { height: 17px; } /* 手機也縮小 50%（34 → 17） */
     .page-banner__art--experience { right: 0; height: 70px; }
     .page-banner__poem { display: none; }
 }
