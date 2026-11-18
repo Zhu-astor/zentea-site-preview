@@ -472,3 +472,35 @@ html, body.journal-page {
 .knowledge-page .j-card__title { font-size: calc(13px + var(--card-text-plus)); }
 .knowledge-page .j-card--hero .j-card__title { font-size: calc(19px + var(--card-text-plus)); }
 .knowledge-page .j-card__desc { font-size: calc(11px + var(--card-text-plus)); }
+
+/* ---------- 茶知識輪播：所有文章縮圖統一成漸層（設計師 11/18 附圖） ----------
+   小卡：照片鋪滿整張卡，左邊淡出到底色、右邊完整，文字壓在左側淡出區。
+   大卡：照片在上方鋪滿，往下淡出到底色，文字放在下方。 */
+.knowledge-page .j-feature .j-card:not(.j-card--hero) .j-card__media {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 30%, rgba(0,0,0,0.7) 56%, #000 78%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 30%, rgba(0,0,0,0.7) 56%, #000 78%);
+}
+.knowledge-page .j-feature .j-card:not(.j-card--hero) .j-card__media img { object-position: right center; }
+
+.knowledge-page .j-feature .j-card--hero { justify-content: flex-end; }
+.knowledge-page .j-feature .j-card--hero .j-card__media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  width: 100%;
+  height: 74%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,0.5) 78%, rgba(0,0,0,0) 100%);
+}
+.knowledge-page .j-feature .j-card--hero .j-card__body { position: relative; z-index: 2; padding-top: 0; padding-bottom: 22px; }
+@media (max-width: 900px) {
+  .knowledge-page .j-feature .j-col--hero > .j-card--hero { min-height: 420px; }
+}

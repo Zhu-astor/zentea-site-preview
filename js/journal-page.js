@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (variant === "j-card--hero" && a.summary) body.append(el("p", "j-card__desc", a.summary));
     body.append(el("span", "j-card__arrow", "閱讀全文 →"));
     const media = el("div", "j-card__media");
-    const src = a.cover_thumb || a.cover;
+    // 沒有封面的文章用品牌山水圖，讓每張卡片都是一致的漸層縮圖
+    const src = a.cover_thumb || a.cover || "assets/img/landscape-1.webp";
     if (src) {
       const img = el("img");
       img.src = src;
