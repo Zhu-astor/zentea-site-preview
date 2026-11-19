@@ -67,6 +67,7 @@
       missing.hidden = false;
     };
     if (!slug) return showMissing();
+    document.body.dataset.tea = slug; // 依茶款套用各自的色系（css/product-detail.css）
 
     let product;
     try {

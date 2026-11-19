@@ -1,8 +1,8 @@
 /* 蟬茶影音（video.html）：影片卡片一排 3 張（手機 1 張），點了在頁面上播放 */
 
-.page-banner__art--video { height: 110px; bottom: 22px; }
+.page-banner__art--video { height: 150px; bottom: 14px; } /* 設計師 11/19 給的茶葉插圖 */
 @media (max-width: 760px) {
-  .page-banner__art--video { right: 3vw; height: 64px; bottom: 10px; }
+  .page-banner__art--video { right: 3vw; height: 96px; bottom: 8px; }
 }
 
 .vd { max-width: 1120px; margin: 0 auto; padding: 48px 5vw 96px; }

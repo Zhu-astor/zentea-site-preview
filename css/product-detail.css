@@ -5,7 +5,11 @@
  */
 .pdx-page {
   --pdx-green: #2F5B45;
+  --pdx-green-hover: #244A37;
   --pdx-green-soft: #E8EDE6;
+  --pdx-select: var(--pdx-ink);                               /* 選中的規格框 */
+  --pdx-icon-bg: #EDEDE6;                                     /* 圖示圓底 */
+  --pdx-card-bg: linear-gradient(135deg, #EEF1EA, #E6EBE2);  /* 一句話認識這款茶 */
   --pdx-paper: #F7F5F0;
   --pdx-ink: #2F3A33;
   --pdx-text: #4A524C;
@@ -76,7 +80,7 @@
   background: transparent; color: var(--pdx-text); cursor: pointer; transition: border-color 0.2s, color 0.2s;
 }
 .pdx-variant:hover { border-color: var(--pdx-green); }
-.pdx-variant.is-selected { border-color: var(--pdx-ink); color: var(--pdx-ink); box-shadow: inset 0 0 0 1px var(--pdx-ink); }
+.pdx-variant.is-selected { border-color: var(--pdx-select); color: var(--pdx-select); box-shadow: inset 0 0 0 1px var(--pdx-select); }
 .pdx-variant:disabled { opacity: 0.45; cursor: default; }
 
 .pdx-actions { display: flex; align-items: center; gap: 14px; }
@@ -89,7 +93,7 @@
   background: var(--pdx-green); color: #fff; font: inherit; font-size: 15px; letter-spacing: 0.2em; cursor: pointer; transition: background-color 0.25s;
 }
 .pdx-add svg { width: 22px; height: 22px; }
-.pdx-add:hover:not(:disabled) { background: #244A37; }
+.pdx-add:hover:not(:disabled) { background: var(--pdx-green-hover); }
 .pdx-add:disabled { background: #A9B3AC; cursor: default; }
 .pdx-fav {
   width: 48px; height: 48px; flex: none; border-radius: 50%; border: 1px solid var(--pdx-line); background: transparent;
@@ -101,7 +105,7 @@
 .pdx-soon-note { font-size: 13px; letter-spacing: 0.06em; color: var(--pdx-muted); margin: 14px 0 0; }
 
 /* ---------- 圖示圓底 ---------- */
-.pdx-icon { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 58px; height: 58px; border-radius: 50%; background: #EDEDE6; color: var(--pdx-green); }
+.pdx-icon { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 58px; height: 58px; border-radius: 50%; background: var(--pdx-icon-bg); color: var(--pdx-green); }
 .pdx-icon svg { width: 52%; height: 52%; }
 .pdx-icon--plain { background: none; width: 40px; height: 40px; }
 .pdx-icon--plain svg { width: 100%; height: 100%; }
@@ -131,7 +135,7 @@
 
 .pdx-oneliner {
   position: relative; overflow: hidden; margin-left: 5vw; padding: 36px 34px; border-radius: 6px;
-  background: linear-gradient(135deg, #EEF1EA, #E6EBE2); align-self: stretch;
+  background: var(--pdx-card-bg); align-self: stretch;
 }
 .pdx-oneliner__head { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
 .pdx-oneliner__title { font-size: 17px; font-weight: 600; letter-spacing: 0.14em; color: var(--pdx-ink); margin: 0; }
@@ -197,4 +201,15 @@
   .pdx-moment:nth-child(3) { border-left: 0; }
   .pdx-brew { grid-template-columns: 1fr; gap: 14px; }
   .pdx-brew__item + .pdx-brew__item { border-left: 0; }
+}
+
+/* 每款茶自己的色系（設計師 11/19 指定）：深框＝茶名、選中的規格、按鈕、圖示線條、標題、風味條；淺底＝圖示圓底、一句話卡片。
+   鮮翠烏龍與沒有指定的茶款維持原本的綠色。 */
+.pdx-page[data-tea="honey-black"]   { --pdx-green: #AE4338; --pdx-green-hover: #933830; --pdx-icon-bg: #E3ABA4; }
+.pdx-page[data-tea="gaba"]          { --pdx-green: #AC6A30; --pdx-green-hover: #915928; --pdx-icon-bg: #E8BD91; }
+.pdx-page[data-tea="yushan-oolong"] { --pdx-green: #C39521; --pdx-green-hover: #A57E1C; --pdx-icon-bg: #E4C782; }
+.pdx-page[data-tea="ruby-black"]    { --pdx-green: #803220; --pdx-green-hover: #6A291A; --pdx-icon-bg: #E6AE9D; }
+.pdx-page:is([data-tea="honey-black"], [data-tea="gaba"], [data-tea="yushan-oolong"], [data-tea="ruby-black"]) {
+  --pdx-select: var(--pdx-green);
+  --pdx-card-bg: var(--pdx-icon-bg);
 }
