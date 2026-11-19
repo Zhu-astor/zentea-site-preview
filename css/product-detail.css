@@ -203,12 +203,12 @@
   .pdx-brew__item + .pdx-brew__item { border-left: 0; }
 }
 
-/* 每款茶自己的色系（設計師 11/19 指定，淺底色用 50% 透明度）：深框＝茶名、選中的規格、按鈕、圖示線條、標題、風味條；淺底＝圖示圓底、一句話卡片。
+/* 每款茶自己的色系（設計師 11/19 指定，淺底色用 30% 透明度）：深框＝茶名、選中的規格、按鈕、圖示線條、標題、風味條；淺底＝圖示圓底、一句話卡片。
    鮮翠烏龍與沒有指定的茶款維持原本的綠色。 */
-.pdx-page[data-tea="honey-black"]   { --pdx-green: #AE4338; --pdx-green-hover: #933830; --pdx-icon-bg: #E3ABA480; }
-.pdx-page[data-tea="gaba"]          { --pdx-green: #AC6A30; --pdx-green-hover: #915928; --pdx-icon-bg: #E8BD9180; }
-.pdx-page[data-tea="yushan-oolong"] { --pdx-green: #C39521; --pdx-green-hover: #A57E1C; --pdx-icon-bg: #E4C78280; }
-.pdx-page[data-tea="ruby-black"]    { --pdx-green: #803220; --pdx-green-hover: #6A291A; --pdx-icon-bg: #E6AE9D80; }
+.pdx-page[data-tea="honey-black"]   { --pdx-green: #AE4338; --pdx-green-hover: #933830; --pdx-icon-bg: #E3ABA44D; }
+.pdx-page[data-tea="gaba"]          { --pdx-green: #AC6A30; --pdx-green-hover: #915928; --pdx-icon-bg: #E8BD914D; }
+.pdx-page[data-tea="yushan-oolong"] { --pdx-green: #C39521; --pdx-green-hover: #A57E1C; --pdx-icon-bg: #E4C7824D; }
+.pdx-page[data-tea="ruby-black"]    { --pdx-green: #803220; --pdx-green-hover: #6A291A; --pdx-icon-bg: #E6AE9D4D; }
 .pdx-page:is([data-tea="honey-black"], [data-tea="gaba"], [data-tea="yushan-oolong"], [data-tea="ruby-black"]) {
   --pdx-select: var(--pdx-green);
   --pdx-card-bg: var(--pdx-icon-bg);
