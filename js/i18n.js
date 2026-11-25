@@ -48,6 +48,8 @@
     "包裝尺寸": "Package size",
     // 購物車、結帳、訂單
     "免運": "Free",
+    "價格待定": "Price TBA",
+    "規格待定": "Coming soon",
     "暫時無法取得最新價格與庫存，請稍後再重新整理頁面。": "We couldn't get the latest prices and stock. Please refresh the page in a moment.",
     "前往付款 →": "Continue to payment →",
     "選擇配送方式後計算": "Choose a method",

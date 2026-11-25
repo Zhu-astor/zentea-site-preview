@@ -167,8 +167,11 @@
         b.classList.toggle("is-selected", on);
         b.setAttribute("aria-checked", String(on));
       });
-      field("price").replaceChildren(v ? priceText(v.price) : "");
+      // 規格待定（後台售價填 0）：可以點來看圖和尺寸，價格顯示「價格待定」、不能加入購物車
+      if (v && v.pending) field("price").textContent = ZT.t("價格待定");
+      else field("price").replaceChildren(v ? priceText(v.price) : "");
       addBtn.disabled = !v || !v.in_stock;
+      $("[data-add-label]").textContent = ZT.t(v && v.pending ? "規格待定" : v && !v.in_stock ? "已售完" : "加入購物車");
       // 規格有自己的包裝尺寸就顯示在介紹下方
       const size = $("[data-variant-size]");
       size.textContent = v && v.size ? `${ZT.t("包裝尺寸")}${ZT.en ? ": " : "："}${v.size}` : "";
@@ -193,11 +196,11 @@
       document.querySelector(".pdx-qty").hidden = true;
     } else {
       product.variants.forEach((v) => {
-        const b = el("button", "pdx-variant", v.in_stock ? v.name : ZT.en ? `${v.name} (Sold out)` : `${v.name}（已售完）`);
+        const b = el("button", "pdx-variant", v.in_stock || v.pending ? v.name : ZT.en ? `${v.name} (Sold out)` : `${v.name}（已售完）`);
         b.type = "button";
         b.dataset.sku = v.sku;
         b.setAttribute("role", "radio");
-        b.disabled = !v.in_stock;
+        b.disabled = !v.in_stock && !v.pending;
         b.addEventListener("click", () => selectVariant(v.sku));
         variantsBox.append(b);
       });
