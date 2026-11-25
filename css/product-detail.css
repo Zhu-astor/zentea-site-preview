@@ -213,3 +213,22 @@
   --pdx-select: var(--pdx-green);
   --pdx-card-bg: var(--pdx-icon-bg);
 }
+
+/* 商品大圖後面的暈染色塊（設計師 11/25）：和「全部茶品」卡片同一組淡色素材，只加在第一張商品照 */
+.pdx-slide:first-child:has(img)::before {
+  content: "";
+  position: absolute;
+  inset: 6% 16% 4% 10%;
+  background: var(--pdx-blob, none) no-repeat 40% 55% / contain;
+  pointer-events: none;
+}
+.pdx-slide:first-child img { position: relative; z-index: 1; }
+.pdx-page[data-tea="honey-black"]     { --pdx-blob: url("../assets/img/blobs/blob-honey-black-3.webp"); }
+.pdx-page[data-tea="gaba"]            { --pdx-blob: url("../assets/img/blobs/blob-gaba-3.webp"); }
+.pdx-page[data-tea="fresh-oolong"]    { --pdx-blob: url("../assets/img/blobs/blob-fresh-oolong-3.webp"); }
+.pdx-page[data-tea="yushan-oolong"]   { --pdx-blob: url("../assets/img/blobs/blob-yushan-oolong-3.webp"); }
+.pdx-page[data-tea="charcoal-oolong"] { --pdx-blob: url("../assets/img/blobs/blob-charcoal-oolong-3.webp"); }
+.pdx-page[data-tea="ruby-black"]      { --pdx-blob: url("../assets/img/blobs/blob-ruby-black-3.webp"); }
+
+/* 規格的包裝尺寸（設計師 11/25）：選到有尺寸的規格才出現，放在介紹下方 */
+.pdx-size { margin: 10px 0 0; font-size: 13px; letter-spacing: 0.08em; color: var(--pdx-muted); }

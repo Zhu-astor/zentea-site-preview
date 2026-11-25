@@ -49,8 +49,9 @@
   }
 
   // ---------- 商品、購物車、結帳（預覽站：讀 demo/ 的商品快照，不能真的下單） ----------
-  let productsPromise = null;
-  const products = () => (productsPromise ||= realFetch("demo/products.json").then((r) => r.json()));
+  // 英文頁（?lang=en）讀 demo/products.en.json、demo/products/<slug>.en.json
+  const promises = {};
+  const products = (en) => (promises[en ? "en" : "zh"] ||= realFetch(en ? "demo/products.en.json" : "demo/products.json").then((r) => r.json()));
 
   async function quote(init) {
     const body = JSON.parse((init && init.body) || "{}");
@@ -75,10 +76,10 @@
     });
   }
 
-  async function shopApi(path, init) {
-    if (path === "/api/products/") return json(await products());
+  async function shopApi(path, init, en) {
+    if (path === "/api/products/") return json(await products(en));
     const detail = path.match(/^\/api\/products\/([^/]+)\/$/);
-    if (detail) return realFetch(`demo/products/${detail[1]}.json`);
+    if (detail) return realFetch(`demo/products/${detail[1]}${en ? ".en" : ""}.json`);
     if (path === "/api/cart/quote/") return quote(init);
     if (path === "/api/shipping/options/") return realFetch("demo/shipping.json");
     if (path === "/api/csrf/") return json({});
@@ -96,7 +97,7 @@
 
   window.fetch = async function (input, init) {
     const url = new URL(typeof input === "string" ? input : input.url, location.href);
-    const shop = await shopApi(url.pathname.replace(/^.*(?=\/api\/)/, ""), init);
+    const shop = await shopApi(url.pathname.replace(/^.*(?=\/api\/)/, ""), init, url.searchParams.get("lang") === "en");
     if (shop) return shop;
     const m = url.pathname.match(/\/api\/articles\/(?:([^/]+)\/(view\/)?)?$/);
     if (!m) return realFetch(input, init);

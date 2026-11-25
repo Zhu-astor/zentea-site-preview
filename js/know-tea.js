@@ -4,6 +4,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector("[data-kt-grid]");
   const TEAS = window.ZENTEA_TEAS;
+  const ZT = window.ZT;
   if (!grid || !TEAS) return;
 
   function el(tag, className, text) {
@@ -26,16 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   grid.replaceChildren(
-    ...Object.values(TEAS).map((tea, i) => {
+    ...Object.values(TEAS).map((zhTea, i) => {
+      const tea = ZT.en && zhTea.en ? { ...zhTea, ...zhTea.en } : zhTea; // 英文頁用 teas.js 裡的 en 欄位
       const card = el("a", "kt-card");
-      card.href = `product.html?slug=${encodeURIComponent(tea.shop)}`;
+      card.href = ZT.page(`product.html?slug=${encodeURIComponent(tea.shop)}`);
       card.style.transitionDelay = `${(i % 3) * 0.06}s`;
       card.setAttribute("data-reveal", "");
       const m = el("div", "kt-card__media");
       m.append(media(tea));
-      if (tea.soon) m.append(el("span", "kt-card__badge", "即將上架"));
+      if (tea.soon) m.append(el("span", "kt-card__badge", ZT.t("即將上架")));
       const notes = el("dl", "kt-card__notes");
-      [["香氣", tea.aroma], ["口感", tea.taste]].forEach(([k, v]) => {
+      [[ZT.t("香氣"), tea.aroma], [ZT.t("口感"), tea.taste]].forEach(([k, v]) => {
         const row = el("div");
         row.append(el("dt", "", k), el("dd", "", v));
         notes.append(row);
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         el("h3", "kt-card__name", tea.name),
         el("p", "kt-card__summary", tea.summary),
         notes,
-        el("span", "kt-card__more", "深入認識 →")
+        el("span", "kt-card__more", ZT.t("深入認識 →"))
       );
       return card;
     })

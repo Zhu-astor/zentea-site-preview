@@ -27,8 +27,9 @@
   };
   const svg = (key) =>
     `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[key] || ICONS.leaf}</svg>`;
-  const BAR_ICON = { 香氣: "leaf", 滋味厚度: "cup", 焙火程度: "fire", 發酵程度: "sprout" };
-  const PLACEHOLDERS = ["茶乾照片準備中", "茶湯照片準備中", "茶園照片準備中"];
+  const BAR_ICON = { 香氣: "leaf", 滋味厚度: "cup", 焙火程度: "fire", 發酵程度: "sprout", Aroma: "leaf", Body: "cup", "Roast level": "fire", Oxidation: "sprout" };
+  const ZT = window.ZT;
+  const PLACEHOLDERS = ["茶乾照片準備中", "茶湯照片準備中", "茶園照片準備中"].map(ZT.t);
   const FAV_KEY = "zentea-favorites";
 
   function el(tag, className, text) {
@@ -71,16 +72,16 @@
 
     let product;
     try {
-      const res = await fetch(`${cart.apiBase}/api/products/${encodeURIComponent(slug)}/`);
+      const res = await fetch(cart.apiBase + ZT.api(`/api/products/${encodeURIComponent(slug)}/`));
       if (res.status === 404) return showMissing();
       if (!res.ok) throw new Error(res.status);
       product = await res.json();
     } catch (e) {
-      status.textContent = "暫時無法載入茶品資料，請稍後再重新整理頁面。";
+      status.textContent = ZT.t("暫時無法載入茶品資料，請稍後再重新整理頁面。");
       return;
     }
 
-    document.title = `${product.name} | 蟬吃茶 ZenEaTea`;
+    document.title = ZT.en ? `${product.name} | 蟬吃茶` : `${product.name} | 蟬吃茶 ZenEaTea`;
     field("crumb").textContent = product.name;
     field("name").textContent = product.name;
     field("summary").textContent = product.summary;
@@ -89,6 +90,7 @@
     // ---------- 圖片輪播：沒有照片的位置放「準備中」 ----------
     const glyph = product.name.replace(/^蟬吃/, "").replace(/^手採/, "").charAt(0);
     const slides = (product.gallery || []).map((src) => ({ src }));
+    const mainSrc = slides[0] && slides[0].src; // 商品主圖；選到有自己圖片的規格時會暫時換掉
     if (!slides.length) slides.push({ glyph });
     PLACEHOLDERS.slice(0, Math.max(0, 4 - slides.length)).forEach((text) => slides.push({ text }));
     const stage = $("[data-stage]");
@@ -100,7 +102,7 @@
       const thumb = el("button", "pdx-thumb");
       thumb.type = "button";
       thumb.setAttribute("role", "tab");
-      thumb.setAttribute("aria-label", `第 ${i + 1} 張`);
+      thumb.setAttribute("aria-label", ZT.en ? `Image ${i + 1}` : `第 ${i + 1} 張`);
       if (s.src) {
         const img = el("img");
         img.src = s.src;
@@ -162,17 +164,31 @@
       });
       field("price").replaceChildren(v ? priceText(v.price) : "");
       addBtn.disabled = !v || !v.in_stock;
+      // 規格有自己的包裝尺寸就顯示在介紹下方
+      const size = $("[data-variant-size]");
+      size.textContent = v && v.size ? `${ZT.t("包裝尺寸")}${ZT.en ? ": " : "："}${v.size}` : "";
+      size.hidden = !(v && v.size);
+      // 規格有自己的圖片（例如圓罐）：第一張大圖換成那張，並切回第一張；沒有就用商品主圖
+      const firstImg = stage.querySelector(".pdx-slide img");
+      if (firstImg && mainSrc) {
+        const src = (v && v.image) || mainSrc;
+        if (firstImg.getAttribute("src") !== src) {
+          firstImg.setAttribute("src", src);
+          thumbs.querySelector(".pdx-thumb img")?.setAttribute("src", src);
+          show(0);
+        }
+      }
     }
     if (product.coming_soon) {
-      field("price").textContent = "即將上架";
+      field("price").textContent = ZT.t("即將上架");
       $("[data-variant-field]").hidden = true;
       addBtn.disabled = true;
-      $("[data-add-label]").textContent = "即將上架";
+      $("[data-add-label]").textContent = ZT.t("即將上架");
       $("[data-soon-note]").hidden = false;
       document.querySelector(".pdx-qty").hidden = true;
     } else {
       product.variants.forEach((v) => {
-        const b = el("button", "pdx-variant", v.in_stock ? v.name : `${v.name}（已售完）`);
+        const b = el("button", "pdx-variant", v.in_stock ? v.name : ZT.en ? `${v.name} (Sold out)` : `${v.name}（已售完）`);
         b.type = "button";
         b.dataset.sku = v.sku;
         b.setAttribute("role", "radio");
@@ -185,7 +201,7 @@
       else {
         field("price").replaceChildren(product.min_price == null ? "" : priceText(product.min_price));
         addBtn.disabled = true;
-        $("[data-add-label]").textContent = product.variants.length ? "已售完" : "暫不販售";
+        $("[data-add-label]").textContent = ZT.t(product.variants.length ? "已售完" : "暫不販售");
       }
       $("[data-variant-field]").hidden = product.variants.length === 0;
     }
@@ -202,7 +218,7 @@
       if (!selectedSku || addBtn.disabled) return;
       const qty = clampQty(qtyInput.value);
       cart.add(selectedSku, qty);
-      cart.toast(`已將 ${qty} 件「${product.name}」加入購物車`);
+      cart.toast(ZT.addedToCart(product.name, qty));
     });
 
     // ---------- 收藏（這台瀏覽器） ----------
@@ -210,7 +226,7 @@
     const syncFav = () => {
       const on = readFavs().includes(product.slug);
       fav.setAttribute("aria-pressed", String(on));
-      fav.setAttribute("aria-label", on ? "取消收藏" : "加入收藏");
+      fav.setAttribute("aria-label", ZT.t(on ? "取消收藏" : "加入收藏"));
     };
     fav.addEventListener("click", () => {
       const list = readFavs();
@@ -222,16 +238,16 @@
         /* 無痕模式存不了 */
       }
       syncFav();
-      cart.toast(on ? "已取消收藏" : "已加入收藏");
+      cart.toast(ZT.t(on ? "已取消收藏" : "已加入收藏"));
     });
     syncFav();
 
     // ---------- 四格基本資料 ----------
     const facts = [
-      ["origin", "產地", product.origin],
-      ["sprout", "製程", product.process],
-      ["cup", "茶類", product.tea_type],
-      ["box", "商品形式", product.product_form],
+      ["origin", ZT.t("產地"), product.origin],
+      ["sprout", ZT.t("製程"), product.process],
+      ["cup", ZT.t("茶類"), product.tea_type],
+      ["box", ZT.t("商品形式"), product.product_form],
     ].filter(([, , v]) => v);
     $("[data-facts]").replaceChildren(
       ...facts.map(([ic, label, value]) => {
@@ -253,7 +269,7 @@
         const meterWrap = el("div", "pdx-bar__meter");
         const meter = el("div", "pdx-meter");
         meter.setAttribute("role", "img");
-        meter.setAttribute("aria-label", `${b.label}：8 格中的 ${b.level} 格`);
+        meter.setAttribute("aria-label", ZT.en ? `${b.label}: ${b.level} of 8` : `${b.label}：8 格中的 ${b.level} 格`);
         for (let i = 0; i < 8; i++) {
           const seg = el("i");
           seg.style.setProperty("--fill", `${Math.max(0, Math.min(1, Number(b.level) - i)) * 100}%`);
@@ -282,9 +298,9 @@
     // ---------- 建議沖泡 ----------
     const brew = product.brew || {};
     const brewItems = [
-      ["thermo", "水溫", brew.temp],
-      ["drop", "茶水比", brew.ratio],
-      ["clock", "浸泡時間", brew.time],
+      ["thermo", ZT.t("水溫"), brew.temp],
+      ["drop", ZT.t("茶水比"), brew.ratio],
+      ["clock", ZT.t("浸泡時間"), brew.time],
     ].filter(([, , v]) => v);
     $("[data-brew]").replaceChildren(
       ...brewItems.map(([ic, label, value]) => {
@@ -306,7 +322,7 @@
     if (product.story_image) media.style.backgroundImage = `url("${product.story_image.replace(/"/g, "")}")`;
     else media.hidden = true;
     const more = $("[data-story-link]");
-    if (product.story_link) more.href = product.story_link;
+    if (product.story_link) more.href = ZT.page(product.story_link);
     $("[data-story-section]").hidden = paras.length === 0;
 
     status.hidden = true;

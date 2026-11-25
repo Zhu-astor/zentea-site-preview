@@ -6,6 +6,7 @@
  */
 document.addEventListener("DOMContentLoaded", () => {
   const cart = window.ZenteaCart;
+  const ZT = window.ZT;
   const grid = document.querySelector("[data-product-grid]");
   const empty = document.querySelector("[data-product-empty]");
   const keywordInput = document.querySelector("[data-filter-keyword]");
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 卡片上的愛心按鈕沿用原本的 SVG
   const wishSvg = grid.querySelector(".p-card__wish svg")?.outerHTML || "";
-  const FLAVOR_LABELS = { rich: "濃郁", balance: "均衡", light: "清爽" };
+  const FLAVOR_LABELS = { rich: ZT.t("濃郁"), balance: ZT.t("均衡"), light: ZT.t("清爽") };
 
   let products = readStaticCards();
 
@@ -53,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderCard(p) {
     const variant = p.variants.find((v) => v.in_stock) || p.variants[0];
     const card = el("a", "p-card");
-    card.href = `product.html?slug=${encodeURIComponent(p.slug)}`;
+    card.href = ZT.page(`product.html?slug=${encodeURIComponent(p.slug)}`);
     card.dataset.slug = p.slug;
     if (variant) card.dataset.sku = variant.sku;
 
@@ -61,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const wish = el("button", "p-card__wish");
     wish.type = "button";
-    wish.setAttribute("aria-label", "加入收藏");
+    wish.setAttribute("aria-label", ZT.t("加入收藏"));
     wish.innerHTML = wishSvg; // 固定的圖示，不含後端資料
     card.append(wish);
 
@@ -76,21 +77,22 @@ document.addEventListener("DOMContentLoaded", () => {
     body.append(el("p", "p-card__desc", p.summary));
     body.append(el("h3", "p-card__name", p.name));
     // 多個規格時顯示最低價「起」
-    const priceText = p.min_price == null ? "" : cart.formatPrice(p.min_price) + (p.variants.length > 1 ? " 起" : "");
+    const price = p.min_price == null ? "" : cart.formatPrice(p.min_price);
+    const priceText = price && p.variants.length > 1 ? ZT.fromPrice(price) : price;
     body.append(el("p", "p-card__price", priceText));
 
     const actions = el("div", "p-card__actions");
-    actions.append(el("span", "p-card__cta", "了解更多"));
-    const add = el("button", "p-card__add", "加入購物車");
+    actions.append(el("span", "p-card__cta", ZT.t("了解更多")));
+    const add = el("button", "p-card__add", ZT.t("加入購物車"));
     add.type = "button";
     if (!variant) {
       add.disabled = true;
-      add.textContent = "暫不販售";
+      add.textContent = ZT.t("暫不販售");
     } else if (!p.in_stock) {
       add.disabled = true;
-      add.textContent = "已售完";
+      add.textContent = ZT.t("已售完");
     } else if (p.variants.length > 1) {
-      add.textContent = "選擇規格"; // 多規格要到商品頁選
+      add.textContent = ZT.t("選擇規格"); // 多規格要到商品頁選
       add.dataset.goto = "detail";
     }
     actions.append(add);
@@ -153,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     cart.add(card.dataset.sku, 1);
-    cart.toast(`已將「${card.querySelector(".p-card__name").textContent}」加入購物車`);
+    cart.toast(ZT.addedToCart(card.querySelector(".p-card__name").textContent));
   });
 
   // 篩選控制

@@ -5,6 +5,7 @@
  * soon：還沒開賣的茶填 true，卡片與測驗結果會標「即將上架」（詳細頁照常可以看）。
  * brew：熱泡／冷泡建議，測驗結果頁用。
  * img：商品圖；還沒有照片的茶填 null，畫面上改用茶名的字樣代替。
+ * en：英文版用的製程、香氣、口感、簡介（茶名保留中文）。
  *
  * 注意：食品不能宣稱醫療或保健功效（食安法第 28 條），佳葉龍的文字只描述成分與品牌暱稱，修改時請留意。
  */
@@ -30,6 +31,13 @@ window.ZENTEA_TEAS = {
       "茶湯非常清甜甘醇，是每天都喝得下去的一杯。",
     ],
     more: "發酵（氧化）程度決定香氣往哪裡走：越輕越接近清香、花香，越重越往熟果與蜜香走。烘焙則是茶的「火候」，烘得適中能把青味收乾淨，讓茶湯溫潤、不刺激。",
+    // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
+    en: {
+      "process": "Lightly oxidized・Medium roast",
+      "aroma": "Fresh, classic oolong, a hint of mountain forest",
+      "taste": "Sweet and smooth, clean with a sweet finish",
+      "summary": "Oolong from the mountains of Nantou, made by our partner farm. Light oxidation keeps the fragrance, a medium roast adds depth. Sweet and smooth."
+    },
   },
 
   "charcoal-oolong": {
@@ -53,6 +61,13 @@ window.ZENTEA_TEAS = {
       "焙好的茶帶一點淡淡的炭香，茶湯溫潤、沉穩，適合想喝點有溫度的茶的時候。",
     ],
     more: "炭焙是台灣傳統的焙茶方式：把龍眼木燒成炭，再覆上一層炭灰控制溫度，用文火長時間烘焙。比起電焙，炭火的熱度更柔和，焙出來的茶香氣溫潤、帶著炭火的暖意，也比較耐泡。",
+    // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
+    en: {
+      "process": "Traditionally roasted over longan-wood charcoal",
+      "aroma": "Light charcoal and roasted notes",
+      "taste": "Mellow, deep, with a sweet finish",
+      "summary": "Oolong from an ecological garden in Nantou, roasted the traditional way over longan-wood charcoal. A light charcoal note, mellow and deep."
+    },
   },
 
   "honey-black": {
@@ -75,6 +90,13 @@ window.ZENTEA_TEAS = {
       "因為是自然生態，沒有使用農藥跟化學肥料，茶葉會被一種叫「茶小綠葉蟬」的小蟲吃；吃過之後烘出來的茶，會帶一種天然、獨特的蜜果香。",
     ],
     more: "小綠葉蟬叮咬嫩芽後，茶樹會產生帶香氣的防禦物質，經過萎凋與發酵轉成蜜果香，東方美人茶的香氣也是這樣來的。因為要讓蟲來吃，茶園不能噴農藥：這股蜜香，其實就是自然生態的證明。",
+    // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
+    en: {
+      "process": "Leafhopper-bitten・Fully oxidized",
+      "aroma": "Natural honey-fruit, ripe fruit",
+      "taste": "Gentle and sweet, flavorful but not heavy",
+      "summary": "From an ecological tea garden in Nantou, every leaf picked by hand. Grown without pesticides or chemical fertilizers, the young buds are nibbled by tea green leafhoppers, giving a natural, distinctive honey-fruit aroma."
+    },
   },
 
   gaba: {
@@ -97,6 +119,13 @@ window.ZENTEA_TEAS = {
       "特殊的厭氧發酵，會讓茶葉裡的麩胺酸轉化成 γ-胺基丁酸（GABA）。γ-胺基丁酸是我們腦中最主要的抑制性神經傳導物質，所以這款茶又被叫作「好睡茶」。",
     ],
     more: "「佳葉龍」就是 GABA 的音譯。製作時把茶菁放在不透氣（例如充滿氮氣）的環境中進行厭氧處理；依茶改場的標準，每 100 公克茶葉的 GABA 含量要在 150 毫克以上，才能稱為佳葉龍茶。",
+    // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
+    en: {
+      "process": "Special anaerobic processing",
+      "aroma": "Natural honey-fruit",
+      "taste": "Deep, mellow, soft",
+      "summary": "An oolong made with a special anaerobic process, with a natural honey-fruit aroma and a deep, mellow character."
+    },
   },
 
   "ruby-black": {
@@ -120,6 +149,13 @@ window.ZENTEA_TEAS = {
       "紅玉又叫作「台茶 18 號」，帶一種非常特殊的肉桂跟薄荷的香氣，所以又被稱作「台灣香」。",
     ],
     more: "紅玉是茶改場魚池分場以緬甸大葉種與台灣野生山茶雜交培育出的品種，1999 年命名為台茶 18 號。它的香氣在其他紅茶裡很少見，是只屬於台灣的紅茶風味。",
+    // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
+    en: {
+      "process": "台茶 18 號・Fully oxidized",
+      "aroma": "Cinnamon and mint",
+      "taste": "Full, sweet, with a cool finish",
+      "summary": "Black tea from the mountains of Nantou, made by our partner farm and picked leaf by leaf. Also known as 台茶 18 號, it has a rare cinnamon and mint aroma known as 台灣香."
+    },
   },
 
   "yushan-oolong": {
@@ -142,5 +178,12 @@ window.ZENTEA_TEAS = {
       "用中發酵、輕烘焙製成，帶有玉山茶區特殊的「山頭氣」；烏龍茶的層次感非常豐富，味道高雅清香。",
     ],
     more: "高海拔茶區日夜溫差大、雲霧多，茶樹長得慢，葉片厚、內含物豐富，所以茶湯滑順、耐沖泡。茶人說的「山頭氣」，就是每座山的風土在茶裡留下的獨特氣息。",
+    // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
+    en: {
+      "process": "Medium oxidation・Light roast",
+      "aroma": "Elegant fragrance with the character of Yushan",
+      "taste": "Layered, elegant, delicate",
+      "summary": "From the Yushan tea region, grown naturally and picked leaf by leaf. Medium oxidized and lightly roasted, with the distinctive character of the Yushan mountains. Layered and elegantly fragrant."
+    },
   },
 };

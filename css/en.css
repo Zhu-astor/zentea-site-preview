@@ -1,0 +1,24 @@
+/* 英文版（en/*.html）專用的調整：中文排版用的寬字距、直排、字距換行，換成適合英文的設定。
+   只有 en/ 底下的頁面會載入這支（scripts/build_en.py 自動加上）。 */
+
+/* 中文的寬字距（0.1em 以上）放在英文上會太散；英文一律收窄，標題略寬一點 */
+html[lang="en"] body * { letter-spacing: 0.01em !important; }
+html[lang="en"] body :is(h1, h2, h3, .pdx-h2, .pdx-name) { letter-spacing: 0.03em !important; }
+/* 不要在單字中間斷行 */
+html[lang="en"] body { word-break: normal; overflow-wrap: break-word; }
+
+/* 茶知識下拉選單：中文直排，英文改成橫排、一行一個 */
+@media (min-width: 961px) {
+  html[lang="en"] .site-nav__panel { width: 560px; gap: 36px; }
+  html[lang="en"] .site-nav__panel-list { flex-direction: column; gap: 4px; }
+  html[lang="en"] .site-nav__panel-list li + li { border-right: 0; border-top: 1px solid rgba(74, 64, 54, 0.14); }
+  html[lang="en"] .site-nav__links .site-nav__panel-list a {
+    writing-mode: horizontal-tb;
+    min-height: 0;
+    padding: 12px 4px;
+    font-size: 17px;
+  }
+}
+
+/* 商品頁：「Options」標籤不換行 */
+html[lang="en"] .pdx-label { white-space: nowrap; }

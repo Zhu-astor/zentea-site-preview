@@ -359,12 +359,12 @@ html, body.products-page {
   .p-card__media img,
   .p-card__media::before { translate: 0 8px; }
 }
-.p-card[data-slug="honey-black"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-honey-black-2.webp"); }
-.p-card[data-slug="gaba"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-gaba-2.webp"); }
-.p-card[data-slug="fresh-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-fresh-oolong-2.webp"); }
-.p-card[data-slug="yushan-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-yushan-oolong-2.webp"); }
-.p-card[data-slug="charcoal-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-charcoal-oolong-2.webp"); }
-.p-card[data-slug="ruby-black"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-ruby-black-2.webp"); }
+.p-card[data-slug="honey-black"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-honey-black-3.webp"); }
+.p-card[data-slug="gaba"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-gaba-3.webp"); }
+.p-card[data-slug="fresh-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-fresh-oolong-3.webp"); }
+.p-card[data-slug="yushan-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-yushan-oolong-3.webp"); }
+.p-card[data-slug="charcoal-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-charcoal-oolong-3.webp"); }
+.p-card[data-slug="ruby-black"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-ruby-black-3.webp"); }
 
 /* 商品本體要壓在裝飾之上 */
 .p-card__media img {

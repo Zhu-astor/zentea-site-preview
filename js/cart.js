@@ -81,7 +81,7 @@
   }
 
   async function api(path, options) {
-    const res = await fetch(API_BASE + path, options);
+    const res = await fetch(API_BASE + (window.ZT ? window.ZT.api(path) : path), options); // 英文頁加 ?lang=en
     if (!res.ok) throw new Error(`API ${path} 回應 ${res.status}`);
     return res.json();
   }

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<!-- 自動產生：請改中文頁或 i18n/en.json，再執行 python3 scripts/build_en.py -->
+<base href="../">
+<link rel="alternate" hreflang="zh-Hant" href="https://www.organic-naturetea.com/product.html">
+<link rel="alternate" hreflang="en" href="https://www.organic-naturetea.com/en/product.html">
+<link rel="alternate" hreflang="x-default" href="https://www.organic-naturetea.com/product.html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Teas | 蟬吃茶</title>
+<link rel="stylesheet" href="css/style.css?v=e88de1b2">
+<link rel="stylesheet" href="css/products.css?v=2690522c">
+<link rel="stylesheet" href="css/cart.css?v=bf89e140">
+<link rel="stylesheet" href="css/site-nav.css?v=bf457208">
+<link rel="stylesheet" href="css/shop.css?v=e1ae40b8">
+<link rel="stylesheet" href="css/product-detail.css?v=a1954284">
+<link rel="stylesheet" href="css/en.css?v=804175db">
+</head>
+<!-- 商品詳細頁：product.html?slug=…。三個入口都進到這裡：首頁測驗結果、首頁「認識茶」卡片、蟬茶鋪「了解更多」。
+     內容全部來自後端 /api/products/<slug>/（後台「商品」的「商品詳細頁」欄位），js/product-page.js 負責填入。 -->
+<body class="products-page product-page pdx-page shop-ui nav-offset">
+
+<header class="site-nav" data-site-nav data-variant="frost">
+  <a href="en/index.html" class="site-nav__logo"><img src="assets/img/logo.png" alt="蟬吃茶"></a>
+  <nav class="site-nav__links" id="site-nav-links" aria-label="Main menu">
+    <a href="en/products.html" class="is-active">蟬茶鋪</a>
+    <a href="journal.html">蟬茶誌</a>
+    <div class="site-nav__item site-nav__item--menu" data-nav-menu>
+      <a href="knowledge.html" aria-haspopup="true" aria-expanded="false">Tea Knowledge</a>
+      <div class="site-nav__dropdown">
+        <div class="site-nav__panel">
+          <img class="site-nav__panel-art" src="assets/img/nav-knowledge-cup.webp" alt="" aria-hidden="true">
+          <ul class="site-nav__panel-list">
+            <li><a href="articles.html?category=%E8%8C%B6%E7%9F%A5%E8%AD%98" data-nav-category="茶知識">Tea Basics</a></li>
+            <li><a href="articles.html?category=%E8%A3%BD%E8%8C%B6%E5%B7%A5%E8%97%9D" data-nav-category="製茶工藝">Tea Making</a></li>
+            <li><a href="articles.html?category=%E6%B2%96%E6%B3%A1%E8%88%87%E4%BF%9D%E5%AD%98" data-nav-category="沖泡與保存">Brewing Guide</a></li>
+            <li><a href="articles.html?category=%E8%8C%B6%E5%99%A8%E8%88%87%E5%93%81%E9%A3%B2" data-nav-category="茶器與品飲">Teaware &amp; Tasting</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="video.html">蟬茶影音</a>
+    <a href="experience.html">蟬茗齋</a>
+    <a href="en/index.html#session-4">About Us</a>
+  </nav>
+  <div class="site-nav__icons">
+    <a href="order-lookup.html" class="site-nav__icon" aria-label="Order Status" title="Order Status">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+    </a>
+    <a href="cart.html" class="site-nav__icon" aria-label="Cart" title="Cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>
+      <span class="site-nav__count" data-cart-count hidden>0</span>
+    </a>
+    <button type="button" class="site-nav__icon site-nav__menu-btn" data-nav-toggle aria-label="Menu" aria-controls="site-nav-links" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="pdx" data-product-root>
+  <nav class="pdx-crumb" aria-label="Breadcrumb">
+    <a href="en/index.html">Home</a><span aria-hidden="true">›</span><a href="en/products.html">All Teas</a><span aria-hidden="true">›</span><span data-field="crumb"></span>
+  </nav>
+
+  <p class="pdx-status" data-product-status>Loading…</p>
+
+  <article data-product hidden>
+    <!-- 圖片＋購買資訊 -->
+    <section class="pdx-top">
+      <div class="pdx-gallery">
+        <div class="pdx-thumbs" data-thumbs role="tablist" aria-label="Product images"></div>
+        <div class="pdx-stage">
+          <div class="pdx-stage__frame" data-stage></div>
+          <button type="button" class="pdx-stage__arrow pdx-stage__arrow--prev" data-prev aria-label="Previous">‹</button>
+          <button type="button" class="pdx-stage__arrow pdx-stage__arrow--next" data-next aria-label="Next">›</button>
+          <div class="pdx-dots" data-dots aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="pdx-buy">
+        <div class="pdx-tags" data-tags></div>
+        <h1 class="pdx-name" data-field="name"></h1>
+        <p class="pdx-summary" data-field="summary"></p>
+        <p class="pdx-size" data-variant-size hidden></p>
+        <hr class="pdx-rule">
+        <div class="pdx-price-row">
+          <p class="pdx-price" data-field="price"></p>
+          <div class="pdx-variants-wrap" data-variant-field>
+            <span class="pdx-label">Options</span>
+            <div class="pdx-variants" data-variants role="radiogroup" aria-label="Options"></div>
+          </div>
+        </div>
+        <div class="pdx-actions">
+          <div class="pdx-qty">
+            <button type="button" data-step="-1" aria-label="Decrease quantity">−</button>
+            <input type="number" value="1" min="1" max="99" inputmode="numeric" aria-label="Quantity" data-qty>
+            <button type="button" data-step="1" aria-label="Increase quantity">+</button>
+          </div>
+          <button type="button" class="pdx-add" data-add>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.2l2.1 11.2a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6.1"/><circle cx="9.5" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>
+            <span data-add-label>Add to cart</span>
+          </button>
+          <button type="button" class="pdx-fav" data-fav aria-pressed="false" aria-label="Add to favorites">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg>
+          </button>
+        </div>
+        <p class="pdx-soon-note" data-soon-note hidden>This tea is coming soon. Add it to your favorites for now.</p>
+      </div>
+    </section>
+
+    <!-- 四格基本資料 -->
+    <section class="pdx-facts" data-facts aria-label="Details"></section>
+
+    <!-- 風味輪廓＋一句話 -->
+    <section class="pdx-flavor">
+      <div class="pdx-flavor__bars">
+        <h2 class="pdx-h2">Flavor Profile</h2>
+        <p class="pdx-sub">A quick look at this tea's character.</p>
+        <div data-bars></div>
+      </div>
+      <aside class="pdx-oneliner">
+        <div class="pdx-oneliner__head">
+          <span class="pdx-icon pdx-icon--plain" data-icon="leaf"></span>
+          <h2 class="pdx-oneliner__title">This Tea in One Line</h2>
+        </div>
+        <p class="pdx-oneliner__text" data-field="one_liner"></p>
+        <img class="pdx-oneliner__leaf" src="assets/img/leaf-1.png" alt="" aria-hidden="true">
+      </aside>
+    </section>
+
+    <!-- 適合時刻＋建議沖泡 -->
+    <section class="pdx-use">
+      <div class="pdx-moments-wrap" data-moments-section>
+        <h2 class="pdx-h2">Perfect Moments</h2>
+        <p class="pdx-sub">A good cup makes every day a little better.</p>
+        <div class="pdx-moments" data-moments></div>
+      </div>
+      <div class="pdx-brew-wrap" data-brew-section>
+        <h2 class="pdx-h2">How to Brew</h2>
+        <p class="pdx-sub">A few simple steps to the best flavor.</p>
+        <div class="pdx-brew" data-brew></div>
+        <div class="pdx-tip" data-tip-box>
+          <span class="pdx-icon pdx-icon--plain" data-icon="cup"></span>
+          <div><p class="pdx-tip__title">Tip</p><p class="pdx-tip__text" data-field="brew_tip"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 茶品故事 -->
+    <section class="pdx-story" data-story-section>
+      <div class="pdx-story__text">
+        <h2 class="pdx-h2">The Story</h2>
+        <div class="pdx-story__body" data-story></div>
+      </div>
+      <div class="pdx-story__media" data-story-media></div>
+      <a class="pdx-story__more" href="knowledge.html" data-story-link>Read more <span aria-hidden="true">→</span></a>
+    </section>
+  </article>
+
+  <div class="c-empty" data-product-missing hidden>
+    <img src="assets/img/leaf-1.png" alt="" class="c-empty__icon">
+    <p>We couldn't find this tea. It may no longer be available.</p>
+    <a href="en/products.html" class="p-card__cta c-empty__cta">See other teas</a>
+  </div>
+</main>
+
+<footer class="site-footer-bg">
+  <div class="footer-container">
+    <div class="footer-logo-col">
+      <img src="assets/img/logo.png" alt="蟬吃茶 logo" class="footer-logo">
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-col">
+        <h4>About 蟬吃茶</h4>
+        <a href="#">Our Story</a>
+        <a href="#">Store Info</a>
+        <a href="#">Our Tea Makers</a>
+      </div>
+      <div class="footer-col">
+        <h4>About Our Teas</h4>
+        <a href="#">Our Teas</a>
+        <a href="#">Brewing Guide</a>
+      </div>
+      <div class="footer-col">
+        <h4>蟬茶誌 &amp; Tea Knowledge</h4>
+        <a href="journal.html">蟬茶誌</a>
+        <a href="knowledge.html">Tea Knowledge</a>
+        <a href="articles.html">All Articles</a>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#">Tea Bags</a>
+        <a href="#">Loose Leaf Tea</a>
+        <a href="#">Teaware</a>
+        <a href="#">Gift Sets</a>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Service</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Contact Us</a>
+        <a href="#">LINE Official Account</a>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    © 2024 蟬吃茶 CHAN CHA TEA. All rights reserved.
+  </div>
+</footer>
+
+<script src="js/demo-api.js?v=754eeca8"></script>
+<script src="js/i18n.js?v=52feaa2d"></script>
+
+<script src="js/cart.js?v=b8a4d118"></script>
+<script src="js/product-page.js?v=8eceb856"></script>
+<script src="js/site-nav.js?v=ff527f13"></script>
+<script src="js/wrap-guard.js?v=b43c0132"></script>
+</body>
+</html>
