@@ -155,7 +155,6 @@ window.ZENTEA_TEAS = {
     short: "手採紅玉紅",
     glyph: "玉",
     shop: "ruby-black",
-    soon: true,
     img: null,
     tags: ["肉桂香", "薄荷香", "台灣香"],
     brew: { hot: "熱泡：90°C 熱水，3 克配 150 毫升，泡 50 秒到 1 分鐘，太久容易澀。", cold: "冷泡：8 克配 1 公升冷水，冷藏 6 小時，薄荷般的清涼感更明顯。" },

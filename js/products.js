@@ -67,17 +67,23 @@ document.addEventListener("DOMContentLoaded", () => {
     card.append(wish);
 
     const media = el("div", "p-card__media");
-    const img = el("img");
-    img.src = p.image;
-    img.alt = p.name;
-    media.append(img);
+    if (p.image) {
+      const img = el("img");
+      img.src = p.image;
+      img.alt = p.name;
+      media.append(img);
+    } else {
+      // 還沒有商品照（例如紅玉）：用中文茶名的一個字代替
+      media.append(el("span", "p-card__glyph", (p.name_zh || p.name).replace(/^蟬吃/, "").replace(/^手採/, "").charAt(0)));
+    }
     card.append(media);
 
     const body = el("div", "p-card__body");
     body.append(el("p", "p-card__desc", p.summary));
     body.append(el("h3", "p-card__name", p.name));
     // 多個規格時顯示最低價「起」
-    const price = p.min_price == null ? "" : cart.formatPrice(p.min_price);
+    const allPending = p.variants.length > 0 && p.variants.every((v) => v.pending); // 規格還沒確定（例如鮮翠圓罐）
+    const price = allPending ? ZT.t("價格未確定") : p.min_price == null ? "" : cart.formatPrice(p.min_price);
     const priceText = price && p.variants.length > 1 ? ZT.fromPrice(price) : price;
     body.append(el("p", "p-card__price", priceText));
 
@@ -85,7 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
     actions.append(el("span", "p-card__cta", ZT.t("了解更多")));
     const add = el("button", "p-card__add", ZT.t("加入購物車"));
     add.type = "button";
-    if (!variant) {
+    if (allPending) {
+      add.disabled = true;
+      add.textContent = ZT.t("規格未確定");
+    } else if (!variant) {
       add.disabled = true;
       add.textContent = ZT.t("暫不販售");
     } else if (!p.in_stock) {

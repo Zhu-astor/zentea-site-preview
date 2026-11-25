@@ -365,6 +365,19 @@ html, body.products-page {
 .p-card[data-slug="yushan-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-yushan-oolong-4.webp"); }
 .p-card[data-slug="charcoal-oolong"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-charcoal-oolong-4.webp"); }
 .p-card[data-slug="ruby-black"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-ruby-black-4.webp"); }
+.p-card[data-slug="fresh-oolong-can"] .p-card__media::before { background-image: url("../assets/img/blobs/blob-fresh-oolong-4.webp"); }
+
+/* 還沒有商品照的茶（例如紅玉）：用茶名的一個字代替，位置和商品照一樣壓在暈染上面 */
+.p-card__glyph {
+  position: relative;
+  z-index: 1;
+  translate: 0 14px;
+  font-family: "Noto Serif TC", serif;
+  font-size: 88px;
+  line-height: 1;
+  color: rgba(74, 64, 54, 0.55);
+}
+@media (max-width: 760px) { .p-card__glyph { font-size: 64px; translate: 0 8px; } }
 
 /* 商品本體要壓在裝飾之上 */
 .p-card__media img {

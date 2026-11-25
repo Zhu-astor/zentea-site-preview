@@ -168,10 +168,10 @@
         b.setAttribute("aria-checked", String(on));
       });
       // 規格待定（後台售價填 0）：可以點來看圖和尺寸，價格顯示「價格待定」、不能加入購物車
-      if (v && v.pending) field("price").textContent = ZT.t("價格待定");
+      if (v && v.pending) field("price").textContent = ZT.t("價格未確定");
       else field("price").replaceChildren(v ? priceText(v.price) : "");
       addBtn.disabled = !v || !v.in_stock;
-      $("[data-add-label]").textContent = ZT.t(v && v.pending ? "規格待定" : v && !v.in_stock ? "已售完" : "加入購物車");
+      $("[data-add-label]").textContent = ZT.t(v && v.pending ? "規格未確定" : v && !v.in_stock ? "已售完" : "加入購物車");
       // 規格有自己的包裝尺寸就顯示在介紹下方
       const size = $("[data-variant-size]");
       size.textContent = v && v.size ? `${ZT.t("包裝尺寸")}${ZT.en ? ": " : "："}${v.size}` : "";
@@ -204,7 +204,7 @@
         b.addEventListener("click", () => selectVariant(v.sku));
         variantsBox.append(b);
       });
-      const first = product.variants.find((v) => v.in_stock);
+      const first = product.variants.find((v) => v.in_stock) || product.variants.find((v) => v.pending); // 全部規格未確定時選第一個，才會顯示圖片與尺寸
       if (first) selectVariant(first.sku);
       else {
         field("price").replaceChildren(product.min_price == null ? "" : priceText(product.min_price));

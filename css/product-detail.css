@@ -231,6 +231,7 @@
 .pdx-page[data-tea="honey-black"]     { --pdx-blob: url("../assets/img/blobs/blob-honey-black-4.webp"); }
 .pdx-page[data-tea="gaba"]            { --pdx-blob: url("../assets/img/blobs/blob-gaba-4.webp"); }
 .pdx-page[data-tea="fresh-oolong"]    { --pdx-blob: url("../assets/img/blobs/blob-fresh-oolong-4.webp"); }
+.pdx-page[data-tea="fresh-oolong-can"] { --pdx-blob: url("../assets/img/blobs/blob-fresh-oolong-4.webp"); }
 .pdx-page[data-tea="yushan-oolong"]   { --pdx-blob: url("../assets/img/blobs/blob-yushan-oolong-4.webp"); }
 .pdx-page[data-tea="charcoal-oolong"] { --pdx-blob: url("../assets/img/blobs/blob-charcoal-oolong-4.webp"); }
 .pdx-page[data-tea="ruby-black"]      { --pdx-blob: url("../assets/img/blobs/blob-ruby-black-4.webp"); }
