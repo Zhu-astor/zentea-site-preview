@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     li.querySelector(".c-line__total").textContent = hasProblem ? "—" : cart.formatPrice(item.line_total);
 
     const problem = li.querySelector(".c-line__problem");
-    problem.textContent = item.problems.join("、");
+    problem.textContent = item.problems.join(ZT.en ? "; " : "、");
     problem.hidden = !hasProblem;
 
     const input = li.querySelector(".c-qty__input");
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
       layout.hidden = false;
     } catch (e) {
       if (id !== requestId) return;
-      status.textContent = "暫時無法取得最新價格與庫存，請稍後再重新整理頁面。";
+      status.textContent = ZT.t("暫時無法取得最新價格與庫存，請稍後再重新整理頁面。");
       status.hidden = false;
       layout.hidden = true;
     }

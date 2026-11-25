@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const card = el("div", "vd-card vd-card--soon");
       const thumb = el("div", "vd-card__thumb");
       thumb.append(playIcon());
-      card.append(thumb, el("h3", "vd-card__title", "影片即將上架"), el("p", "vd-card__date", "COMING SOON"), el("p", "vd-card__text", "泡茶、茶園與製茶的故事，正在拍攝整理中。"));
+      card.append(thumb, el("h3", "vd-card__title", ZT.t("影片即將上架")), el("p", "vd-card__date", "COMING SOON"), el("p", "vd-card__text", ZT.t("泡茶、茶園與製茶的故事，正在拍攝整理中。")));
       grid.append(card);
     }
     return;
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       return b;
     };
-    tabs.append(tab("全部影片", ""), ...categories.map((c) => tab(c, c)));
+    tabs.append(tab(ZT.t("全部影片"), ""), ...categories.map((c) => tab(c, c)));
     tabs.firstChild.classList.add("is-active");
     tabs.hidden = false;
   }

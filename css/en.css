@@ -22,3 +22,6 @@ html[lang="en"] body { word-break: normal; overflow-wrap: break-word; }
 
 /* 商品頁：「Options」標籤不換行 */
 html[lang="en"] .pdx-label { white-space: nowrap; }
+
+/* 購物車：「Remove」不換行 */
+html[lang="en"] .c-line__remove, html[lang="en"] [data-remove] { white-space: nowrap; }

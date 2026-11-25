@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("[data-f]").forEach((el) => (el.textContent = order[el.dataset.f] || ""));
     document.querySelectorAll("[data-money]").forEach((el) => {
       const n = order[el.dataset.money];
-      el.textContent = el.dataset.money === "shipping_fee" && n === 0 ? "免運" : cart.formatPrice(n);
+      el.textContent = el.dataset.money === "shipping_fee" && n === 0 ? ZT.t("免運") : cart.formatPrice(n);
     });
     const rows = { store: order.is_cvs, shipment: !!order.shipment_no, logistics: !!order.logistics_status };
     document.querySelectorAll("[data-row]").forEach((el) => (el.hidden = !rows[el.dataset.row]));
@@ -44,21 +44,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const orderNo = form.elements.order_no.value.trim();
     const email = form.elements.email.value.trim();
     if (!orderNo || !email) {
-      showError("請填寫訂單編號與 Email");
+      showError(ZT.t("請填寫訂單編號與 Email"));
       return;
     }
     submit.disabled = true;
     try {
-      const res = await fetch(`${cart.apiBase}/api/orders/lookup/`, {
+      const res = await fetch(cart.apiBase + ZT.api("/api/orders/lookup/"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ order_no: orderNo, email }),
       });
       const data = await res.json();
       if (res.ok) render(data);
-      else showError(data.error || "查詢失敗，請稍後再試");
+      else showError(data.error || ZT.t("查詢失敗，請稍後再試"));
     } catch (err) {
-      showError("暫時無法連線，請稍後再試");
+      showError(ZT.t("暫時無法連線，請稍後再試"));
     } finally {
       submit.disabled = false;
     }

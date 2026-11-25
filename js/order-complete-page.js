@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (orderNo) history.replaceState(null, "", location.pathname);
 
   if (!no || !t) {
-    status.textContent = "找不到訂單資訊。如果已經完成付款，訂單確認信會寄到您的信箱。";
+    status.textContent = ZT.t("找不到訂單資訊。如果已經完成付款，訂單確認信會寄到您的信箱。");
     return;
   }
 
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const li = document.createElement("li");
         li.className = "co__item";
         const name = document.createElement("span");
-        name.textContent = `${item.product_name} ${item.variant_name} × ${item.quantity}`;
+        name.textContent = ZT.en ? `${item.product_name}, ${item.variant_name} × ${item.quantity}` : `${item.product_name} ${item.variant_name} × ${item.quantity}`;
         const price = document.createElement("span");
         price.textContent = cart.formatPrice(item.line_total);
         li.append(name, price);
@@ -69,27 +69,27 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     );
     $("[data-order-subtotal]").textContent = cart.formatPrice(order.subtotal);
-    $("[data-order-shipping]").textContent = order.shipping_fee === 0 ? "免運" : cart.formatPrice(order.shipping_fee);
+    $("[data-order-shipping]").textContent = order.shipping_fee === 0 ? ZT.t("免運") : cart.formatPrice(order.shipping_fee);
     $("[data-order-total]").textContent = cart.formatPrice(order.total);
 
     const title = $("[data-order-title]");
     if (order.status === "pending_payment") {
-      title.textContent = "付款確認中";
-      message(["正在等候綠界回傳付款結果，請稍候，不要關閉這個頁面。"]);
+      title.textContent = ZT.t("付款確認中");
+      message([ZT.t("正在等候綠界回傳付款結果，請稍候，不要關閉這個頁面。")]);
     } else if (order.status === "payment_failed" || order.status === "cancelled") {
-      title.textContent = "付款未完成";
+      title.textContent = ZT.t("付款未完成");
       message(
-        ["這筆訂單沒有付款成功，不會出貨。購物車內容都還在，可以回購物車重新結帳。"],
-        [["回購物車", "cart.html"]]
+        [ZT.t("這筆訂單沒有付款成功，不會出貨。購物車內容都還在，可以回購物車重新結帳。")],
+        [[ZT.t("回購物車"), ZT.page("cart.html")]]
       );
     } else {
-      title.textContent = "訂購完成，謝謝您";
+      title.textContent = ZT.t("訂購完成，謝謝您");
       message(
         [
-          "我們已收到您的付款，會盡快為您備貨出貨。",
-          "出貨時會寄 Email 通知您寄貨編號；之後隨時可以到「訂單查詢」，用訂單編號和 Email 查看物流進度。",
+          ZT.t("我們已收到您的付款，會盡快為您備貨出貨。"),
+          ZT.t("出貨時會寄 Email 通知您寄貨編號；之後隨時可以到「訂單查詢」，用訂單編號和 Email 查看物流進度。"),
         ],
-        [["查詢訂單", "order-lookup.html"], ["繼續逛逛", "products.html"]]
+        [[ZT.t("查詢訂單"), ZT.page("order-lookup.html")], [ZT.t("繼續逛逛"), ZT.page("products.html")]]
       );
     }
     status.hidden = true;
@@ -109,9 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let polls = 0;
   async function load() {
     try {
-      const res = await fetch(`${cart.apiBase}/api/orders/${encodeURIComponent(no)}/?t=${encodeURIComponent(t)}`);
+      const res = await fetch(cart.apiBase + ZT.api(`/api/orders/${encodeURIComponent(no)}/?t=${encodeURIComponent(t)}`));
       if (res.status === 404) {
-        status.textContent = "查不到這筆訂單。";
+        status.textContent = ZT.t("查不到這筆訂單。");
         return;
       }
       if (!res.ok) throw new Error(res.status);
@@ -123,10 +123,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (order.status === "pending_payment") {
         polls += 1;
         if (polls < MAX_POLLS) setTimeout(load, POLL_MS);
-        else message(["還沒收到付款結果。如果您已經完成付款，請稍後重新整理這個頁面，或聯絡我們並提供訂單編號。"]);
+        else message([ZT.t("還沒收到付款結果。如果您已經完成付款，請稍後重新整理這個頁面，或聯絡我們並提供訂單編號。")]);
       }
     } catch (e) {
-      status.textContent = "暫時無法查詢訂單，請稍後重新整理這個頁面。";
+      status.textContent = ZT.t("暫時無法查詢訂單，請稍後重新整理這個頁面。");
     }
   }
 

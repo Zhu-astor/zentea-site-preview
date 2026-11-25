@@ -88,7 +88,7 @@
     $("[data-tags]").replaceChildren(...(product.tags || []).map((t) => el("span", "", t)));
 
     // ---------- 圖片輪播：沒有照片的位置放「準備中」 ----------
-    const glyph = product.name.replace(/^蟬吃/, "").replace(/^手採/, "").charAt(0);
+    const glyph = (product.name_zh || product.name).replace(/^蟬吃/, "").replace(/^手採/, "").charAt(0);
     const slides = (product.gallery || []).map((src) => ({ src }));
     const mainSrc = slides[0] && slides[0].src; // 商品主圖；選到有自己圖片的規格時會暫時換掉
     if (!slides.length) slides.push({ glyph });
@@ -107,7 +107,12 @@
         const img = el("img");
         img.src = s.src;
         img.alt = i === 0 ? product.name : "";
-        slide.append(img);
+        if (i === 0) {
+          // 商品照包一層，暈染色塊照這層定位，和蟬茶鋪商品卡的相對位置一樣（css/product-detail.css）
+          const wrap = el("span", "pdx-slide__product");
+          wrap.append(img);
+          slide.append(wrap);
+        } else slide.append(img);
         thumb.append(Object.assign(el("img"), { src: s.src, alt: "" }));
       } else if (s.glyph) {
         slide.append(el("span", "pdx-slide__glyph", s.glyph));

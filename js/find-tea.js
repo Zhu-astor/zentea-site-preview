@@ -11,7 +11,11 @@
  * 注意：「感覺」題描述的是使用者想要的喝茶情境，結果頁不寫成茶的功效（食安法第 28 條）。
  */
 (function () {
-  const TEAS = window.ZENTEA_TEAS;
+  const ZT = window.ZT;
+  // 英文頁用 teas.js 每款茶裡的 en 欄位（名稱、短名、香氣、泡法…）
+  const TEAS = ZT.en
+    ? Object.fromEntries(Object.entries(window.ZENTEA_TEAS).map(([k, t]) => [k, t.en ? { ...t, ...t.en } : t]))
+    : window.ZENTEA_TEAS;
   // 測驗內部代號 → js/teas.js 的 key（也是商品詳細頁的 slug）
   const SLUG = {
     xian_cui: "fresh-oolong", tan_bei: "charcoal-oolong", mi_xiang: "honey-black",
@@ -105,6 +109,84 @@
     solo: "只喝茶", bread: "早餐麵包", dessert: "甜點搭配", fruit: "清爽小點",
   };
 
+
+  // ---------- 英文版（/en/find-tea.html）：題目、選項、標籤換成英文，分數不變 ----------
+  const QS_EN = {
+    daily: ["01 Daily", "When do you usually make tea?", "Pick the one closest to your day.", {
+      work: ["Sipping while working or studying", "With a cup nearby, I can keep going until the job's done."],
+      meal: ["After a meal", "Something to round off the meal."],
+      me_time: ["Time for myself", "Afternoon or evening, brewing and sipping slowly."],
+      weekend: ["A proper pot on the weekend", "Smelling the aroma and noticing how the tea changes."],
+      share: ["With family and friends", "A pot on the table for everyone."],
+      neutral: ["Whenever I feel like it", "No particular occasion."],
+      beginner: ["I'm new to tea", "I'd like to start with something easy."],
+    }],
+    feeling: ["02 Feeling", "How would you like to feel while drinking this tea?",
+      "Pick the feeling you'd most like. This only fine-tunes the recommendation and is not a medical or health claim.", {
+      relax: ["Relaxed and unhurried", "A softer, gentler cup to slow things down."],
+      clear: ["Fresh and crisp", "Clean and bright, not too heavy."],
+      warm: ["Warm and settled", "Roasted, ripe flavors with a fuller feel."],
+      reward: ["A little treat", "A sweet, pleasing aroma that feels satisfying."],
+      immerse: ["Absorbed in the moment", "Paying attention to aroma, layers and finish."],
+      easy: ["Easygoing", "Smooth and easy to drink, even brewed casually."],
+      neutral: ["No particular feeling", "This won't affect the recommendation."],
+    }],
+    flavor: ["03 Taste", "If this tea is going to be with you for a while, which would you not get tired of?",
+      "No need to know tea names. Go with flavors you know.", {
+      floral: ["Fresh and floral", "Light floral notes, like mountain air. Clean and airy."],
+      sweet: ["Sweet with a lingering finish", "Sweet on the first sip, and it stays with you."],
+      honey: ["Honey and ripe fruit", "Like honey and ripe fruit. Naturally sweet."],
+      roasted: ["Roasted and nutty", "Like toasted nuts, grains or charcoal. Warm and deep."],
+      bold: ["Bold and distinctive", "A strong aroma and full body that I remember."],
+      soft: ["Soft and smooth", "Nothing too strong. Comfortable and easy to drink."],
+      explore: ["I drink everything and want something different", "I'd rather discover a distinctive tea than play it safe."],
+      unknown: ["I'm not sure what I like yet", "That's fine. Let's try an easier way."],
+    }, {
+      fb_fresh: "Flowers, grass and fresh air",
+      fb_honey: "Honey and ripe fruit",
+      fb_nutty: "Toasted nuts and grains",
+      fb_deep: "Deep, rich aromas",
+      fb_soft: "Nothing too strong, smooth is best",
+      fb_beginner: "I really don't know. Pick an easy one for me.",
+    }],
+    pairing: ["04 Pairing", "What do you usually have with tea at home?", "Pick 1 or 2. It's fine if it varies.", {
+      solo: ["Just the tea", "Most of the time I just want to enjoy the tea."],
+      bread: ["Breakfast or bread", "Toast, croissants, bread, sometimes with breakfast."],
+      dessert: ["Desserts or cookies", "Something sweet in the afternoon."],
+      meal: ["Meals", "With or after a meal."],
+      fruit: ["Fruit or light snacks", "Fruit, dried fruit or lighter snacks."],
+      neutral: ["Whatever's around", "Pairing isn't how I choose tea."],
+    }],
+    brew: ["05 Brewing", "Finally, how do you usually brew tea at home?", "No right answer. Pick what you'd really do.", {
+      cup: ["Straight in a cup", "A mug or glass. Simple is best."],
+      gongfu: ["Teapot or gaiwan", "Happy to take a little more time to brew it properly."],
+      cold: ["Cold brew", "In the fridge, to drink the next day."],
+      thermos: ["Thermos or big cup", "A larger batch to take with me."],
+      neutral: ["All kinds of ways", "Brewing method won't limit my choice."],
+      beginner: ["I'm not sure how to brew tea yet", "I'd like something easy to start with."],
+    }],
+  };
+  if (ZT.en) {
+    QS.forEach((q) => {
+      const [step, title, sub, opts, fb] = QS_EN[q.key];
+      Object.assign(q, { step, title, sub });
+      q.options.forEach((o) => ([o.title, o.desc] = opts[o.id]));
+      (q.fallback || []).forEach((o) => (o.title = fb[o.id]));
+    });
+    Object.assign(TAGLINE, {
+      xian_cui: "Sweet・Everyday・Easy", tan_bei: "Roasted・Warm・Full", mi_xiang: "Sweet aroma・Friendly・Easy to drink",
+      hong_yu: "Rich・Distinctive・For savoring", gaba: "Soft・Comfortable・Easy to enjoy", yu_shan: "Floral・Delicate・For slow sipping",
+    });
+    Object.assign(TAG, {
+      work: "Everyday drinking", meal: "After meals", me_time: "Time for yourself", weekend: "Slow sipping", share: "Good for sharing", beginner: "Easy to start",
+      relax: "Slowing down", clear: "Fresh and crisp", warm: "Warmth", reward: "A treat", immerse: "Savoring", easy: "Easygoing",
+      floral: "Fresh and floral", sweet: "Sweet finish", honey: "Honey and ripe fruit", roasted: "Roasted and nutty", bold: "Bold", soft: "Soft and smooth", explore: "Exploring new flavors",
+      fb_fresh: "Fresh and floral", fb_honey: "Honey and ripe fruit", fb_nutty: "Toasted nuts and grains", fb_deep: "Deep and rich", fb_soft: "Smooth",
+      cup: "Simple cup", gongfu: "Teapot brewing", cold: "Cold brew", thermos: "Big-cup brewing",
+      solo: "Tea on its own", bread: "Breakfast", dessert: "With desserts", fruit: "Light snacks",
+    });
+  }
+
   let idx = 0;
   let answers = {};
   let pairing = [];
@@ -129,7 +211,9 @@
 
   // 題目畫面照 tea-quiz-ui（尋茶日常）視覺稿：01 / 05 進度點、分類標籤、大標、
   // 兩欄單選卡（圓形勾選）、「下一題」按鈕、「先跳過這題」。選了之後按下一題才前進。
-  const CATEGORY = { daily: "日常", feeling: "感覺", flavor: "喜好", pairing: "搭配", brew: "泡法" };
+  const CATEGORY = ZT.en
+    ? { daily: "Daily", feeling: "Feeling", flavor: "Taste", pairing: "Pairing", brew: "Brewing" }
+    : { daily: "日常", feeling: "感覺", flavor: "喜好", pairing: "搭配", brew: "泡法" };
 
   function render() {
     const q = QS[idx];
@@ -146,9 +230,9 @@
     dots.setAttribute("aria-hidden", "true");
     QS.forEach((_, i) => dots.append(el("li", i < idx ? "is-done" : i === idx ? "is-on" : "")));
     prog.replaceChildren(num, dots);
-    prog.setAttribute("aria-label", `測驗進度：第 ${idx + 1} 題，共 ${QS.length} 題`);
+    prog.setAttribute("aria-label", ZT.en ? `Question ${idx + 1} of ${QS.length}` : `測驗進度：第 ${idx + 1} 題，共 ${QS.length} 題`);
     if (idx > 0 || fb) {
-      const back = el("button", "ft-back", "← 上一題");
+      const back = el("button", "ft-back", ZT.t("← 上一題"));
       back.type = "button";
       back.addEventListener("click", () => {
         if (fallbackShown) fallbackShown = false;
@@ -160,12 +244,12 @@
 
     const form = el("form", "ft-form");
     form.noValidate = true;
-    const h = el("h1", "ft-q", fb ? "沒關係，換個簡單的方式。" : q.title);
+    const h = el("h1", "ft-q", fb ? ZT.t("沒關係，換個簡單的方式。") : q.title);
     h.id = "ft-q";
     form.append(
-      el("span", "ft-cat", fb ? "喜好・補充" : CATEGORY[q.key]),
+      el("span", "ft-cat", fb ? ZT.t("喜好・補充") : CATEGORY[q.key]),
       h,
-      el("p", "ft-help", fb ? "哪一組味道聞起來，你比較想靠近？" : q.sub)
+      el("p", "ft-help", fb ? ZT.t("哪一組味道聞起來，你比較想靠近？") : q.sub)
     );
     const fs = el("fieldset", "ft-choices");
     fs.setAttribute("aria-labelledby", "ft-q");
@@ -208,9 +292,9 @@
     const actions = el("div", "ft-act");
     const next = el("button", "ft-next");
     next.type = "submit";
-    next.append(idx === QS.length - 1 ? "看結果 " : "下一題 ", el("span", "", "→"));
+    next.append(ZT.t(idx === QS.length - 1 ? "看結果 " : "下一題 "), el("span", "", "→"));
     next.lastChild.setAttribute("aria-hidden", "true");
-    const skip = el("button", "ft-skip", "先跳過這題");
+    const skip = el("button", "ft-skip", ZT.t("先跳過這題"));
     skip.type = "button";
     skip.addEventListener("click", () => {
       if (q.key === "pairing") pairing = [];
@@ -224,7 +308,7 @@
       e.preventDefault();
       const checked = [...fs.querySelectorAll("input:checked")];
       if (!checked.length) {
-        status.textContent = multi ? "請選 1～2 個，或按「先跳過這題」。" : "請先選一個最接近你的選項。";
+        status.textContent = ZT.t(multi ? "請選 1～2 個，或按「先跳過這題」。" : "請先選一個最接近你的選項。");
         return;
       }
       if (multi) return checked[0].value === "neutral" ? choose(q, list.find((o) => o.id === "neutral")) : nextFromMulti();
@@ -310,7 +394,7 @@
     return { scores, arr, margin, confidence, beginnerCount, explore };
   }
 
-  const tone = (c) => (c >= 0.8 ? "高信心推薦" : c >= 0.6 ? "很適合你的選擇" : "先從這款開始");
+  const tone = (c) => ZT.t(c >= 0.8 ? "高信心推薦" : c >= 0.6 ? "很適合你的選擇" : "先從這款開始");
 
   // 推薦理由：哪幾題的答案替這款茶加了最多分（分數 × 該題權重）
   function reasonsFor(key) {
@@ -333,7 +417,7 @@
     return out.slice(0, 4);
   }
 
-  const detailUrl = (key) => `product.html?slug=${encodeURIComponent(SLUG[key])}`;
+  const detailUrl = (key) => ZT.page(`product.html?slug=${encodeURIComponent(SLUG[key])}`);
 
   function teaImage(key, className) {
     const tea = TEAS[SLUG[key]];
@@ -345,12 +429,12 @@
       img.loading = "lazy";
       wrap.append(img);
     } else wrap.append(el("span", "ft-glyph", tea.glyph));
-    if (tea.soon) wrap.append(el("span", "ft-soon", "即將上架"));
+    if (tea.soon) wrap.append(el("span", "ft-soon", ZT.t("即將上架")));
     return wrap;
   }
 
   function moreLink(key, label) {
-    const a = el("a", "ft-more", label || "了解更多 →");
+    const a = el("a", "ft-more", label || ZT.t("了解更多 →"));
     a.href = detailUrl(key);
     return a;
   }
@@ -385,10 +469,10 @@
     if (reasons.length) {
       reasons.forEach((x) => {
         const li = el("li");
-        li.append(el("strong", "", `${x.step}「${x.title}」`), ` ${top.short}在這一項 ${x.score} / 5`);
+        li.append(el("strong", "", ZT.en ? `${x.step}: “${x.title}”` : `${x.step}「${x.title}」`), ZT.en ? ` ${top.short} scores ${x.score} / 5 here` : ` ${top.short}在這一項 ${x.score} / 5`);
         whyList.append(li);
       });
-    } else whyList.append(el("li", "", "你跳過了大部分題目，先推薦最容易開始、多數人都喝得順的一款。"));
+    } else whyList.append(el("li", "", ZT.t("你跳過了大部分題目，先推薦最容易開始、多數人都喝得順的一款。")));
     const whyPanel = el("div");
     whyPanel.append(whyList);
     const chips = el("div", "ft-chips");
@@ -398,16 +482,16 @@
     const descPanel = el("div");
     descPanel.append(el("p", "ft-panel__p", top.summary));
     const flavor = el("p", "ft-panel__p ft-panel__meta");
-    flavor.append(el("strong", "", "香氣　"), top.aroma, el("br"), el("strong", "", "口感　"), top.taste);
+    flavor.append(el("strong", "", ZT.t("香氣") + "　"), top.aroma, el("br"), el("strong", "", ZT.t("口感") + "　"), top.taste);
     descPanel.append(flavor);
 
     const cold = answers.brew?.id === "cold";
     const brewPanel = el("div");
     const brewList = el("ul", "ft-list");
-    [[cold ? "推薦冷泡" : "推薦熱泡", cold ? top.brew.cold : top.brew.hot], [cold ? "也可以熱泡" : "也可以冷泡", cold ? top.brew.hot : top.brew.cold]]
+    [[ZT.t(cold ? "推薦冷泡" : "推薦熱泡"), cold ? top.brew.cold : top.brew.hot], [ZT.t(cold ? "也可以熱泡" : "也可以冷泡"), cold ? top.brew.hot : top.brew.cold]]
       .forEach(([label, text]) => {
         const li = el("li");
-        li.append(el("strong", "", label + "　"), text.replace(/^(熱泡|冷泡)：/, ""));
+        li.append(el("strong", "", label + "　"), text.replace(/^(熱泡|冷泡)：|^(Hot|Cold): /, ""));
         brewList.append(li);
       });
     brewPanel.append(brewList);
@@ -416,7 +500,7 @@
     const tabBar = el("div", "ft-tabs__bar");
     tabBar.setAttribute("role", "tablist");
     const panelBox = el("div", "ft-tabs__panel");
-    const panels = [["為什麼推薦", whyPanel], ["茶的特色", descPanel], ["怎麼泡", brewPanel]];
+    const panels = [[ZT.t("為什麼推薦"), whyPanel], [ZT.t("茶的特色"), descPanel], [ZT.t("怎麼泡"), brewPanel]];
     function openTab(i) {
       tabBar.querySelectorAll("button").forEach((b, k) => {
         b.classList.toggle("is-on", k === i);
@@ -440,8 +524,8 @@
     let tie = null;
     if (close) {
       tie = el("div", "ft-tie1");
-      tie.append(el("span", "", `${top.short}和${second.short}很接近，你比較想要：`));
-      [["日常方便", true], ["細緻品飲", false]].forEach(([label, everyday]) => {
+      tie.append(el("span", "", ZT.en ? `${top.short} and ${second.short} are close. Which do you prefer?` : `${top.short}和${second.short}很接近，你比較想要：`));
+      [[ZT.t("日常方便"), true], [ZT.t("細緻品飲"), false]].forEach(([label, everyday]) => {
         const b = el("button", "ft-tie1__btn", label);
         b.type = "button";
         b.addEventListener("click", () => {
@@ -453,9 +537,9 @@
     }
 
     const actions = el("div", "ft-result__actions");
-    const detail = el("a", "ft-btn", "了解更多 →");
+    const detail = el("a", "ft-btn", ZT.t("了解更多 →"));
     detail.href = detailUrl(topKey);
-    const again = el("button", "ft-btn ft-btn--ghost", "再測一次");
+    const again = el("button", "ft-btn ft-btn--ghost", ZT.t("再測一次"));
     again.type = "button";
     again.addEventListener("click", () => {
       document.body.classList.remove("ft-done");
@@ -471,12 +555,12 @@
     alt.href = detailUrl(secondKey);
     alt.append(teaImage(secondKey, "ft-alt1__thumb"));
     const altText = el("span", "ft-alt1__text");
-    altText.append(el("span", "ft-alt1__label", "第二推薦"), el("span", "ft-alt1__name", second.name), el("span", "ft-alt1__score", `${score(secondKey)} 分・${TAGLINE[secondKey]}`));
-    alt.append(altText, el("span", "ft-alt1__more", "了解更多 →"));
+    altText.append(el("span", "ft-alt1__label", ZT.t("第二推薦")), el("span", "ft-alt1__name", second.name), el("span", "ft-alt1__score", ZT.en ? `${score(secondKey)} pts・${TAGLINE[secondKey]}` : `${score(secondKey)} 分・${TAGLINE[secondKey]}`));
+    alt.append(altText, el("span", "ft-alt1__more", ZT.t("了解更多 →")));
     side.append(alt);
 
     const rank = el("div", "ft-rank1");
-    rank.append(el("p", "ft-rank1__label", "六款茶和你的相似度"));
+    rank.append(el("p", "ft-rank1__label", ZT.t("六款茶和你的相似度")));
     ranked.forEach((k, i) => {
       const a = el("a", "ft-rank1__item");
       a.href = detailUrl(k);
@@ -488,7 +572,7 @@
       rank.append(a);
     });
     side.append(rank);
-    side.append(el("p", "ft-fine", "依你的答案與各款茶的香氣、焙火、茶湯厚度比對相似度；「感覺」題是喝茶情境，不代表茶的功效。"));
+    side.append(el("p", "ft-fine", ZT.t("依你的答案與各款茶的香氣、焙火、茶湯厚度比對相似度；「感覺」題是喝茶情境，不代表茶的功效。")));
 
     card.append(body, side);
     r.append(card);

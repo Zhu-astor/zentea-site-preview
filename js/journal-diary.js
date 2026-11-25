@@ -11,13 +11,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     {
       title: "自然農法：\n讓茶樹與小綠葉蟬共生",
       summary: "不使用農藥、不施化肥，讓茶樹與小綠葉蟬共生，產出天然的蜜果香氣。",
-      eyebrow: "品牌理念",
-      label: "茶園筆記",
+      eyebrow: ZT.t("品牌理念"),
+      label: ZT.t("茶園筆記"),
       img: "assets/img/landscape-2.webp",
       illustration: true,
     },
-    { title: "玉山自然茶園", eyebrow: "產地故事", label: "茶園走訪", img: "assets/img/tea-figure-1.webp", illustration: "wide" },
-    { title: "全國製茶武林大賽・榮獲茶王", eyebrow: "榮譽紀事", label: "職人", img: "assets/img/idea-chan-crave.png", illustration: "icon" },
+    { title: "玉山自然茶園", eyebrow: ZT.t("產地故事"), label: ZT.t("茶園走訪"), img: "assets/img/tea-figure-1.webp", illustration: "wide" },
+    { title: "全國製茶武林大賽・榮獲茶王", eyebrow: ZT.t("榮譽紀事"), label: ZT.t("職人"), img: "assets/img/idea-chan-crave.png", illustration: "icon" },
   ];
 
   function el(tag, className, text) {
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const body = el("div", "jd-card__body");
     body.append(el("p", "jd-card__eyebrow", item.eyebrow), el("h2", "jd-card__title", item.title));
     if (big && item.summary) body.append(el("p", "jd-card__summary", item.summary));
-    body.append(el("span", "jd-card__link", item.href ? "讀這篇 →" : "即將推出"));
+    body.append(el("span", "jd-card__link", ZT.t(item.href ? "讀這篇 →" : "即將推出")));
     node.append(media, body);
     return node;
   }
@@ -76,10 +76,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       data.articles.map((a) => ({
         title: a.title,
         summary: a.summary,
-        eyebrow: `${a.category || "蟬茶誌"}・${a.read_minutes} MIN READ`,
-        label: a.category || "蟬茶誌",
+        eyebrow: `${ZT.t(a.category || "蟬茶誌")}・${a.read_minutes} MIN READ`,
+        label: ZT.t(a.category || "蟬茶誌"),
         img: a.cover_thumb || a.cover,
-        href: `article.html?slug=${encodeURIComponent(a.slug)}`,
+        href: ZT.page(`article.html?slug=${encodeURIComponent(a.slug)}`),
       }))
     );
   } catch (e) {

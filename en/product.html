@@ -11,12 +11,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Teas | 蟬吃茶</title>
 <link rel="stylesheet" href="css/style.css?v=e88de1b2">
-<link rel="stylesheet" href="css/products.css?v=2690522c">
+<link rel="stylesheet" href="css/products.css?v=a69cd72a">
 <link rel="stylesheet" href="css/cart.css?v=bf89e140">
 <link rel="stylesheet" href="css/site-nav.css?v=bf457208">
 <link rel="stylesheet" href="css/shop.css?v=e1ae40b8">
-<link rel="stylesheet" href="css/product-detail.css?v=a1954284">
-<link rel="stylesheet" href="css/en.css?v=804175db">
+<link rel="stylesheet" href="css/product-detail.css?v=51acd7a0">
+<link rel="stylesheet" href="css/en.css?v=b838fb08">
 </head>
 <!-- 商品詳細頁：product.html?slug=…。三個入口都進到這裡：首頁測驗結果、首頁「認識茶」卡片、蟬茶鋪「了解更多」。
      內容全部來自後端 /api/products/<slug>/（後台「商品」的「商品詳細頁」欄位），js/product-page.js 負責填入。 -->
@@ -26,30 +26,30 @@
   <a href="en/index.html" class="site-nav__logo"><img src="assets/img/logo.png" alt="蟬吃茶"></a>
   <nav class="site-nav__links" id="site-nav-links" aria-label="Main menu">
     <a href="en/products.html" class="is-active">蟬茶鋪</a>
-    <a href="journal.html">蟬茶誌</a>
+    <a href="en/journal.html">蟬茶誌</a>
     <div class="site-nav__item site-nav__item--menu" data-nav-menu>
-      <a href="knowledge.html" aria-haspopup="true" aria-expanded="false">Tea Knowledge</a>
+      <a href="en/knowledge.html" aria-haspopup="true" aria-expanded="false">Tea Knowledge</a>
       <div class="site-nav__dropdown">
         <div class="site-nav__panel">
           <img class="site-nav__panel-art" src="assets/img/nav-knowledge-cup.webp" alt="" aria-hidden="true">
           <ul class="site-nav__panel-list">
-            <li><a href="articles.html?category=%E8%8C%B6%E7%9F%A5%E8%AD%98" data-nav-category="茶知識">Tea Basics</a></li>
-            <li><a href="articles.html?category=%E8%A3%BD%E8%8C%B6%E5%B7%A5%E8%97%9D" data-nav-category="製茶工藝">Tea Making</a></li>
-            <li><a href="articles.html?category=%E6%B2%96%E6%B3%A1%E8%88%87%E4%BF%9D%E5%AD%98" data-nav-category="沖泡與保存">Brewing Guide</a></li>
-            <li><a href="articles.html?category=%E8%8C%B6%E5%99%A8%E8%88%87%E5%93%81%E9%A3%B2" data-nav-category="茶器與品飲">Teaware &amp; Tasting</a></li>
+            <li><a href="en/articles.html?category=%E8%8C%B6%E7%9F%A5%E8%AD%98" data-nav-category="茶知識">Tea Basics</a></li>
+            <li><a href="en/articles.html?category=%E8%A3%BD%E8%8C%B6%E5%B7%A5%E8%97%9D" data-nav-category="製茶工藝">Tea Making</a></li>
+            <li><a href="en/articles.html?category=%E6%B2%96%E6%B3%A1%E8%88%87%E4%BF%9D%E5%AD%98" data-nav-category="沖泡與保存">Brewing Guide</a></li>
+            <li><a href="en/articles.html?category=%E8%8C%B6%E5%99%A8%E8%88%87%E5%93%81%E9%A3%B2" data-nav-category="茶器與品飲">Teaware &amp; Tasting</a></li>
           </ul>
         </div>
       </div>
     </div>
-    <a href="video.html">蟬茶影音</a>
-    <a href="experience.html">蟬茗齋</a>
+    <a href="en/video.html">蟬茶影音</a>
+    <a href="en/experience.html">蟬茗齋</a>
     <a href="en/index.html#session-4">About Us</a>
   </nav>
   <div class="site-nav__icons">
-    <a href="order-lookup.html" class="site-nav__icon" aria-label="Order Status" title="Order Status">
+    <a href="en/order-lookup.html" class="site-nav__icon" aria-label="Order Status" title="Order Status">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
     </a>
-    <a href="cart.html" class="site-nav__icon" aria-label="Cart" title="Cart">
+    <a href="en/cart.html" class="site-nav__icon" aria-label="Cart" title="Cart">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 12.1a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg>
       <span class="site-nav__count" data-cart-count hidden>0</span>
     </a>
@@ -155,7 +155,7 @@
         <div class="pdx-story__body" data-story></div>
       </div>
       <div class="pdx-story__media" data-story-media></div>
-      <a class="pdx-story__more" href="knowledge.html" data-story-link>Read more <span aria-hidden="true">→</span></a>
+      <a class="pdx-story__more" href="en/knowledge.html" data-story-link>Read more <span aria-hidden="true">→</span></a>
     </section>
   </article>
 
@@ -185,9 +185,9 @@
       </div>
       <div class="footer-col">
         <h4>蟬茶誌 &amp; Tea Knowledge</h4>
-        <a href="journal.html">蟬茶誌</a>
-        <a href="knowledge.html">Tea Knowledge</a>
-        <a href="articles.html">All Articles</a>
+        <a href="en/journal.html">蟬茶誌</a>
+        <a href="en/knowledge.html">Tea Knowledge</a>
+        <a href="en/articles.html">All Articles</a>
       </div>
       <div class="footer-col">
         <h4>Shop</h4>
@@ -209,11 +209,11 @@
   </div>
 </footer>
 
-<script src="js/demo-api.js?v=754eeca8"></script>
-<script src="js/i18n.js?v=52feaa2d"></script>
+<script src="js/demo-api.js?v=2d49f494"></script>
+<script src="js/i18n.js?v=4b28e7c1"></script>
 
 <script src="js/cart.js?v=b8a4d118"></script>
-<script src="js/product-page.js?v=8eceb856"></script>
+<script src="js/product-page.js?v=cd6a2d5e"></script>
 <script src="js/site-nav.js?v=ff527f13"></script>
 <script src="js/wrap-guard.js?v=b43c0132"></script>
 </body>

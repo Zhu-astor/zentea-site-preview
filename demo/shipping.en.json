@@ -1,0 +1,1 @@
+{"free_shipping_threshold": 1000, "methods": [{"code": "cvs_fami", "label": "FamilyMart store pickup", "fee": 60, "enabled": true}, {"code": "cvs_unimart", "label": "7-Eleven store pickup", "fee": 60, "enabled": true}, {"code": "home", "label": "Home delivery", "fee": 100, "enabled": true}]}

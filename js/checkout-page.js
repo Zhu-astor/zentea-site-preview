@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const FIELDS = ["customer_name", "customer_phone", "customer_email", "receiver_name", "receiver_phone",
     "receiver_zipcode", "address", "note"];
   const CVS_METHODS = ["cvs_fami", "cvs_unimart"];
-  const SUBMIT_LABEL = "前往付款 →";
+  const SUBMIT_LABEL = ZT.t("前往付款 →");
 
   let subtotal = 0;
   let shipping = { free_shipping_threshold: Infinity, methods: [] };
@@ -129,14 +129,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const fee = feeFor(method);
     $("[data-checkout-subtotal]").textContent = cart.formatPrice(subtotal);
     $("[data-checkout-shipping]").textContent =
-      fee === null ? "選擇配送方式後計算" : fee === 0 ? "免運" : cart.formatPrice(fee);
+      fee === null ? ZT.t("選擇配送方式後計算") : fee === 0 ? ZT.t("免運") : cart.formatPrice(fee);
     $("[data-checkout-total]").textContent = fee === null ? "—" : cart.formatPrice(subtotal + fee);
     addressField.hidden = !method || method.code !== "home";
     renderStore();
 
     const note = $("[data-free-shipping-note]");
     const gap = shipping.free_shipping_threshold - subtotal;
-    note.textContent = Number.isFinite(gap) && gap > 0 ? `再買 ${cart.formatPrice(gap)} 即可免運` : "";
+    note.textContent = Number.isFinite(gap) && gap > 0 ? (ZT.en ? `Add ${cart.formatPrice(gap)} more for free shipping` : `再買 ${cart.formatPrice(gap)} 即可免運`) : "";
   }
 
   function renderStore() {
@@ -146,13 +146,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (box.hidden) return;
     const s = currentStore();
     const name = $("[data-store-name]");
-    name.textContent = s ? s.name : "尚未選擇取貨門市";
+    name.textContent = s ? s.name : ZT.t("尚未選擇取貨門市");
     name.classList.toggle("is-empty", !s);
     $("[data-store-address]").textContent = s ? s.address : "";
     const pick = $("[data-store-pick]");
-    pick.textContent = s ? "重新選擇" : "選擇門市";
+    pick.textContent = ZT.t(s ? "重新選擇" : "選擇門市");
     const mobile = window.matchMedia("(max-width: 760px)").matches ? "1" : "0";
-    pick.href = `${cart.apiBase}/api/logistics/map/?method=${encodeURIComponent(method)}&mobile=${mobile}`;
+    pick.href = cart.apiBase + ZT.api(`/api/logistics/map/?method=${encodeURIComponent(method)}&mobile=${mobile}`);
   }
 
   // 離開去選門市前先存草稿，回來時填過的資料都還在
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         name.textContent = m.label;
         const fee = document.createElement("span");
         fee.className = "co__option-fee";
-        fee.textContent = m.enabled ? cart.formatPrice(m.fee) : "即將開放";
+        fee.textContent = m.enabled ? cart.formatPrice(m.fee) : ZT.t("即將開放");
         label.append(input, name, fee);
         return label;
       })
@@ -234,11 +234,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         name.textContent = `${item.product_name || item.sku} × ${item.quantity}`;
         const unit = document.createElement("span");
         unit.className = "co__item-unit";
-        unit.textContent = item.unit_price ? `單價 ${cart.formatPrice(item.unit_price)}` : "";
+        unit.textContent = item.unit_price ? `${ZT.t("單價")} ${cart.formatPrice(item.unit_price)}` : "";
         info.append(name, unit);
         const price = document.createElement("span");
         price.className = "co__item-price";
-        price.textContent = item.problems.length ? item.problems.join("、") : cart.formatPrice(item.line_total);
+        price.textContent = item.problems.length ? item.problems.join(ZT.en ? "; " : "、") : cart.formatPrice(item.line_total);
         if (item.problems.length) li.classList.add("has-problem");
         li.append(img, info, price);
         return li;
@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function createOrder() {
     if (!csrfToken()) await fetch(`${cart.apiBase}/api/csrf/`, { credentials: "include" });
-    const res = await fetch(`${cart.apiBase}/api/orders/`, {
+    const res = await fetch(cart.apiBase + ZT.api("/api/orders/"), {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json", "X-CSRFToken": csrfToken() },
@@ -291,20 +291,20 @@ document.addEventListener("DOMContentLoaded", async () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     submit.disabled = true;
-    submit.textContent = "建立訂單中…";
+    submit.textContent = ZT.t("建立訂單中…");
     clearErrors();
     try {
       const result = await createOrder();
       if (result.cart) renderSummary(result.cart);
       if (!result.ok) {
-        showErrors(result.errors || { cart: [result.error || "資料有誤，請檢查後再試一次"] });
+        showErrors(result.errors || { cart: [result.error || ZT.t("資料有誤，請檢查後再試一次")] });
         resetSubmit();
         return;
       }
-      submit.textContent = "前往綠界付款頁…";
+      submit.textContent = ZT.t("前往綠界付款頁…");
       goToPayment(result.payment);
     } catch (err) {
-      showErrors({ cart: ["暫時無法連線，請稍後再試一次"] });
+      showErrors({ cart: [ZT.t("暫時無法連線，請稍後再試一次")] });
       resetSubmit();
     }
   });
@@ -318,7 +318,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const [quote, options] = await Promise.all([
       cart.quote(),
-      fetch(`${cart.apiBase}/api/shipping/options/`).then((r) => {
+      fetch(cart.apiBase + ZT.api("/api/shipping/options/")).then((r) => {
         if (!r.ok) throw new Error(r.status);
         return r.json();
       }),
@@ -327,11 +327,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderShippingOptions();
     renderSummary(quote);
     if (quote.has_problems) {
-      showErrors({ cart: ["部分商品目前無法購買，請回購物車調整"] });
+      showErrors({ cart: [ZT.t("部分商品目前無法購買，請回購物車調整")] });
     }
     status.hidden = true;
     form.hidden = false;
   } catch (e) {
-    status.textContent = "暫時無法取得最新價格與庫存，請稍後再重新整理頁面。";
+    status.textContent = ZT.t("暫時無法取得最新價格與庫存，請稍後再重新整理頁面。");
   }
 });

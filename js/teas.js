@@ -33,6 +33,12 @@ window.ZENTEA_TEAS = {
     more: "發酵（氧化）程度決定香氣往哪裡走：越輕越接近清香、花香，越重越往熟果與蜜香走。烘焙則是茶的「火候」，烘得適中能把青味收乾淨，讓茶湯溫潤、不刺激。",
     // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
     en: {
+      "short": "Chan Chih Oolong",
+      "tags": ["Fresh", "Sweet", "Smooth"],
+      "mood": "Fresh・Smooth",
+      "brew": {"hot": "Hot: 95°C water, 3 g per 150 ml, first steep about 50 seconds.", "cold": "Cold: 10 g in 1 L of cold water, refrigerate 6–8 hours."},
+      "caption": "Light oxidation keeps the fragrance;\na medium roast adds depth.",
+      "name": "Chan Chih Oolong Tea",
       "process": "Lightly oxidized・Medium roast",
       "aroma": "Fresh, classic oolong, a hint of mountain forest",
       "taste": "Sweet and smooth, clean with a sweet finish",
@@ -63,6 +69,10 @@ window.ZENTEA_TEAS = {
     more: "炭焙是台灣傳統的焙茶方式：把龍眼木燒成炭，再覆上一層炭灰控制溫度，用文火長時間烘焙。比起電焙，炭火的熱度更柔和，焙出來的茶香氣溫潤、帶著炭火的暖意，也比較耐泡。",
     // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
     en: {
+      "tags": ["Charcoal", "Mellow", "Deep"],
+      "mood": "Mellow・Charcoal",
+      "brew": {"hot": "Hot: 100°C boiling water, 3 g per 150 ml, first steep about 45 seconds to bring out the charcoal note.", "cold": "Cold: 10 g in 1 L of cold water, refrigerate 8 hours. The charcoal note becomes softer."},
+      "caption": "Slowly roasted over longan-wood charcoal,\nwith a light charcoal note.",
       "process": "Traditionally roasted over longan-wood charcoal",
       "aroma": "Light charcoal and roasted notes",
       "taste": "Mellow, deep, with a sweet finish",
@@ -92,6 +102,12 @@ window.ZENTEA_TEAS = {
     more: "小綠葉蟬叮咬嫩芽後，茶樹會產生帶香氣的防禦物質，經過萎凋與發酵轉成蜜果香，東方美人茶的香氣也是這樣來的。因為要讓蟲來吃，茶園不能噴農藥：這股蜜香，其實就是自然生態的證明。",
     // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
     en: {
+      "short": "Honey-Flavored Black",
+      "tags": ["Honey-fruit", "Mellow", "Sweet"],
+      "mood": "Mellow・Honey-sweet",
+      "brew": {"hot": "Hot: 90–95°C water, 3 g per 150 ml, steep about 1 minute.", "cold": "Cold: 8 g in 1 L of cold water, refrigerate 6–8 hours for sweeter honey notes."},
+      "caption": "Young buds nibbled by leafhoppers,\nwith a natural honey-fruit aroma.",
+      "name": "Honey-Flavored Black Tea",
       "process": "Leafhopper-bitten・Fully oxidized",
       "aroma": "Natural honey-fruit, ripe fruit",
       "taste": "Gentle and sweet, flavorful but not heavy",
@@ -121,6 +137,12 @@ window.ZENTEA_TEAS = {
     more: "「佳葉龍」就是 GABA 的音譯。製作時把茶菁放在不透氣（例如充滿氮氣）的環境中進行厭氧處理；依茶改場的標準，每 100 公克茶葉的 GABA 含量要在 150 毫克以上，才能稱為佳葉龍茶。",
     // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
     en: {
+      "short": "Gaba Tea",
+      "tags": ["Honey-fruit", "Deep", "Soft"],
+      "mood": "Deep・Mellow",
+      "brew": {"hot": "Hot: 95°C water, 3 g per 150 ml, first steep about 50 seconds.", "cold": "Cold: 10 g in 1 L of cold water, refrigerate 8 hours."},
+      "caption": "An oolong made with\na special anaerobic process.",
+      "name": "Hand-Picked Gaba Tea",
       "process": "Special anaerobic processing",
       "aroma": "Natural honey-fruit",
       "taste": "Deep, mellow, soft",
@@ -151,6 +173,12 @@ window.ZENTEA_TEAS = {
     more: "紅玉是茶改場魚池分場以緬甸大葉種與台灣野生山茶雜交培育出的品種，1999 年命名為台茶 18 號。它的香氣在其他紅茶裡很少見，是只屬於台灣的紅茶風味。",
     // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
     en: {
+      "short": "Ruby Black",
+      "tags": ["Cinnamon", "Mint", "台灣香"],
+      "mood": "Distinctive・台灣香",
+      "brew": {"hot": "Hot: 90°C water, 3 g per 150 ml, steep 50 seconds to 1 minute. Longer can make it astringent.", "cold": "Cold: 8 g in 1 L of cold water, refrigerate 6 hours for a cooler, minty finish."},
+      "caption": "台茶 18 號:\nthe cinnamon and mint aroma of 台灣香.",
+      "name": "Hand-Picked Ruby Black Tea",
       "process": "台茶 18 號・Fully oxidized",
       "aroma": "Cinnamon and mint",
       "taste": "Full, sweet, with a cool finish",
@@ -180,6 +208,12 @@ window.ZENTEA_TEAS = {
     more: "高海拔茶區日夜溫差大、雲霧多，茶樹長得慢，葉片厚、內含物豐富，所以茶湯滑順、耐沖泡。茶人說的「山頭氣」，就是每座山的風土在茶裡留下的獨特氣息。",
     // 英文版首頁「認識茶」用（茶名等專有名詞保留中文）
     en: {
+      "short": "Yushan Oolong",
+      "tags": ["Mountain character", "Elegant", "Fragrant"],
+      "mood": "Elegant・High mountain",
+      "brew": {"hot": "Hot: 95°C water, 3 g per 150 ml, first steep about 50 seconds.", "cold": "Cold: 10 g in 1 L of cold water, refrigerate 6–8 hours. The floral notes come through clearly."},
+      "caption": "The character of the Yushan mountains:\nlayered, elegant and fragrant.",
+      "name": "Yushan Oolong Tea",
       "process": "Medium oxidation・Light roast",
       "aroma": "Elegant fragrance with the character of Yushan",
       "taste": "Layered, elegant, delicate",

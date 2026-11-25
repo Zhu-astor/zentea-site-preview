@@ -15,12 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const next = $("[data-feature-next]");
 
   const SLIDES = [
-    { sort: "latest", title: "最新文章", sub: "剛從茶山與茶桌帶回來的新篇章。" },
-    { sort: "popular", title: "人氣文章", sub: "最近三十天，大家最常讀的幾篇。" },
-    { sort: "views", title: "最多點閱", sub: "上線以來，被打開最多次的文章。" },
+    { sort: "latest", title: ZT.t("最新文章"), sub: ZT.t("剛從茶山與茶桌帶回來的新篇章。") },
+    { sort: "popular", title: ZT.t("人氣文章"), sub: ZT.t("最近三十天，大家最常讀的幾篇。") },
+    { sort: "views", title: ZT.t("最多點閱"), sub: ZT.t("上線以來，被打開最多次的文章。") },
   ];
   const PER_SLIDE = 6;
-  const FEATURED = { static: true, title: "精選文章", sub: "把山林、茶香與生活裡的留白，慢慢寫下來。", html: columns.innerHTML };
+  const FEATURED = { static: true, title: ZT.t("精選文章"), sub: ZT.t("把山林、茶香與生活裡的留白，慢慢寫下來。"), html: columns.innerHTML };
   let slides = [];
   let current = 0;
   let busy = false;
@@ -35,13 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // 卡片：結構跟原本手工排版的卡片完全一樣（分類、標題、[大卡描述]、閱讀全文、圖片）
   function card(a, rank, variant, ranked) {
     const link = el("a", `j-card ${variant}`.trim());
-    link.href = `article.html?slug=${encodeURIComponent(a.slug)}`;
+    link.href = ZT.page(`article.html?slug=${encodeURIComponent(a.slug)}`);
     const body = el("div", "j-card__body");
-    const eyebrow = el("p", "j-card__eyebrow", a.category || "茶知識");
+    const eyebrow = el("p", "j-card__eyebrow", ZT.t(a.category || "茶知識"));
     if (ranked) eyebrow.prepend(el("span", "j-card__rank", `No.${rank}`));
     body.append(eyebrow, el("h2", "j-card__title", a.title));
     if (variant === "j-card--hero" && a.summary) body.append(el("p", "j-card__desc", a.summary));
-    body.append(el("span", "j-card__arrow", "閱讀全文 →"));
+    body.append(el("span", "j-card__arrow", ZT.t("閱讀全文 →")));
     const media = el("div", "j-card__media");
     // 沒有封面的文章用品牌山水圖，讓每張卡片都是一致的漸層縮圖
     const src = a.cover_thumb || a.cover || "assets/img/landscape-1.webp";
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setup();
       const total = results[0].facets ? results[0].facets.total : 0;
       if (total > PER_SLIDE) {
-        $("[data-more-desc]").textContent = `一共 ${total} 篇文章，依分類、日期找到想讀的那一篇，還能看到大家最常讀哪些。`;
+        $("[data-more-desc]").textContent = ZT.en ? `${total} articles. Browse by category or date, and see what others read most.` : `一共 ${total} 篇文章，依分類、日期找到想讀的那一篇，還能看到大家最常讀哪些。`;
       }
     } catch (e) {
       /* 後端連不上：保留手工排版的卡片 */

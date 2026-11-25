@@ -53,18 +53,18 @@
   const promises = {};
   const products = (en) => (promises[en ? "en" : "zh"] ||= realFetch(en ? "demo/products.en.json" : "demo/products.json").then((r) => r.json()));
 
-  async function quote(init) {
+  async function quote(init, en) {
     const body = JSON.parse((init && init.body) || "{}");
     const variants = {};
-    (await products()).products.forEach((p) =>
+    (await products(en)).products.forEach((p) =>
       p.variants.forEach((v) => (variants[v.sku] = { ...v, product: p }))
     );
     const items = (body.items || []).map(({ sku, quantity }) => {
       const v = variants[sku];
-      if (!v) return { sku, quantity, product_name: "", variant_name: "", image: "", unit_price: 0, line_total: 0, problems: ["商品已下架"] };
+      if (!v) return { sku, quantity, product_name: "", variant_name: "", image: "", unit_price: 0, line_total: 0, problems: [en ? "This item is no longer available" : "商品已下架"] };
       return {
         sku, quantity, product_name: v.product.name, variant_name: v.name, image: v.product.image,
-        unit_price: v.price, line_total: v.price * quantity, problems: v.in_stock ? [] : ["已售完"],
+        unit_price: v.price, line_total: v.price * quantity, problems: v.in_stock ? [] : [en ? "Out of stock" : "已售完"],
       };
     });
     const ok = items.filter((i) => !i.problems.length);
@@ -80,10 +80,11 @@
     if (path === "/api/products/") return json(await products(en));
     const detail = path.match(/^\/api\/products\/([^/]+)\/$/);
     if (detail) return realFetch(`demo/products/${detail[1]}${en ? ".en" : ""}.json`);
-    if (path === "/api/cart/quote/") return quote(init);
-    if (path === "/api/shipping/options/") return realFetch("demo/shipping.json");
+    if (path === "/api/cart/quote/") return quote(init, en);
+    if (path === "/api/shipping/options/") return realFetch(en ? "demo/shipping.en.json" : "demo/shipping.json");
     if (path === "/api/csrf/") return json({});
-    if (path === "/api/orders/") return json({ error: "這是預覽站，無法真的下單付款；正式網站才會轉到綠界付款。" }, 503);
+    if (path === "/api/orders/")
+      return json({ error: en ? "This is a preview site, so you can't place a real order. The live site goes to ECPay for payment." : "這是預覽站，無法真的下單付款；正式網站才會轉到綠界付款。" }, 503);
     return null;
   }
 

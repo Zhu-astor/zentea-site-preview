@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const preview = params.get("preview") === "1";
 
   if (!slug) {
-    status.textContent = "找不到這篇文章。";
+    status.textContent = ZT.t("找不到這篇文章。");
     return;
   }
 
@@ -20,19 +20,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     const url = `${api}/api/articles/${encodeURIComponent(slug)}/${preview ? "?preview=1" : ""}`;
     const res = await fetch(url, { credentials: "include" });
     if (res.status === 404) {
-      status.textContent = "找不到這篇文章，可能已經下架。";
+      status.textContent = ZT.t("找不到這篇文章，可能已經下架。");
       return;
     }
     if (!res.ok) throw new Error(res.status);
     const a = await res.json();
 
     // 依文章欄目決定「回到哪裡」：蟬茶誌（品牌文章）或茶知識
-    const section = a.section === "journal" ? { name: "蟬茶誌", href: "journal.html" } : { name: "茶知識", href: "knowledge.html" };
+    const section = a.section === "journal" ? { name: "蟬茶誌", href: ZT.page("journal.html") } : { name: ZT.t("茶知識"), href: ZT.page("knowledge.html") };
     document.title = `${a.title} | ${section.name} | 蟬吃茶`;
-    const back = document.querySelector('.ar-head__back[href="knowledge.html"]');
+    const back = document.querySelector(".ar-head__back");
     if (back) {
       back.href = section.href;
-      back.textContent = `← 回${section.name}`;
+      back.textContent = ZT.en ? `← Back to ${section.name}` : `← 回${section.name}`;
     }
     document.querySelector('meta[name="description"]').content = a.summary || "";
     $("[data-preview]").hidden = a.status !== "draft";
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     revealOnScroll($("[data-article]"));
     if (a.status === "published") countView(slug);
   } catch (e) {
-    status.textContent = "暫時無法載入文章，請稍後再試。";
+    status.textContent = ZT.t("暫時無法載入文章，請稍後再試。");
   }
 });
 

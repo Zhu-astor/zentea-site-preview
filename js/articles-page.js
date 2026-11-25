@@ -35,12 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const formatDate = (iso) => (iso ? iso.slice(0, 10).replaceAll("-", ".") : "");
-  const formatMonth = (v) => `${v.slice(0, 4)} 年 ${parseInt(v.slice(5), 10)} 月`;
+  const formatMonth = (v) =>
+    ZT.en ? new Date(`${v}-01T00:00:00`).toLocaleDateString("en-US", { year: "numeric", month: "short" }) : `${v.slice(0, 4)} 年 ${parseInt(v.slice(5), 10)} 月`;
   const isNew = (iso) => iso && Date.now() - new Date(iso).getTime() < NEW_DAYS * 86400000;
 
   function card(a, rank, wide) {
     const link = el("a", "ax-card" + (wide ? " ax-card--wide" : ""));
-    link.href = `article.html?slug=${encodeURIComponent(a.slug)}`;
+    link.href = ZT.page(`article.html?slug=${encodeURIComponent(a.slug)}`);
 
     const media = el("div", "ax-card__media");
     const src = (wide ? a.cover : a.cover_thumb) || a.cover;
@@ -51,13 +52,13 @@ document.addEventListener("DOMContentLoaded", () => {
       img.loading = "lazy";
       media.append(img);
     }
-    if (a.category) media.append(el("span", "ax-card__tag", a.category));
+    if (a.category) media.append(el("span", "ax-card__tag", ZT.t(a.category)));
     const badges = el("div", "ax-card__badges");
     if (isNew(a.published_at)) badges.append(el("span", "ax-badge ax-badge--new", "NEW"));
     if (a.has_video) {
       const v = el("span", "ax-badge");
       v.innerHTML = PLAY;
-      v.append("影片");
+      v.append(ZT.t("影片"));
       badges.append(v);
     }
     if (badges.childElementCount) media.append(badges);
@@ -68,11 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
     meta.append(el("span", "", formatDate(a.published_at)));
     const views = el("span", "ax-views");
     views.innerHTML = EYE;
-    views.append(`閱讀 ${a.view_count.toLocaleString()}`);
+    views.append(ZT.en ? `${a.view_count.toLocaleString()} views` : `閱讀 ${a.view_count.toLocaleString()}`);
     meta.append(views);
     body.append(meta, el("h2", "ax-card__title", a.title));
     if (a.summary) body.append(el("p", "ax-card__summary", a.summary));
-    body.append(el("span", "ax-card__more", "閱讀全文 →"));
+    body.append(el("span", "ax-card__more", ZT.t("閱讀全文 →")));
 
     link.append(media, body);
     return link;
@@ -103,13 +104,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderFacets() {
     if (!facets) return;
     $("[data-categories]").replaceChildren(
-      filterButton("全部分類", facets.total, !state.category, () => update({ category: "" })),
+      filterButton(ZT.t("全部分類"), facets.total, !state.category, () => update({ category: "" })),
       ...facets.categories.map((c) =>
-        filterButton(c.name, c.count, state.category === c.name, () => update({ category: c.name }))
+        filterButton(ZT.t(c.name), c.count, state.category === c.name, () => update({ category: c.name }))
       )
     );
     $("[data-months]").replaceChildren(
-      filterButton("全部月份", facets.total, !state.month, () => update({ month: "" })),
+      filterButton(ZT.t("全部月份"), facets.total, !state.month, () => update({ month: "" })),
       ...facets.months.map((m) =>
         filterButton(formatMonth(m.value), m.count, state.month === m.value, () => update({ month: m.value }))
       )
@@ -122,11 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const b = el("button", "ax-chip");
       b.type = "button";
       b.append(label, el("span", "", "×"));
-      b.setAttribute("aria-label", `移除篩選：${label}`);
+      b.setAttribute("aria-label", ZT.en ? `Remove filter: ${label}` : `移除篩選：${label}`);
       b.addEventListener("click", () => update(reset));
       chips.push(b);
     };
-    if (state.category) chip(state.category, { category: "" });
+    if (state.category) chip(ZT.t(state.category), { category: "" });
     if (state.month) chip(formatMonth(state.month), { month: "" });
     if (state.q) chip(`「${state.q}」`, { q: "" });
     $("[data-chips]").replaceChildren(...chips);
@@ -147,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
       b.addEventListener("click", () => update({ page: target }, true));
       return b;
     };
-    const items = [btn("‹", page - 1, { disabled: page === 1, aria: "上一頁" })];
+    const items = [btn("‹", page - 1, { disabled: page === 1, aria: ZT.t("上一頁") })];
     // 頁數多時只顯示頭尾與目前頁附近
     let last = 0;
     for (let i = 1; i <= pages; i++) {
@@ -157,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
         last = i;
       }
     }
-    items.push(btn("›", page + 1, { disabled: page === pages, aria: "下一頁" }));
+    items.push(btn("›", page + 1, { disabled: page === pages, aria: ZT.t("下一頁") }));
     pager.replaceChildren(...items);
   }
 
@@ -213,7 +214,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       $("[data-count]").innerHTML = "";
-      $("[data-count]").append("共", el("strong", "", String(data.total)), "篇文章");
+      if (ZT.en) $("[data-count]").append(el("strong", "", String(data.total)), " articles");
+      else $("[data-count]").append("共", el("strong", "", String(data.total)), "篇文章");
 
       const ranked = state.sort !== "latest";
       const showWide = !ranked && state.page === 1 && !state.category && !state.month && !state.q;
