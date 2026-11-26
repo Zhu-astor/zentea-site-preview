@@ -12,6 +12,7 @@
     origin: '<path d="M6 19c0-7 4-12 12-13-1 8-5 12-12 13z"/><path d="M6 19c2.5-3.5 5-6 8-8"/><path d="M9 14.5l-2.5-1M11.5 12l-1-2.5"/>',
     cup: '<path d="M4 10h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17"/>',
     box: '<path d="M7 4h10l2 4v12H5V8z"/><path d="M5 8h14M9 4l-1 4M15 4l1 4"/>',
+    ruler: '<rect x="3" y="8" width="18" height="8" rx="1"/><path d="M7 8v3M11 8v4M15 8v3M19 8v2"/>',
     fire: '<path d="M12 21c-3.9 0-6-2.6-6-5.6 0-3.4 2.6-5.3 3.6-8.4 1.9 1.6 2.2 3.3 2 4.6 1-.7 1.8-2 2-3.6 2 1.8 2.4 4.3 2.4 6 0 4-2.4 7-4 7z"/><path d="M12 21c-1.6 0-2.6-1.1-2.6-2.5 0-1.6 1.3-2.4 2-3.8 1.3 1.1 3.2 2.3 3.2 3.8 0 1.4-1 2.5-2.6 2.5z"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/>',
     laptop: '<rect x="4.5" y="5.5" width="15" height="10" rx="1"/><path d="M2.5 18.5h19"/>',
@@ -173,9 +174,11 @@
       addBtn.disabled = !v || !v.in_stock;
       $("[data-add-label]").textContent = ZT.t(v && v.pending ? "規格未確定" : v && !v.in_stock ? "已售完" : "加入購物車");
       // 規格有自己的包裝尺寸就顯示在介紹下方
+      // 包裝尺寸顯示在介紹下方（商品資訊欄）：規格有自己的尺寸用規格的，否則用商品的包裝尺寸
       const size = $("[data-variant-size]");
-      size.textContent = v && v.size ? `${ZT.t("包裝尺寸")}${ZT.en ? ": " : "："}${v.size}` : "";
-      size.hidden = !(v && v.size);
+      const sizeText = ((v && v.size) || product.package_size || "").replace(/\s*\n\s*/g, " ");
+      size.textContent = sizeText ? `${ZT.t("包裝尺寸")}${ZT.en ? ": " : "："}${sizeText}` : "";
+      size.hidden = !sizeText;
       // 規格有自己的圖片（例如圓罐）：第一張大圖換成那張，並切回第一張；沒有就用商品主圖
       const firstImg = stage.querySelector(".pdx-slide img");
       if (firstImg && mainSrc) {
@@ -256,10 +259,11 @@
       ["sprout", ZT.t("製程"), product.process],
       ["cup", ZT.t("茶類"), product.tea_type],
       ["box", ZT.t("商品形式"), product.product_form],
+      ["ruler", ZT.t("包裝尺寸"), product.package_size], // 11/26：基本資料欄和標題下方兩個位置都顯示
     ].filter(([, , v]) => v);
     $("[data-facts]").replaceChildren(
       ...facts.map(([ic, label, value]) => {
-        const item = el("div", "pdx-fact");
+        const item = el("div", `pdx-fact pdx-fact--${ic}`);
         const text = el("div");
         text.append(el("p", "pdx-fact__label", label), el("p", "pdx-fact__value", value));
         item.append(icon(ic), text);
@@ -267,6 +271,7 @@
       })
     );
     $("[data-facts]").hidden = facts.length === 0;
+    $("[data-facts]").style.setProperty("--facts", Math.max(facts.length, 1)); // 有幾格就分幾欄（包裝尺寸有填才多一格）
 
     // ---------- 風味輪廓（0～8 格，可以有半格） ----------
     $("[data-bars]").replaceChildren(

@@ -111,11 +111,11 @@
 .pdx-icon--plain svg { width: 100%; height: 100%; }
 
 /* ---------- 四格基本資料 ---------- */
-.pdx-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 54px 0 0; padding: 0 0 34px; border-bottom: 1px solid var(--pdx-line); }
+.pdx-facts { display: grid; grid-template-columns: repeat(var(--facts, 4), minmax(0, 1fr)); margin: 54px 0 0; padding: 0 0 34px; border-bottom: 1px solid var(--pdx-line); }
 .pdx-fact { display: flex; align-items: center; gap: 22px; padding: 4px 3vw 4px 14px; }
 .pdx-fact + .pdx-fact { border-left: 1px solid var(--pdx-line); }
 .pdx-fact__label { font-size: 13px; letter-spacing: 0.14em; color: var(--pdx-text); margin: 0 0 8px; }
-.pdx-fact__value { font-size: 13.5px; letter-spacing: 0.1em; color: var(--pdx-ink); margin: 0; }
+.pdx-fact__value { font-size: 13.5px; letter-spacing: 0.1em; color: var(--pdx-ink); margin: 0; white-space: pre-line; } /* 包裝尺寸用換行分成盒型＋尺寸兩行 */
 
 /* ---------- 區塊標題 ---------- */
 .pdx-h2 { font-size: 18px; font-weight: 600; letter-spacing: 0.18em; color: var(--pdx-green); margin: 0 0 8px; }
@@ -175,7 +175,7 @@
 @media (max-width: 900px) {
   .pdx-top { grid-template-columns: 1fr; gap: 28px; }
   .pdx-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 22px; }
-  .pdx-fact:nth-child(3) { border-left: 0; }
+  .pdx-fact:nth-child(odd) { border-left: 0; }
   .pdx-flavor, .pdx-use, .pdx-story { grid-template-columns: 1fr; }
   .pdx-flavor__bars, .pdx-moments-wrap { padding-right: 0; border-right: 0; }
   .pdx-oneliner { margin: 26px 0 0; }
@@ -238,3 +238,11 @@
 
 /* 規格的包裝尺寸（設計師 11/25）：選到有尺寸的規格才出現，放在介紹下方 */
 .pdx-size { margin: 10px 0 0; font-size: 13px; letter-spacing: 0.08em; color: var(--pdx-muted); }
+
+/* 基本資料有 5 格（含包裝尺寸）時，電腦版每格左右留白縮小 */
+@media (min-width: 901px) {
+  .pdx-facts[style*="--facts: 5"] { grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.35fr); }
+  .pdx-facts[style*="--facts: 5"] .pdx-fact { padding: 4px 1.2vw 4px 12px; gap: 14px; }
+}
+/* 包裝尺寸：數字字距收窄，尺寸那一行不斷開 */
+.pdx-fact--ruler .pdx-fact__value { letter-spacing: 0.04em; }
